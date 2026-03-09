@@ -1,18 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
-public class PlayerState : MonoBehaviour
+public class PlayerState
 {
-    // Start is called before the first frame update
-    void Start()
+
+    protected float inputX;
+
+    protected Player player;
+    protected PlayerStateMachine stateMachine;
+    protected string animationName;
+
+    protected PlayerState(Player player,PlayerStateMachine stateMachine,string animationName)
     {
-        
+        this.player = player;
+        this.stateMachine = stateMachine
+;        this.animationName = animationName;
     }
 
-    // Update is called once per frame
-    void Update()
+    
+
+    public virtual void Enter()
     {
-        
+        player.animator.SetBool(animationName, true);
+    }
+
+    public virtual void Exit()
+    {
+        player.animator.SetBool(animationName, false);
+    }
+
+    public virtual void Update()
+    {
+        inputX = Input.GetAxisRaw("Horizontal");
+        player.animator.SetFloat("yV", player.rb.velocity.y);
     }
 }
