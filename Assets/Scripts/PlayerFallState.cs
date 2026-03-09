@@ -22,7 +22,7 @@ public class PlayerFallState : PlayerState
     public override void Update()
     {
         base.Update();
-        if (player.rb.velocity.y == 0)
+        if (player.GroundCheck())
         {
             stateMachine.ChangeState(player.idleState);
         }

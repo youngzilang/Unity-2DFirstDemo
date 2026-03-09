@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     public float jumpForce;
 
+    [Header("³å´ÌÊý¾Ý")]
+    public float dashSpeed;
+    public float dashContinue;
+
     [Header("Åö×²¼ì²â")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
@@ -32,9 +36,10 @@ public class Player : MonoBehaviour
     public PlayerMoveState moveState { get; private set; }
     public PlayerFallState fallState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
-    #endregion
+    public PlayerDashState dashState { get; private set; }
+#endregion
 
-    private void Awake()
+private void Awake()
     {
         stateMachine = new PlayerStateMachine();
 
@@ -42,7 +47,7 @@ public class Player : MonoBehaviour
         moveState=new PlayerMoveState(this, stateMachine, "isMove");
         fallState = new PlayerFallState(this, stateMachine, "isJump");
         jumpState = new PlayerJumpState(this, stateMachine, "isJump");
-
+        dashState= new PlayerDashState(this, stateMachine, "isDash");
     }
 
     private void Start()
@@ -56,13 +61,22 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentState.Update();
+
+        DashNow();
     }
-    
+
+    private void DashNow()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            stateMachine.ChangeState(dashState);
+        }
+    }
 
     public void SetVe(float _x,float _y)
     {
-        rb.velocity = new Vector2(_x, _y);
-        FlipController(_x);
+        rb.velocity = new Vector2(_x, _y); FlipController(_x);
+
     }
    
     public void Flip()
@@ -83,4 +97,7 @@ public class Player : MonoBehaviour
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundDistance));
         Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x+wallDistance*faceDir, wallCheck.position.y));
     }
+
+    public bool GroundCheck() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundDistance, layer);
+    
 }

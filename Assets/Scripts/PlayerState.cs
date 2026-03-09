@@ -7,12 +7,13 @@ public class PlayerState
 {
 
     protected float inputX;
+    protected float dashContinueTimer;
 
     protected Player player;
     protected PlayerStateMachine stateMachine;
     protected string animationName;
 
-    protected PlayerState(Player player,PlayerStateMachine stateMachine,string animationName)
+    public PlayerState(Player player,PlayerStateMachine stateMachine,string animationName)
     {
         this.player = player;
         this.stateMachine = stateMachine
@@ -35,5 +36,6 @@ public class PlayerState
     {
         inputX = Input.GetAxisRaw("Horizontal");
         player.animator.SetFloat("yV", player.rb.velocity.y);
+        dashContinueTimer -= Time.deltaTime;
     }
 }

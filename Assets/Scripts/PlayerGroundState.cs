@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGroundState : PlayerState
 {
-    protected PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animationName) : base(player, stateMachine, animationName)
+    public PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animationName) : base(player, stateMachine, animationName)
     {
     }
 
@@ -22,7 +22,9 @@ public class PlayerGroundState : PlayerState
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!player.GroundCheck()) stateMachine.ChangeState(player.fallState);
+
+        if (Input.GetKeyDown(KeyCode.Space)&&player.GroundCheck())
         {
             stateMachine.ChangeState(player.jumpState);
         }

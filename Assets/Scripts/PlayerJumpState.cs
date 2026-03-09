@@ -23,7 +23,7 @@ public class PlayerJumpState : PlayerGroundState
     {
         base.Update();
 
-        if (player.rb.velocity.y < 0)
+        if (player.rb.velocity.y<0)
         {
             stateMachine.ChangeState(player.fallState);
         }
