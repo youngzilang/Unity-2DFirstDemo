@@ -16,12 +16,18 @@ public class PlayerFallState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        player.SetVe(0, 0);
 
     }
 
     public override void Update()
     {
         base.Update();
+
+        if (inputX != 0)
+        {
+            player.SetVe(inputX * player.moveSpeed * 0.8f, player.rb.velocity.y);
+        }
         if (player.GroundCheck())
         {
             stateMachine.ChangeState(player.idleState);

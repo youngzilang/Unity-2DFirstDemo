@@ -7,6 +7,7 @@ public class PlayerState
 {
 
     protected float inputX;
+    protected float inputY;
     protected float dashContinueTimer;
     
 
@@ -36,6 +37,7 @@ public class PlayerState
     public virtual void Update()
     {
         inputX = Input.GetAxisRaw("Horizontal");
+        inputY = Input.GetAxisRaw("Vertical");
         player.animator.SetFloat("yV", player.rb.velocity.y);
         dashContinueTimer -= Time.deltaTime;
     }

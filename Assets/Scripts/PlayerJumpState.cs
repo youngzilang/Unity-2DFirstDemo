@@ -17,11 +17,16 @@ public class PlayerJumpState : PlayerGroundState
     public override void Exit()
     {
         base.Exit();
+       
     }
 
     public override void Update()
     {
         base.Update();
+        if (inputX != 0)
+        {
+            player.SetVe(inputX * player.moveSpeed * 0.8f, player.rb.velocity.y);
+        }
 
         if (player.rb.velocity.y<0)
         {

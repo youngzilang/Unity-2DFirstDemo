@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(_x, _y); FlipController(_x);
 
     }
-   
+
     public void Flip()
     {
         faceDir = -faceDir;
