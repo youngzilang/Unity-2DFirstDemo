@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Animations;
@@ -15,6 +16,8 @@ public class PlayerState
     protected PlayerStateMachine stateMachine;
     protected string animationName;
 
+    protected bool trigger ;
+
     public PlayerState(Player player,PlayerStateMachine stateMachine,string animationName)
     {
         this.player = player;
@@ -27,6 +30,7 @@ public class PlayerState
     public virtual void Enter()
     {
         player.animator.SetBool(animationName, true);
+        trigger = false;
     }
 
     public virtual void Exit()
@@ -41,5 +45,10 @@ public class PlayerState
         player.animator.SetFloat("yV", player.rb.velocity.y);
         dashContinueTimer -= Time.deltaTime;
         slideJumpTimer -= Time.deltaTime;
+    }
+
+    public virtual void AnimationFinishTrigger()
+    {
+        trigger = true;
     }
 }

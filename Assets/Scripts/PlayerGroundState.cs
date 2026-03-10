@@ -22,6 +22,9 @@ public class PlayerGroundState : PlayerState
     {
         base.Update();
 
+        if (Input.GetKeyDown(KeyCode.Mouse0)) stateMachine.ChangeState(player.attackState);
+
+
         if (player.rb.velocity.y < 0)
         {
             stateMachine.ChangeState(player.fallState);
