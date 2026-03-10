@@ -41,9 +41,11 @@ public class Player : MonoBehaviour
     public PlayerFallState fallState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
     public PlayerDashState dashState { get; private set; }
-#endregion
 
-private void Awake()
+    public PlayerWallSlideState slideState { get; private set; }
+    #endregion
+
+    private void Awake()
     {
         stateMachine = new PlayerStateMachine();
 
@@ -52,6 +54,7 @@ private void Awake()
         fallState = new PlayerFallState(this, stateMachine, "isJump");
         jumpState = new PlayerJumpState(this, stateMachine, "isJump");
         dashState= new PlayerDashState(this, stateMachine, "isDash");
+        slideState = new PlayerWallSlideState(this, stateMachine, "isWallSlide");
     }
 
     private void Start()
@@ -106,5 +109,6 @@ private void Awake()
     }
 
     public bool GroundCheck() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundDistance, layer);
-    
+
+    public bool WallCheck() => Physics2D.Raycast(wallCheck.position, Vector2.right * faceDir, wallDistance, layer);
 }

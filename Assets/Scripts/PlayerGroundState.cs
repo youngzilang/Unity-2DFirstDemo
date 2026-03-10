@@ -22,7 +22,7 @@ public class PlayerGroundState : PlayerState
     {
         base.Update();
 
-        if (!player.GroundCheck()) stateMachine.ChangeState(player.fallState);
+        
 
         if (Input.GetKeyDown(KeyCode.Space)&&player.GroundCheck())
         {
