@@ -28,6 +28,11 @@ public class PlayerJumpState : PlayerGroundState
             player.SetVe(inputX * player.moveSpeed * 0.8f, player.rb.velocity.y);
         }
 
+        if (player.WallCheck())
+        {
+            stateMachine.ChangeState(player.slideState);
+        }
+
         if (player.rb.velocity.y<0)
         {
             stateMachine.ChangeState(player.fallState);

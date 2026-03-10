@@ -24,6 +24,11 @@ public class PlayerFallState : PlayerState
     {
         base.Update();
 
+        if (player.WallCheck())
+        {
+            stateMachine.ChangeState(player.slideState);
+        }
+
         if (inputX != 0)
         {
             player.SetVe(inputX * player.moveSpeed * 0.8f, player.rb.velocity.y);

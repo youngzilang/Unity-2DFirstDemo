@@ -22,7 +22,10 @@ public class PlayerGroundState : PlayerState
     {
         base.Update();
 
-        
+        if (player.rb.velocity.y < 0)
+        {
+            stateMachine.ChangeState(player.fallState);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space)&&player.GroundCheck())
         {

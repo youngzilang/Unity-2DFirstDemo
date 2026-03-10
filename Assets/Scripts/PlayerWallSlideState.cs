@@ -11,6 +11,7 @@ public class PlayerWallSlideState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        
     }
 
     public override void Exit()
@@ -21,5 +22,16 @@ public class PlayerWallSlideState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        if (inputX != 0 && inputX == -player.faceDir) stateMachine.ChangeState(player.idleState);
+
+
+        if(inputY<0) player.SetVe(0, player.rb.velocity.y );
+        else player.SetVe(0, player.rb.velocity.y * 0.8f);
+
+        if (player.GroundCheck())
+        {
+            stateMachine.ChangeState(player.idleState);
+        }
     }
 }
