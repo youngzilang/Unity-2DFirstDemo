@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [Header("³å´ÌÊý¾Ý")]
     public float dashSpeed;
     public float dashContinue;
+    public float dashCd;
 
     [Header("Åö×²¼ì²â")]
     [SerializeField] private Transform groundCheck;
@@ -20,6 +21,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float groundDistance;
     [SerializeField] private float wallDistance;
     [SerializeField] private LayerMask layer;
+
+
+    public float dashCdTimer { get; private set; }
 
     public int faceDir { get; private set; } = 1;
     public bool faceRight { get; private set; } = true;
@@ -67,8 +71,11 @@ private void Awake()
 
     private void DashNow()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        dashCdTimer -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift)&&dashCdTimer<0)
         {
+            dashCdTimer = dashCd;
             stateMachine.ChangeState(dashState);
         }
     }

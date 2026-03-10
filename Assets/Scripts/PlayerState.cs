@@ -8,6 +8,7 @@ public class PlayerState
 
     protected float inputX;
     protected float dashContinueTimer;
+    
 
     protected Player player;
     protected PlayerStateMachine stateMachine;
