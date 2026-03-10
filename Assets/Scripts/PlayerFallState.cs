@@ -26,7 +26,7 @@ public class PlayerFallState : PlayerState
 
         if (player.WallCheck())
         {
-            stateMachine.ChangeState(player.slideState);
+            stateMachine.ChangeState(player.wallSlideState);
         }
 
         if (inputX != 0)

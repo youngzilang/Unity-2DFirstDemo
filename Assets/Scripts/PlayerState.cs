@@ -9,7 +9,7 @@ public class PlayerState
     protected float inputX;
     protected float inputY;
     protected float dashContinueTimer;
-    
+    protected float slideJumpTimer;
 
     protected Player player;
     protected PlayerStateMachine stateMachine;
@@ -40,5 +40,6 @@ public class PlayerState
         inputY = Input.GetAxisRaw("Vertical");
         player.animator.SetFloat("yV", player.rb.velocity.y);
         dashContinueTimer -= Time.deltaTime;
+        slideJumpTimer -= Time.deltaTime;
     }
 }

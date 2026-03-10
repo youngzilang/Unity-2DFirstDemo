@@ -11,7 +11,7 @@ public class PlayerJumpState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
-        player.rb.velocity = new Vector2(player.rb.velocity.x, player.jumpForce);
+        player.rb.velocity = new Vector2(0 , player.jumpForce);
     }
 
     public override void Exit()
@@ -30,7 +30,7 @@ public class PlayerJumpState : PlayerGroundState
 
         if (player.WallCheck())
         {
-            stateMachine.ChangeState(player.slideState);
+            stateMachine.ChangeState(player.wallSlideState);
         }
 
         if (player.rb.velocity.y<0)

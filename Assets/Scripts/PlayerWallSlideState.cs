@@ -23,6 +23,12 @@ public class PlayerWallSlideState : PlayerState
     {
         base.Update();
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            stateMachine.ChangeState(player.wallJumpState);
+            return;
+        }
+
         if (inputX != 0 && inputX == -player.faceDir) stateMachine.ChangeState(player.idleState);
 
 

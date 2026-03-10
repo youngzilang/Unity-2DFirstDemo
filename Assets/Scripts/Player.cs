@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     [Header("移动数据")]
     public float moveSpeed;
     public float jumpForce;
+    public float slideJumpSpeed;
 
     [Header("冲刺数据")]
     public float dashSpeed;
@@ -21,7 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float groundDistance;
     [SerializeField] private float wallDistance;
     [SerializeField] private LayerMask layer;
-
+    
 
     public float dashCdTimer { get; private set; }
 
@@ -41,8 +38,8 @@ public class Player : MonoBehaviour
     public PlayerFallState fallState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
     public PlayerDashState dashState { get; private set; }
-
-    public PlayerWallSlideState slideState { get; private set; }
+    public PlayerWallJumpState wallJumpState { get; private set; }
+    public PlayerWallSlideState wallSlideState { get; private set; }
     #endregion
 
     private void Awake()
@@ -50,11 +47,12 @@ public class Player : MonoBehaviour
         stateMachine = new PlayerStateMachine();
 
         idleState = new PlayerIdleState(this, stateMachine, "isIdle");
-        moveState=new PlayerMoveState(this, stateMachine, "isMove");
+        moveState = new PlayerMoveState(this, stateMachine, "isMove");
         fallState = new PlayerFallState(this, stateMachine, "isJump");
         jumpState = new PlayerJumpState(this, stateMachine, "isJump");
-        dashState= new PlayerDashState(this, stateMachine, "isDash");
-        slideState = new PlayerWallSlideState(this, stateMachine, "isWallSlide");
+        dashState = new PlayerDashState(this, stateMachine, "isDash");
+        wallSlideState = new PlayerWallSlideState(this, stateMachine, "isWallSlide");
+        wallJumpState = new PlayerWallJumpState(this, stateMachine, "isWallJump");
     }
 
     private void Start()
@@ -76,14 +74,14 @@ public class Player : MonoBehaviour
     {
         dashCdTimer -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)&&dashCdTimer<0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCdTimer < 0)
         {
             dashCdTimer = dashCd;
             stateMachine.ChangeState(dashState);
         }
     }
 
-    public void SetVe(float _x,float _y)
+    public void SetVe(float _x, float _y)
     {
         rb.velocity = new Vector2(_x, _y); FlipController(_x);
 
@@ -105,7 +103,7 @@ public class Player : MonoBehaviour
     public void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundDistance));
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x+wallDistance*faceDir, wallCheck.position.y));
+        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallDistance * faceDir, wallCheck.position.y));
     }
 
     public bool GroundCheck() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundDistance, layer);
