@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerNormalAttackState : PlayerState
 {
+    private int attackCount ;
+    private float mixAttackWindow=2;
+    private float attackTiming;
+
     public PlayerNormalAttackState(Player player, PlayerStateMachine stateMachine, string animationName) : base(player, stateMachine, animationName)
     {
     }
@@ -11,11 +15,18 @@ public class PlayerNormalAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        if(attackCount>2||Time.time>= attackTiming + mixAttackWindow)
+        {
+            attackCount = 0;
+        }
+        player.animator.SetInteger( "attackCount",attackCount);
     }
 
     public override void Exit()
     {
         base.Exit();
+        attackCount++;
+        attackTiming = Time.time;
     }
 
     public override void Update()
