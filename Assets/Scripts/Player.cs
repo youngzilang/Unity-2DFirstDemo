@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class Player : MonoBehaviour
 {
     [Header("ÒÆ¶¯Êý¾Ý")]
@@ -68,7 +69,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         stateMachine.currentState.Update();
-
+    
         DashNow();
     }
 

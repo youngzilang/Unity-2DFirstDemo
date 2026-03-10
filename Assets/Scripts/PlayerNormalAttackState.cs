@@ -20,6 +20,8 @@ public class PlayerNormalAttackState : PlayerState
             attackCount = 0;
         }
         player.animator.SetInteger( "attackCount",attackCount);
+
+        stateTimer = 0.08f;
     }
 
     public override void Exit()
@@ -32,6 +34,9 @@ public class PlayerNormalAttackState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        if (stateTimer < 0) player.SetVe(0, 0);
+
         if (trigger) stateMachine.ChangeState(player.idleState);
     }
 }

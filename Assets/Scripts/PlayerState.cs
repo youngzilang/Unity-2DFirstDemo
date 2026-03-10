@@ -11,6 +11,7 @@ public class PlayerState
     protected float inputY;
     protected float dashContinueTimer;
     protected float slideJumpTimer;
+    protected float stateTimer;
 
     protected Player player;
     protected PlayerStateMachine stateMachine;
@@ -45,6 +46,7 @@ public class PlayerState
         player.animator.SetFloat("yV", player.rb.velocity.y);
         dashContinueTimer -= Time.deltaTime;
         slideJumpTimer -= Time.deltaTime;
+        stateTimer -= Time.deltaTime;
     }
 
     public virtual void AnimationFinishTrigger()
