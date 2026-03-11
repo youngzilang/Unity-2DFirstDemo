@@ -21,7 +21,14 @@ public class PlayerNormalAttackState : PlayerState
         }
         player.animator.SetInteger( "attackCount",attackCount);
 
-        player.rb.velocity=new Vector2(player.attackVe[attackCount].x*player.faceDir, player.attackVe[attackCount].y);
+        float attackFace=player.faceDir;
+        if (inputX != 0)
+        {
+            attackFace = inputX;
+        }
+
+
+        player.SetVe(player.attackVe[attackCount].x* attackFace, player.attackVe[attackCount].y);
 
         stateTimer = 0.08f;
     }
