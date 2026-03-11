@@ -23,7 +23,7 @@ public class PlayerIdleState : PlayerGroundState
     {
         base.Update();
 
-        if (inputX!=0)
+        if (inputX!=0&&!player.isBusy)
         {
             stateMachine.ChangeState(player.moveState);
         }

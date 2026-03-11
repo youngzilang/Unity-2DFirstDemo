@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerNormalAttackState : PlayerState
 {
     private int attackCount ;
-    private float mixAttackWindow=2;
+    private float mixAttackWindow=1.0f;
     private float attackTiming;
 
     public PlayerNormalAttackState(Player player, PlayerStateMachine stateMachine, string animationName) : base(player, stateMachine, animationName)
@@ -29,6 +29,7 @@ public class PlayerNormalAttackState : PlayerState
         base.Exit();
         attackCount++;
         attackTiming = Time.time;
+        player.StartCoroutine("Busy", 0.15);
     }
 
     public override void Update()

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 
@@ -19,7 +20,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float groundDistance;
     [SerializeField] private float wallDistance;
     [SerializeField] private LayerMask layer;
-    
+
+
+    public bool isBusy { get; private set; } = false;
 
     public float dashCdTimer { get; private set; }
 
@@ -72,6 +75,17 @@ public class Player : MonoBehaviour
     
         DashNow();
     }
+
+    public IEnumerator Busy(float _seconds)
+    {
+        isBusy = true;
+
+        yield return new WaitForSeconds (_seconds);
+
+        isBusy = false;
+
+    }
+
 
     private void DashNow()
     {
