@@ -18,6 +18,7 @@ public class PlayerState
     protected string animationName;
 
     protected bool trigger ;
+   
 
     public PlayerState(Player player,PlayerStateMachine stateMachine,string animationName)
     {

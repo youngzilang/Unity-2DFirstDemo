@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerDashState : PlayerState
 {
+    private float dashFace;
+
     public PlayerDashState(Player player, PlayerStateMachine stateMachine, string animationName) : base(player, stateMachine, animationName)
     {
     }
@@ -12,6 +14,7 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
         dashContinueTimer = player.dashContinue;
+        
     }
 
     public override void Exit()
@@ -24,10 +27,13 @@ public class PlayerDashState : PlayerState
     {
         base.Update();
 
+        if (inputX != 0) dashFace = inputX;
+        else dashFace = player.faceDir;
+
         if (player.WallCheck() && !player.GroundCheck()) stateMachine.ChangeState(player.wallSlideState);
 
 
-        player.SetVe(player.dashSpeed*player.faceDir, 0);
+        player.SetVe(player.dashSpeed*dashFace, 0);
 
         if (dashContinueTimer < 0)
         {
