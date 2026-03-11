@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("攻击时人物速度矢量")]
+    public Vector2[] attackVe;
+
+
     [Header("移动数据")]
     public float moveSpeed;
     public float jumpForce;
@@ -103,13 +107,15 @@ public class Player : MonoBehaviour
         stateMachine.currentState.AnimationFinishTrigger();
     }
 
-
+    #region Ve
     public void SetVe(float _x, float _y)
     {
         rb.velocity = new Vector2(_x, _y); FlipController(_x);
 
     }
+    #endregion
 
+    #region Flip
     public void Flip()
     {
         faceDir = -faceDir;
@@ -122,7 +128,9 @@ public class Player : MonoBehaviour
         if (_x > 0 && !faceRight) Flip();
         else if (_x < 0 && faceRight) Flip();
     }
+    #endregion
 
+    #region LayerCheck
     public void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundDistance));
@@ -132,4 +140,6 @@ public class Player : MonoBehaviour
     public bool GroundCheck() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundDistance, layer);
 
     public bool WallCheck() => Physics2D.Raycast(wallCheck.position, Vector2.right * faceDir, wallDistance, layer);
+
+    #endregion 
 }
