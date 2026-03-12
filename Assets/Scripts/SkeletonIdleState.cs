@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class SkeletonIdleState : EnemyState
 {
-    public SkeletonIdleState(Enemy enemy, EnemyStateMachine stateMachine, string aniName) : base(enemy, stateMachine, aniName)
+    Enemy_Skeleton skeleton;
+
+    public SkeletonIdleState(Enemy enemy, EnemyStateMachine stateMachine, string aniName, Enemy_Skeleton skeleton) : base(enemy, stateMachine, aniName)
     {
+        this.skeleton = skeleton;
     }
 
     public override void Enter()
     {
         base.Enter();
+        stateTimer = skeleton.idleTime;
     }
 
     public override void Exit()
@@ -21,5 +25,9 @@ public class SkeletonIdleState : EnemyState
     public override void Update()
     {
         base.Update();
+        if (stateTimer < 0)
+        {
+            stateMachine.ChangeState(skeleton.moveState);
+        }
     }
 }

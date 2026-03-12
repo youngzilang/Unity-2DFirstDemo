@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-   
+    [Header("π÷ŒÔ–≈œ¢")]
+    [SerializeField] public float moveSpeed;
+    [SerializeField] public float idleTime;
+
+
     public EnemyStateMachine stateMachine { get; private set; }
 
     protected override void Awake()
