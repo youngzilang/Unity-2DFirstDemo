@@ -22,7 +22,7 @@ public class PlayerGroundState : PlayerState
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)) stateMachine.ChangeState(player.attackState);
+        if (Input.GetKeyDown(KeyCode.J)) stateMachine.ChangeState(player.attackState);
 
 
         if (player.rb.velocity.y < -0.01)

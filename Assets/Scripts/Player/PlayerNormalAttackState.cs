@@ -38,7 +38,7 @@ public class PlayerNormalAttackState : PlayerState
         base.Exit();
         attackCount++;
         attackTiming = Time.time;
-        player.StartCoroutine("Busy", 0.15);
+        player.StartCoroutine("Busy", 0.12);
     }
 
     public override void Update()
