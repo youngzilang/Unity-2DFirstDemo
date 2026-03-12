@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
-public class SkeletonMoveState : EnemyState
+public class SkeletonMoveState : SkeletonGroundState
 {
-    Enemy_Skeleton skeleton;
+    
 
-    public SkeletonMoveState(Enemy enemy, EnemyStateMachine stateMachine, string aniName, Enemy_Skeleton skeleton) : base(enemy, stateMachine, aniName)
+    public SkeletonMoveState(Enemy enemy, EnemyStateMachine stateMachine, string aniName, Enemy_Skeleton skeleton) : base(enemy, stateMachine, aniName,skeleton)
     {
-        this.skeleton = skeleton;
+        
     }
 
     public override void Enter()

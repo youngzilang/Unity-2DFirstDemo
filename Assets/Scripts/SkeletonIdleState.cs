@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonIdleState : EnemyState
+public class SkeletonIdleState : SkeletonGroundState
 {
-    Enemy_Skeleton skeleton;
+   
 
-    public SkeletonIdleState(Enemy enemy, EnemyStateMachine stateMachine, string aniName, Enemy_Skeleton skeleton) : base(enemy, stateMachine, aniName)
+    public SkeletonIdleState(Enemy enemy, EnemyStateMachine stateMachine, string aniName, Enemy_Skeleton skeleton) : base(enemy, stateMachine, aniName, skeleton)
     {
-        this.skeleton = skeleton;
+        
     }
 
     public override void Enter()
