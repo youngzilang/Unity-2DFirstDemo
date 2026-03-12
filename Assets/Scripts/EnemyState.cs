@@ -1,18 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyState : MonoBehaviour
+public class EnemyState 
 {
-    // Start is called before the first frame update
-    void Start()
+    protected EnemyStateMachine stateMachine;
+    protected Enemy enemy;
+    protected string aniName;
+
+
+    protected float stateTimer;
+    protected bool trigger;
+
+    public EnemyState(Enemy enemy,EnemyStateMachine stateMachine,string aniName)
     {
-        
+        this.stateMachine = stateMachine;
+        this.enemy = enemy;
+        this.aniName = aniName;
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Enter()
     {
-        
+        trigger = false;
+        enemy.animator.SetBool(aniName, true);
+    }
+
+    public virtual void Update()
+    {
+        stateTimer -= Time.deltaTime;
+    }
+
+    public  virtual void Exit()
+    {
+        enemy.animator.SetBool(aniName, false);
     }
 }

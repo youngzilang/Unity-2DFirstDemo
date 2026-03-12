@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
-    // Start is called before the first frame update
-    void Start()
+    public Rigidbody2D rigidbody { get; private set; }
+    public Animator animator { get; private set; }
+    public EnemyStateMachine stateMachine { get; private set; }
+
+    private void Awake()
     {
-        
+        stateMachine = new EnemyStateMachine();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        stateMachine.currentState.Update();
     }
 }

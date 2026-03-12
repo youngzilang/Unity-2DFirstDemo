@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     [Header("攻击时人物速度矢量")]
     public Vector2[] attackVe;
@@ -18,26 +18,12 @@ public class Player : MonoBehaviour
     public float dashContinue;
     public float dashCd;
 
-    [Header("碰撞检测")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Transform wallCheck;
-    [SerializeField] private float groundDistance;
-    [SerializeField] private float wallDistance;
-    [SerializeField] private LayerMask layer;
-
+    
 
     public bool isBusy { get; private set; } = false;
 
     public float dashCdTimer { get; private set; }
 
-    public int faceDir { get; private set; } = 1;
-    public bool faceRight { get; private set; } = true;
-
-
-    #region Components
-    public Animator animator { get; private set; }
-    public Rigidbody2D rb { get; private set; }
-    #endregion
 
     #region States
     public PlayerNormalAttackState attackState { get; private set; }
@@ -51,8 +37,9 @@ public class Player : MonoBehaviour
     public PlayerWallSlideState wallSlideState { get; private set; }
     #endregion
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         stateMachine = new PlayerStateMachine();
 
         idleState = new PlayerIdleState(this, stateMachine, "isIdle");
@@ -65,16 +52,15 @@ public class Player : MonoBehaviour
         attackState = new PlayerNormalAttackState(this, stateMachine, "isAttack");
     }
 
-    private void Start()
+    protected override void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
-
+        base.Start();
         stateMachine.Initialize(idleState);
     }
 
-    private void Update()
+    protected override  void Update()
     {
+        base.Update();
         stateMachine.currentState.Update();
     
         DashNow();
@@ -107,39 +93,5 @@ public class Player : MonoBehaviour
         stateMachine.currentState.AnimationFinishTrigger();
     }
 
-    #region Ve
-    public void SetVe(float _x, float _y)
-    {
-        rb.velocity = new Vector2(_x, _y); FlipController(_x);
-
-    }
-    #endregion
-
-    #region Flip
-    public void Flip()
-    {
-        faceDir = -faceDir;
-        faceRight = !faceRight;
-        transform.Rotate(0, 180, 0);
-    }
-
-    public void FlipController(float _x)
-    {
-        if (_x > 0 && !faceRight) Flip();
-        else if (_x < 0 && faceRight) Flip();
-    }
-    #endregion
-
-    #region LayerCheck
-    public void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundDistance));
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallDistance * faceDir, wallCheck.position.y));
-    }
-
-    public bool GroundCheck() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundDistance, layer);
-
-    public bool WallCheck() => Physics2D.Raycast(wallCheck.position, Vector2.right * faceDir, wallDistance, layer);
-
-    #endregion 
+    
 }
