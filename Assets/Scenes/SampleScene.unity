@@ -107589,9 +107589,12 @@ MonoBehaviour:
   moveSpeed: 2
   idleTime: 2
   attackDistance: 1
+  battleTime: 1
   player:
     serializedVersion: 2
     m_Bits: 64
+  attackCd: 0.4
+  lastAttackTime: 0
 --- !u!4 &93941993
 Transform:
   m_ObjectHideFlags: 0

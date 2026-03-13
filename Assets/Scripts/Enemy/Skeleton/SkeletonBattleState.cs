@@ -29,12 +29,18 @@ public class SkeletonBattleState : EnemyState
 
         if (skeleton.PlayerCheck())
         {
+            stateTimer = skeleton.battleTime;
             if (skeleton.PlayerCheck().distance < skeleton.attackDistance&&CanAttack())
             {
                 stateMachine.ChangeState(skeleton.attackState);
             }
         }
+        else
+        {
+            if (stateTimer < 0|| Vector2.Distance(player.position, skeleton.transform.position) > 7) stateMachine.ChangeState(skeleton.idleState);
+        }
 
+        
         if (player.position.x > skeleton.rb.position.x) dir = 1;
         else dir = -1;
 

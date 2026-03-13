@@ -5,9 +5,10 @@ using UnityEngine;
 public class Enemy : Entity
 {
     [Header("¹ÖÎïÐÅÏ¢")]
-    [SerializeField] public float moveSpeed;
-    [SerializeField] public float idleTime;
-    [SerializeField] public float attackDistance;
+     public float moveSpeed;
+     public float idleTime;
+     public float attackDistance;
+    public float battleTime;
     [SerializeField] protected LayerMask player;
 
     public float attackCd;
@@ -27,7 +28,7 @@ public class Enemy : Entity
         stateMachine.currentState.Update();
     }
 
-    public RaycastHit2D PlayerCheck() => Physics2D.Raycast(transform.position, Vector2.right*faceDir,50.0f,player);
+    public RaycastHit2D PlayerCheck() => Physics2D.Raycast(transform.position, Vector2.right*faceDir,attackDistance,player);
 
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
