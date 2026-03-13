@@ -10,4 +10,17 @@ public class PlayerAnimationTrigger : MonoBehaviour
     {
         player.AnimationTrigger();
     } 
+
+    private void AttackTrigger()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(player.transform.position, player.attackR);
+
+        foreach(var collider in colliders)
+        {
+            if (collider.GetComponent<Enemy>() != null)
+            {
+                collider.GetComponent<Enemy>().Damage();
+            }
+        }
+    }
 }
