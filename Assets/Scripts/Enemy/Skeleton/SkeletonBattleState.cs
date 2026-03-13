@@ -29,12 +29,21 @@ public class SkeletonBattleState : EnemyState
 
         if (skeleton.PlayerCheck())
         {
-           
+            if (skeleton.PlayerCheck().distance < skeleton.attackDistance&&CanAttack())
+            {
+                stateMachine.ChangeState(skeleton.attackState);
+            }
         }
 
         if (player.position.x > skeleton.rb.position.x) dir = 1;
         else dir = -1;
 
         skeleton.SetVe(skeleton.moveSpeed * dir, skeleton.rb.velocity.y);
+    }
+
+    public bool CanAttack()
+    {
+        if (skeleton.lastAttackTime + skeleton.attackCd <= Time.time) return true;
+        else return false;
     }
 }

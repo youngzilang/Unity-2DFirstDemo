@@ -7,12 +7,13 @@ public class Enemy : Entity
     [Header("¹ÖÎïÐÅÏ¢")]
     [SerializeField] public float moveSpeed;
     [SerializeField] public float idleTime;
-    [SerializeField] protected float attackDistance;
+    [SerializeField] public float attackDistance;
     [SerializeField] protected LayerMask player;
 
+    public float attackCd;
+    [HideInInspector]public float lastAttackTime;
     
-    
-    public EnemyStateMachine stateMachine { get; private set; }
+    protected EnemyStateMachine stateMachine { get; private set; }
 
     protected override void Awake()
     {
@@ -27,6 +28,8 @@ public class Enemy : Entity
     }
 
     public RaycastHit2D PlayerCheck() => Physics2D.Raycast(transform.position, Vector2.right*faceDir,50.0f,player);
+
+    public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
     protected override void OnDrawGizmos()
     {

@@ -35,4 +35,10 @@ public class EnemyState
     {
         enemy.animator.SetBool(aniName, false);
     }
+
+    public virtual void AnimationFinishTrigger()
+    {
+        trigger = true;
+    }
+
 }

@@ -107582,12 +107582,16 @@ MonoBehaviour:
   groundCheck: {fileID: 294096868}
   wallCheck: {fileID: 93941993}
   groundDistance: 0.5
-  wallDistance: 1.5
+  wallDistance: 1.1
   layer:
     serializedVersion: 2
     m_Bits: 8
   moveSpeed: 2
   idleTime: 2
+  attackDistance: 1
+  player:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &93941993
 Transform:
   m_ObjectHideFlags: 0
@@ -107603,6 +107607,7 @@ Transform:
   m_Children:
   - {fileID: 1189044604}
   - {fileID: 294096868}
+  - {fileID: 368629660}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &93941994
@@ -120892,6 +120897,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &368629659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 368629660}
+  m_Layer: 0
+  m_Name: PlayerCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &368629660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368629659}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 93941993}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &386914746
 GameObject:
   m_ObjectHideFlags: 0
@@ -121332,7 +121368,7 @@ GameObject:
   - component: {fileID: 985653999}
   - component: {fileID: 985653998}
   - component: {fileID: 985654000}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121568,6 +121604,7 @@ GameObject:
   - component: {fileID: 1189044604}
   - component: {fileID: 1189044606}
   - component: {fileID: 1189044605}
+  - component: {fileID: 1189044607}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -121663,6 +121700,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1189044607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189044603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449f253dedb2c09408732e5d39969a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1524985543
 GameObject:
   m_ObjectHideFlags: 3
@@ -121844,7 +121893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1839813487}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121878,7 +121927,7 @@ GameObject:
   - component: {fileID: 1844310485}
   - component: {fileID: 1844310484}
   - component: {fileID: 1844310487}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121989,7 +122038,7 @@ MonoBehaviour:
   - {x: 1, y: 2}
   - {x: 3, y: 1}
   moveSpeed: 12
-  jumpForce: 10
+  jumpForce: 12
   slideJumpSpeed: 7
   dashSpeed: 20
   dashContinue: 0.25
@@ -122087,7 +122136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2039557099}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
