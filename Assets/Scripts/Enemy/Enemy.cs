@@ -11,6 +11,11 @@ public class Enemy : Entity
     public float battleTime;
     [SerializeField] protected LayerMask player;
 
+    [Header("¹ÖÎïÑ£ÔÎ")]
+    public float stunMove;
+    public float stunJump;
+    public float stunTime;
+
     public float attackCd;
     [HideInInspector]public float lastAttackTime;
     

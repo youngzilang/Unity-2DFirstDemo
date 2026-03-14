@@ -107600,6 +107600,9 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 64
+  stunMove: 10
+  stunJump: 12
+  stunTime: 1
   attackCd: 0.4
   lastAttackTime: 0
 --- !u!4 &93941993
