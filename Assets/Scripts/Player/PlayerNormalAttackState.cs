@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerNormalAttackState : PlayerState
 {
     private int attackCount ;
-    private float mixAttackWindow=1.0f;
+    private float mixAttackWindow=0.8f;
     private float attackTiming;
 
     public PlayerNormalAttackState(Player player, PlayerStateMachine stateMachine, string animationName) : base(player, stateMachine, animationName)
@@ -21,11 +21,8 @@ public class PlayerNormalAttackState : PlayerState
         }
         player.animator.SetInteger( "attackCount",attackCount);
 
-        float attackFace=player.faceDir;
-        if (inputX != 0)
-        {
-            attackFace = inputX;
-        }
+        float attackFace = inputX != 0 ? inputX : player.faceDir;
+
 
 
         player.SetVe(player.attackVe[attackCount].x* attackFace, player.attackVe[attackCount].y);
@@ -39,6 +36,7 @@ public class PlayerNormalAttackState : PlayerState
         attackCount++;
         attackTiming = Time.time;
         player.StartCoroutine("Busy", 0.12);
+        
     }
 
     public override void Update()
@@ -47,6 +45,16 @@ public class PlayerNormalAttackState : PlayerState
 
         if (stateTimer < 0) player.SetVe(0, 0);
 
-        if (trigger) stateMachine.ChangeState(player.idleState);
+        if (trigger)
+        {
+            
+            if (inputX == 0)
+                stateMachine.ChangeState(player.idleState);
+            else
+                stateMachine.ChangeState(player.moveState);
+        }
+
+        
+
     }
 }

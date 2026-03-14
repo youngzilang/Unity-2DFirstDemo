@@ -23,7 +23,7 @@ public class PlayerMoveState : PlayerGroundState
         base.Update();
 
         player.SetVe(inputX * player.moveSpeed, player.rb.velocity.y);
-        player.FlipController(inputX);
+
 
         if (inputX == 0)
         {

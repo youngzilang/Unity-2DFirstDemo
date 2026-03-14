@@ -107582,16 +107582,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundCheck: {fileID: 294096868}
   wallCheck: {fileID: 93941993}
-  groundDistance: 0.5
+  groundDistance: 1
   wallDistance: 1.1
   layer:
     serializedVersion: 2
     m_Bits: 8
   attackCheck: {fileID: 1425619201}
-  attackR: 0.8
-  hitMove: 10
-  hitJump: 10
+  attackR: 1
+  hitMove: 7
+  hitJump: 12
   hitTime: 0.07
+  isHit: 0
   moveSpeed: 2
   idleTime: 2
   attackDistance: 1
@@ -107610,7 +107611,7 @@ Transform:
   m_GameObject: {fileID: 93941991}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 71.6, y: 0.26, z: 0}
+  m_LocalPosition: {x: 71.77, y: 0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -107680,7 +107681,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 12
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -121524,7 +121525,7 @@ Transform:
   m_GameObject: {fileID: 1041557590}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.199, y: -0.005, z: 0}
+  m_LocalPosition: {x: 0.23, y: -0.005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -121792,7 +121793,7 @@ Transform:
   m_GameObject: {fileID: 1425619200}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.26, y: -0.23, z: 0}
+  m_LocalPosition: {x: 1.49, y: -0.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -122122,10 +122123,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackCheck: {fileID: 1041557591}
-  attackR: 0.8
+  attackR: 1
   hitMove: 0
   hitJump: 0
   hitTime: 0
+  isHit: 0
   attackVe:
   - {x: 2, y: 1}
   - {x: 1, y: 2}

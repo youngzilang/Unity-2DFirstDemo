@@ -90,17 +90,30 @@ public class Entity : MonoBehaviour
         transform.Rotate(0, 180, 0);
     }
 
-    public void FlipController(float _x)
+    public void UpdateFaceDirection(float inputX)
     {
-        if (_x > 0 && !faceRight) Flip();
-        else if (_x < 0 && faceRight) Flip();
+        // 只有输入有效时才更新朝向，避免无输入时误翻转
+        if (inputX != 0)
+        {
+            bool needFlip = (inputX > 0 && !faceRight) || (inputX < 0 && faceRight);
+            if (needFlip)
+            {
+                Flip();
+            }
+        }
     }
+
+    //public void FlipController(float _x)
+    //{
+    //    if (_x > 0 && !faceRight) Flip();
+    //    else if (_x < 0 && faceRight) Flip();
+    //}
     #endregion
 
     #region Ve
     public void SetVe(float _x, float _y)
     {
-        rb.velocity = new Vector2(_x, _y); FlipController(_x);
+        rb.velocity = new Vector2(_x, _y); UpdateFaceDirection(_x);
 
     }
     #endregion

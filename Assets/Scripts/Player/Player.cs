@@ -64,6 +64,12 @@ public class Player : Entity
         stateMachine.currentState.Update();
     
         DashNow();
+
+        if (!isHit && !isBusy)
+        {
+            float inputX = Input.GetAxisRaw("Horizontal");
+            UpdateFaceDirection(inputX);
+        }
     }
 
     public IEnumerator Busy(float _seconds)
@@ -84,6 +90,8 @@ public class Player : Entity
         if (Input.GetKeyDown(KeyCode.LeftShift) && dashCdTimer < 0)
         {
             dashCdTimer = dashCd;
+            float inputX = Input.GetAxisRaw("Horizontal");
+            UpdateFaceDirection(inputX);
             stateMachine.ChangeState(dashState);
         }
     }

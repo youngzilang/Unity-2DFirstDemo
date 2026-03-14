@@ -34,5 +34,7 @@ public class PlayerGroundState : PlayerState
         {
             stateMachine.ChangeState(player.jumpState);
         }
+
+        player.UpdateFaceDirection(inputX);
     }
 }
