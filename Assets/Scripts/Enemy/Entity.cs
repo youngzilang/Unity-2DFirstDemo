@@ -13,6 +13,12 @@ public class Entity : MonoBehaviour
     public Transform attackCheck;
     public float attackR;
 
+    [Header("»÷ÍËÐ§¹û")]
+    [SerializeField] protected float hitMove;
+    [SerializeField] protected float hitJump;
+    [SerializeField] protected float hitTime;
+    [HideInInspector]public bool isHit;
+
     #region Components
     public FX fX { get; private set; }
     public Animator animator { get; private set; }
@@ -44,8 +50,22 @@ public class Entity : MonoBehaviour
     public void Damage()
     {
         fX.StartCoroutine("Fx");
+        StartCoroutine("Hitted");
         Debug.Log(gameObject.name+"±»¹¥»÷!!!");
     }
+
+    public IEnumerator Hitted()
+    {
+        isHit = true;
+
+        rb.velocity = new Vector2(hitMove * -faceDir, hitJump);
+
+        yield return new WaitForSeconds(hitTime);
+
+        isHit = false;
+    }
+
+
 
     #region LayerCheck
     protected virtual void OnDrawGizmos()

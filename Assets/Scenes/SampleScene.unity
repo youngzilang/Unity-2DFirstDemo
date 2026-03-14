@@ -107560,6 +107560,7 @@ GameObject:
   - component: {fileID: 93941992}
   - component: {fileID: 93941995}
   - component: {fileID: 93941994}
+  - component: {fileID: 93941996}
   m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
@@ -107588,6 +107589,9 @@ MonoBehaviour:
     m_Bits: 8
   attackCheck: {fileID: 1425619201}
   attackR: 0.8
+  hitMove: 10
+  hitJump: 10
+  hitTime: 0.07
   moveSpeed: 2
   idleTime: 2
   attackDistance: 1
@@ -107688,6 +107692,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &93941996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93941991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aefb7afc889dd34f870f74d2eae3ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitMaterial: {fileID: 2100000, guid: 848a2593d3532d64098b19ca2bd3a456, type: 2}
+  hitTime: 0.15
 --- !u!1 &294096867
 GameObject:
   m_ObjectHideFlags: 0
@@ -121995,6 +122013,7 @@ GameObject:
   - component: {fileID: 1844310485}
   - component: {fileID: 1844310484}
   - component: {fileID: 1844310487}
+  - component: {fileID: 1844310488}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -122104,6 +122123,9 @@ MonoBehaviour:
     m_Bits: 8
   attackCheck: {fileID: 1041557591}
   attackR: 0.8
+  hitMove: 0
+  hitJump: 0
+  hitTime: 0
   attackVe:
   - {x: 2, y: 1}
   - {x: 1, y: 2}
@@ -122114,6 +122136,20 @@ MonoBehaviour:
   dashSpeed: 20
   dashContinue: 0.25
   dashCd: 0.4
+--- !u!114 &1844310488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844310483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aefb7afc889dd34f870f74d2eae3ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitMaterial: {fileID: 2100000, guid: 848a2593d3532d64098b19ca2bd3a456, type: 2}
+  hitTime: 0.15
 --- !u!1 &1872925708
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class SkeletonAttackState : EnemyState
     {
         base.Update();
 
+        if(!skeleton.isHit)
         skeleton.SetVe(0, 0);
 
         if (trigger) stateMachine.ChangeState(skeleton.battleState);
