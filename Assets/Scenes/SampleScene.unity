@@ -107560,7 +107560,7 @@ GameObject:
   - component: {fileID: 93941992}
   - component: {fileID: 93941995}
   - component: {fileID: 93941994}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107587,7 +107587,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackCheck: {fileID: 1425619201}
-  attackR: 0
+  attackR: 0.8
   moveSpeed: 2
   idleTime: 2
   attackDistance: 1
@@ -107697,7 +107697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 294096868}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120912,7 +120912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 368629660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121642,7 +121642,7 @@ GameObject:
   - component: {fileID: 1189044606}
   - component: {fileID: 1189044605}
   - component: {fileID: 1189044607}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121758,7 +121758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1425619201}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122103,7 +122103,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackCheck: {fileID: 1041557591}
-  attackR: 0
+  attackR: 0.8
   attackVe:
   - {x: 2, y: 1}
   - {x: 1, y: 2}

@@ -14,6 +14,7 @@ public class Entity : MonoBehaviour
     public float attackR;
 
     #region Components
+    public FX fX { get; private set; }
     public Animator animator { get; private set; }
     public Rigidbody2D rb { get; private set; }
     #endregion
@@ -30,6 +31,7 @@ public class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
+        fX = GetComponent<FX>();
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -41,6 +43,7 @@ public class Entity : MonoBehaviour
 
     public void Damage()
     {
+        fX.StartCoroutine("Fx");
         Debug.Log(gameObject.name+"±»¹¥»÷!!!");
     }
 
