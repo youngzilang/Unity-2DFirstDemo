@@ -24,6 +24,8 @@ public class PlayerGroundState : PlayerState
         base.Update();
         player.UpdateFaceDirection(inputX);
 
+        if (Input.GetKeyDown(KeyCode.K)) stateMachine.ChangeState(player.reAttackState);
+
         if (Input.GetKeyDown(KeyCode.J)) stateMachine.ChangeState(player.attackState);
 
 

@@ -36,9 +36,15 @@ public class Enemy_Skeleton : Enemy
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.U))
+    }
+
+    public override bool StunCheck()
+    {
+        if (base.StunCheck())
         {
             stateMachine.ChangeState(stunState);
+            return true;
         }
+        return false;
     }
 }

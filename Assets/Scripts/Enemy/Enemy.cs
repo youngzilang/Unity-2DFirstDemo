@@ -48,6 +48,16 @@ public class Enemy : Entity
         stunSign.SetActive(false);
     }
 
+    public virtual bool StunCheck()
+    {
+        if (canBeStun)
+        {
+            CloseStunWindow();
+            return true;
+        }
+        return false;
+    }
+
     public RaycastHit2D PlayerCheck() => Physics2D.Raycast(transform.position, Vector2.right*faceDir,attackDistance,player);
 
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();

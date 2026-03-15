@@ -18,7 +18,8 @@ public class Player : Entity
     public float dashContinue;
     public float dashCd;
 
-    
+    [Header("·´»÷Ê±³¤")]
+    public float reAttackTime;
 
     public bool isBusy { get; private set; } = false;
 
@@ -35,6 +36,7 @@ public class Player : Entity
     public PlayerDashState dashState { get; private set; }
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerWallSlideState wallSlideState { get; private set; }
+    public PlayerReAttackState reAttackState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -50,6 +52,7 @@ public class Player : Entity
         wallSlideState = new PlayerWallSlideState(this, stateMachine, "isWallSlide");
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "isWallJump");
         attackState = new PlayerNormalAttackState(this, stateMachine, "isAttack");
+        reAttackState = new PlayerReAttackState(this, stateMachine, "isReAttack");
     }
 
     protected override void Start()
