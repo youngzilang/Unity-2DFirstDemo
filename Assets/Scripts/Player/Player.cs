@@ -16,7 +16,6 @@ public class Player : Entity
     [Header("冲刺数据")]
     public float dashSpeed;
     public float dashContinue;
-    public float dashCd;
 
     [Header("反击时长")]
     public float reAttackTime;
@@ -83,11 +82,9 @@ public class Player : Entity
 
     private void DashNow()
     {
-        dashCdTimer -= Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCdTimer < 0)
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dashSkill.CanSkill())
         {
-            dashCdTimer = dashCd;
             float inputX = Input.GetAxisRaw("Horizontal");
             UpdateFaceDirection(inputX);
             stateMachine.ChangeState(dashState);
