@@ -23,6 +23,8 @@ public class PlayerReAttackState : PlayerState
     {
         base.Update();
 
+        player.SetVe(0, 0);
+
         Collider2D[] colliders = Physics2D.OverlapCircleAll(player.transform.position, player.attackR);
 
         foreach (var collider in colliders)
