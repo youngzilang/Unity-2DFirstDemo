@@ -24,4 +24,8 @@ public class SkeletonAnimationTrigger : MonoBehaviour
             }
         }
     }
+
+    private void OpenStunWindow() => skeleton.OpenStunWindow();
+
+    private void CloseStunWindow() => skeleton.CloseStunWindow();
 }

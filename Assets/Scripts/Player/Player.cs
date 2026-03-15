@@ -65,11 +65,6 @@ public class Player : Entity
     
         DashNow();
 
-        if (!isHit && !isBusy)
-        {
-            float inputX = Input.GetAxisRaw("Horizontal");
-            UpdateFaceDirection(inputX);
-        }
     }
 
     public IEnumerator Busy(float _seconds)

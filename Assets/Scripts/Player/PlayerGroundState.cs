@@ -16,11 +16,13 @@ public class PlayerGroundState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        player.UpdateFaceDirection(inputX);
     }
 
     public override void Update()
     {
         base.Update();
+        player.UpdateFaceDirection(inputX);
 
         if (Input.GetKeyDown(KeyCode.J)) stateMachine.ChangeState(player.attackState);
 
@@ -35,6 +37,6 @@ public class PlayerGroundState : PlayerState
             stateMachine.ChangeState(player.jumpState);
         }
 
-        player.UpdateFaceDirection(inputX);
+        
     }
 }

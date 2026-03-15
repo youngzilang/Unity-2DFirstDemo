@@ -21,7 +21,7 @@ public class PlayerNormalAttackState : PlayerState
         }
         player.animator.SetInteger( "attackCount",attackCount);
 
-        float attackFace = inputX != 0 ? inputX : player.faceDir;
+        float attackFace =  player.faceDir;
 
 
 
@@ -36,7 +36,7 @@ public class PlayerNormalAttackState : PlayerState
         attackCount++;
         attackTiming = Time.time;
         player.StartCoroutine("Busy", 0.12);
-        
+        player.UpdateFaceDirection(inputX);
     }
 
     public override void Update()
@@ -47,11 +47,7 @@ public class PlayerNormalAttackState : PlayerState
 
         if (trigger)
         {
-            
-            if (inputX == 0)
                 stateMachine.ChangeState(player.idleState);
-            else
-                stateMachine.ChangeState(player.moveState);
         }
 
         

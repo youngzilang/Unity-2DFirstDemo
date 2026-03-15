@@ -18,7 +18,10 @@ public class Enemy : Entity
 
     public float attackCd;
     [HideInInspector]public float lastAttackTime;
-    
+
+    protected bool canBeStun;
+    [SerializeField] protected GameObject stunSign;
+
     protected EnemyStateMachine stateMachine { get; private set; }
 
     protected override void Awake()
@@ -31,6 +34,18 @@ public class Enemy : Entity
     {
         base.Update();
         stateMachine.currentState.Update();
+    }
+
+    public void OpenStunWindow()
+    {
+        canBeStun = true;
+        stunSign.SetActive(true);
+    }
+
+    public void CloseStunWindow()
+    {
+        canBeStun = false;
+        stunSign.SetActive(false);
     }
 
     public RaycastHit2D PlayerCheck() => Physics2D.Raycast(transform.position, Vector2.right*faceDir,attackDistance,player);
