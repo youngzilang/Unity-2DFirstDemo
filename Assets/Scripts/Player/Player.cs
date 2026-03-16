@@ -38,6 +38,10 @@ public class Player : Entity
     public PlayerReAttackState reAttackState { get; private set; }
     #endregion
 
+    #region
+    public SkillManager skillManager { get; private set; }
+    #endregion
+
     protected override void Awake()
     {
         base.Awake();
@@ -57,6 +61,7 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+        skillManager = SkillManager.instance;
         stateMachine.Initialize(idleState);
     }
 

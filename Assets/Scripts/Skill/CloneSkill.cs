@@ -4,5 +4,16 @@ using UnityEngine;
 
 public class CloneSkill : Skill
 {
+    [Header("克隆技能信息")]
+    [SerializeField]private GameObject clonePrefab;
+    [SerializeField] private float cloneCd;
     
+
+
+    public void ClonePrefab(Transform clonePosition)
+    {
+        GameObject newClone = Instantiate(clonePrefab);
+
+        newClone.GetComponent<CloneSkillController>().SetUpClone(clonePosition, cloneCd);
+    }
 }
