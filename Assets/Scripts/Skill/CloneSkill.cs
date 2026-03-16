@@ -7,6 +7,7 @@ public class CloneSkill : Skill
     [Header("克隆技能信息")]
     [SerializeField]private GameObject clonePrefab;
     [SerializeField] private float cloneCd;
+    [SerializeField] private bool canCloneAttack;
     
 
 
@@ -14,6 +15,6 @@ public class CloneSkill : Skill
     {
         GameObject newClone = Instantiate(clonePrefab);
 
-        newClone.GetComponent<CloneSkillController>().SetUpClone(clonePosition, cloneCd);
+        newClone.GetComponent<CloneSkillController>().SetUpClone(clonePosition, cloneCd,canCloneAttack);
     }
 }
