@@ -36,6 +36,8 @@ public class Player : Entity
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerReAttackState reAttackState { get; private set; }
+    public PlayerHoldState holdState { get; private set; }
+    public PlayerAimState aimState { get; private set; }
     #endregion
 
     #region
@@ -56,6 +58,8 @@ public class Player : Entity
         wallJumpState = new PlayerWallJumpState(this, stateMachine, "isWallJump");
         attackState = new PlayerNormalAttackState(this, stateMachine, "isAttack");
         reAttackState = new PlayerReAttackState(this, stateMachine, "isReAttack");
+        holdState = new PlayerHoldState(this, stateMachine, "isHold");
+        aimState = new PlayerAimState(this, stateMachine, "isAim");
     }
 
     protected override void Start()
