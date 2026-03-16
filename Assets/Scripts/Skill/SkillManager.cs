@@ -9,11 +9,13 @@ public class SkillManager : MonoBehaviour
     public DashSkill dashSkill { get; private set; }
     public CloneSkill cloneSkill { get; private set; }
 
+    public SwordSkill swordSkill { get; protected set; }
+
     private void Awake()
     {
         if (instance != null)
         {
-            Destroy(instance);
+            Destroy(gameObject);
         }
         else instance = this;
     }
@@ -23,5 +25,6 @@ public class SkillManager : MonoBehaviour
     {
         dashSkill = instance.GetComponent<DashSkill>();
         cloneSkill = instance.GetComponent<CloneSkill>();
+        swordSkill = instance.GetComponent<SwordSkill>();
     }
 }

@@ -7,6 +7,13 @@ public class Skill : MonoBehaviour
     [SerializeField] protected float cd;
     protected float cdTimer;
 
+    protected Player player;
+
+    private void Start()
+    {
+        player = PlayerManager.instance.player;
+    }
+
     protected virtual void Update()
     {
         cdTimer -= Time.deltaTime;
