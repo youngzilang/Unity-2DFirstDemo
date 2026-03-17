@@ -11,7 +11,7 @@ public class SwordSkillController : MonoBehaviour
     private Player player;
     [SerializeField] private float returnSpeed;
     private bool isRotate=true;
-    private bool isReture;
+    private bool isReturn;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -24,7 +24,7 @@ public class SwordSkillController : MonoBehaviour
         if(isRotate)
         transform.right = rb.velocity;
 
-        if (isReture)
+        if (isReturn)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position,returnSpeed*Time.deltaTime);
 
@@ -37,9 +37,9 @@ public class SwordSkillController : MonoBehaviour
 
     public void SwordReturn()
     {
-        rb.isKinematic = false;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
         transform.parent = null;
-        isReture = true;
+        isReturn = true;
     }
 
     public void SetUpSword(Vector2 direction,float g,Player player)
@@ -53,6 +53,7 @@ public class SwordSkillController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isReturn) return;
         animator.SetBool("isFlip", false);
         isRotate = false;
         collider2D.enabled = false;

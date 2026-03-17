@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwordSkill :Skill
@@ -53,6 +54,7 @@ public class SwordSkill :Skill
 
     public void DestroyMoreSword()
     {
+        player.stateMachine.ChangeState(player.holdState);
         Destroy(swordOnly);
     }
 

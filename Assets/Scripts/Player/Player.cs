@@ -20,6 +20,9 @@ public class Player : Entity
     [Header("反击时长")]
     public float reAttackTime;
 
+    [Header("接剑后坐力")]
+    public float swordForce;
+
     public bool isBusy { get; private set; } = false;
 
     public float dashCdTimer { get; private set; }
