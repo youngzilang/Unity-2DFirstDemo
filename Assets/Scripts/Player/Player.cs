@@ -40,7 +40,7 @@ public class Player : Entity
     public PlayerAimState aimState { get; private set; }
     #endregion
 
-    #region
+    #region Manager
     public SkillManager skillManager { get; private set; }
     #endregion
 
