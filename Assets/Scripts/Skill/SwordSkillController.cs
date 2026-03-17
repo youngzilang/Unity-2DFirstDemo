@@ -6,21 +6,58 @@ using UnityEngine.WSA;
 public class SwordSkillController : MonoBehaviour
 {
     private Animator animator;
-    private Rigidbody2D rg;
+    private Rigidbody2D rb;
     private CircleCollider2D collider2D;
     private Player player;
-
+    [SerializeField] private float returnSpeed;
+    private bool isRotate=true;
+    private bool isReture;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-        rg = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<CircleCollider2D>();
     }
 
-    public void SetUpSword(Vector2 direction,float g)
+    private void Update()
     {
-        rg.velocity = direction;
-        rg.gravityScale = g;
+        if(isRotate)
+        transform.right = rb.velocity;
+
+        if (isReture)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position,returnSpeed*Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, player.transform.position) < 1)
+            {
+                SkillManager.instance.swordSkill.DestroyMoreSword();
+            }
+        }
     }
 
+    public void SwordReturn()
+    {
+        rb.isKinematic = false;
+        transform.parent = null;
+        isReture = true;
+    }
+
+    public void SetUpSword(Vector2 direction,float g,Player player)
+    {
+        this.player = player;
+        rb.velocity = direction;
+        rb.gravityScale = g;
+
+        animator.SetBool("isFlip", true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        animator.SetBool("isFlip", false);
+        isRotate = false;
+        collider2D.enabled = false;
+        rb.isKinematic = true;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        transform.parent = collision.transform;
+    }
 }

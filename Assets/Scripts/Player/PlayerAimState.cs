@@ -18,6 +18,7 @@ public class PlayerAimState : PlayerState
     public override void Exit()
     {
         base.Exit();
+
     }
 
     public override void Update()

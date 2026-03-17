@@ -5,9 +5,10 @@ using UnityEngine;
 public class SwordSkill :Skill
 {
     [Header("·Éµ¶Êý¾Ý")]
-    [SerializeField]private GameObject sword;
+    [SerializeField]private GameObject swordPreFab;
     [SerializeField] private Vector2 launchDirection;
     [SerializeField] private float swordGravity;
+
 
     private Vector2 swordFinalDirection;
 
@@ -18,7 +19,7 @@ public class SwordSkill :Skill
     [SerializeField] private Transform dotParent;
 
     private GameObject[] dots;
-
+    public GameObject swordOnly;
 
     protected override void Start()
     {
@@ -44,12 +45,23 @@ public class SwordSkill :Skill
             }
         }
     }
+
+    public void OnlySword(GameObject onlySword)
+    {
+        swordOnly = onlySword;
+    }
+
+    public void DestroyMoreSword()
+    {
+        Destroy(swordOnly);
+    }
+
     public void CreatSword()
     {
-        GameObject newSword = Instantiate(sword,player.transform.position,player.transform.rotation);
+        GameObject newSword = Instantiate(swordPreFab,player.transform.position,player.transform.rotation);
         SwordSkillController swordSkillController = newSword.GetComponent<SwordSkillController>();
-
-        swordSkillController.SetUpSword(swordFinalDirection, swordGravity);
+        OnlySword(newSword);
+        swordSkillController.SetUpSword(swordFinalDirection, swordGravity,player);
         DotsActive(false);
     }
 

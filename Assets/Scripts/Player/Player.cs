@@ -24,7 +24,6 @@ public class Player : Entity
 
     public float dashCdTimer { get; private set; }
 
-
     #region States
     public PlayerNormalAttackState attackState { get; private set; }
     public PlayerStateMachine stateMachine { get; private set; }

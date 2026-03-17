@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillManager : MonoBehaviour
 {
     public static SkillManager instance;
+    public Skill skill;
 
     public DashSkill dashSkill { get; private set; }
     public CloneSkill cloneSkill { get; private set; }

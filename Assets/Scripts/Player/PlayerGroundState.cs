@@ -24,7 +24,7 @@ public class PlayerGroundState : PlayerState
         base.Update();
         player.UpdateFaceDirection(inputX);
 
-        if (Input.GetKeyDown(KeyCode.Mouse1)) stateMachine.ChangeState(player.aimState);
+        if (Input.GetKeyDown(KeyCode.Mouse1)&&IsSwordReturn()) stateMachine.ChangeState(player.aimState);
 
         if (Input.GetKeyDown(KeyCode.R)) stateMachine.ChangeState(player.reAttackState);
 
@@ -42,5 +42,15 @@ public class PlayerGroundState : PlayerState
         }
 
         
+    }
+
+    public bool IsSwordReturn()
+    {
+        if (!SkillManager.instance.swordSkill.swordOnly)
+        {
+            return true;
+        }
+        SkillManager.instance.swordSkill.swordOnly.GetComponent<SwordSkillController>().SwordReturn();
+        return false;
     }
 }
