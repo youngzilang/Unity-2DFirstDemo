@@ -1,12 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class SwordSkill :Skill
+public enum SwordType
 {
+    Regular,
+    Bounce,
+    Pierce,
+    Spin
+}
+
+public class SwordSkill : Skill
+{
+    [Header("飞剑类型")]
+    public SwordType swordType=SwordType.Regular;
+
+    [Header("反弹飞剑")]
+    [SerializeField] private int bounceAmount;
+    [SerializeField] private float bounceG;
+
     [Header("飞刀数据")]
-    [SerializeField]private GameObject swordPreFab;
+    [SerializeField] private GameObject swordPreFab;
     [SerializeField] private Vector2 launchDirection;
     [SerializeField] private float swordGravity;
 
@@ -40,7 +52,7 @@ public class SwordSkill :Skill
 
         if (Input.GetKey(KeyCode.Mouse1))
         {
-            for(int i = 0; i < dots.Length; i++)
+            for (int i = 0; i < dots.Length; i++)
             {
                 dots[i].transform.position = DotsPosition(i * dotBetween);
             }
@@ -60,13 +72,21 @@ public class SwordSkill :Skill
 
     public void CreatSword()
     {
-        GameObject newSword = Instantiate(swordPreFab,player.transform.position,player.transform.rotation);
+        GameObject newSword = Instantiate(swordPreFab, player.transform.position, player.transform.rotation);
         SwordSkillController swordSkillController = newSword.GetComponent<SwordSkillController>();
+
+        if (swordType == SwordType.Bounce)
+        {
+            swordGravity = bounceG;
+            swordSkillController.SetUpBounce(true, bounceAmount);
+        }
+
         OnlySword(newSword);
-        swordSkillController.SetUpSword(swordFinalDirection, swordGravity,player);
+        swordSkillController.SetUpSword(swordFinalDirection, swordGravity, player);
         DotsActive(false);
     }
 
+    #region Aim
     public Vector2 AimDirection()
     {
         Vector2 playerPosition = player.transform.position;
@@ -79,9 +99,9 @@ public class SwordSkill :Skill
     public void DotsCreat()
     {
         dots = new GameObject[dotNum];
-        for(int i = 0; i < dotNum; i++)
+        for (int i = 0; i < dotNum; i++)
         {
-            dots[i] = Instantiate(dotPreFab,player.transform.position,Quaternion.identity,dotParent);
+            dots[i] = Instantiate(dotPreFab, player.transform.position, Quaternion.identity, dotParent);
             dots[i].SetActive(false);
         }
 
@@ -91,7 +111,7 @@ public class SwordSkill :Skill
 
     public void DotsActive(bool isActive)
     {
-        for(int i = 0; i < dots.Length; i++)
+        for (int i = 0; i < dots.Length; i++)
         {
             dots[i].SetActive(isActive);
         }
@@ -109,5 +129,5 @@ public class SwordSkill :Skill
         Vector2 finalPosition = (Vector2)player.transform.position + new Vector2(deltaX, deltaY);
         return finalPosition;
     }
-
+    #endregion
 }

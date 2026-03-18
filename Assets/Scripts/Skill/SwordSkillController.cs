@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.WSA;
 
 public class SwordSkillController : MonoBehaviour
 {
@@ -10,13 +9,14 @@ public class SwordSkillController : MonoBehaviour
     private CircleCollider2D collider2D;
     private Player player;
     [SerializeField] private float returnSpeed;
-    private bool isRotate=true;
+    private bool isRotate = true;
     private bool isReturn;
 
-    public float bounceSpeed;
-    private bool isBounce=true;
-    public int bounceAmount;
-    public List<Transform> transforms;
+    [Header("·´µ¯Êý¾Ý")]
+    [SerializeField]private float bounceSpeed;
+    private bool isBounce;
+    private int bounceAmount;
+    private List<Transform> transforms;
     private int transformsIndex;
 
     private void Awake()
@@ -28,12 +28,12 @@ public class SwordSkillController : MonoBehaviour
 
     private void Update()
     {
-        if(isRotate)
-        transform.right = rb.velocity;
+        if (isRotate)
+            transform.right = rb.velocity;
 
         if (isReturn)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position,returnSpeed*Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, returnSpeed * Time.deltaTime);
 
             if (Vector2.Distance(transform.position, player.transform.position) < 1)
             {
@@ -41,6 +41,11 @@ public class SwordSkillController : MonoBehaviour
             }
         }
 
+        BounceLogic();
+    }
+
+    private void BounceLogic()
+    {
         if (isBounce && transforms.Count > 0)
         {
             transform.position = Vector2.MoveTowards(transform.position, transforms[transformsIndex].position, bounceSpeed * Time.deltaTime);
@@ -63,6 +68,13 @@ public class SwordSkillController : MonoBehaviour
         }
     }
 
+    public void SetUpBounce(bool bounce,int _bounceAmount)
+    {
+        isBounce = bounce;
+        bounceAmount = _bounceAmount;
+        transforms = new List<Transform>();
+    }
+
     public void SwordReturn()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -70,7 +82,7 @@ public class SwordSkillController : MonoBehaviour
         isReturn = true;
     }
 
-    public void SetUpSword(Vector2 direction,float g,Player player)
+    public void SetUpSword(Vector2 direction, float g, Player player)
     {
         this.player = player;
         rb.velocity = direction;
@@ -81,6 +93,7 @@ public class SwordSkillController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (isReturn) return;
 
         if (collision.GetComponent<Enemy>() != null)
@@ -104,12 +117,12 @@ public class SwordSkillController : MonoBehaviour
 
     private void SwordStuck(Collider2D collision)
     {
-        
         isRotate = false;
         collider2D.enabled = false;
         rb.isKinematic = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        if (isBounce&&transforms.Count>0) return;
+
+        if (isBounce && transforms.Count > 0) return;
 
         animator.SetBool("isFlip", false);
         transform.parent = collision.transform;
