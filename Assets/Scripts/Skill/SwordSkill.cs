@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum SwordType
@@ -16,6 +17,10 @@ public class SwordSkill : Skill
     [Header("·´µ¯·É½£")]
     [SerializeField] private int bounceAmount;
     [SerializeField] private float bounceG;
+
+    [Header("¹á´©·É½£")]
+    [SerializeField] private int pierceAmount;
+    [SerializeField] private float pierceG;
 
     [Header("·Éµ¶Êý¾Ý")]
     [SerializeField] private GameObject swordPreFab;
@@ -39,8 +44,18 @@ public class SwordSkill : Skill
         base.Start();
 
         DotsCreat();
+
+        SetSwordG();
     }
 
+    private void SetSwordG()
+    {
+        switch (swordType)
+        {
+            case SwordType.Bounce:swordGravity = bounceG;break;
+            case SwordType.Pierce:swordGravity = pierceG;break;
+        }
+    }
 
     protected override void Update()
     {
@@ -75,11 +90,14 @@ public class SwordSkill : Skill
         GameObject newSword = Instantiate(swordPreFab, player.transform.position, player.transform.rotation);
         SwordSkillController swordSkillController = newSword.GetComponent<SwordSkillController>();
 
-        if (swordType == SwordType.Bounce)
+
+        switch (swordType)
         {
-            swordGravity = bounceG;
-            swordSkillController.SetUpBounce(true, bounceAmount);
+            case SwordType.Bounce:swordSkillController.SetUpBounce(true, bounceAmount);break;
+            case SwordType.Pierce:swordSkillController.SetUpPierce(pierceAmount); break;
         }
+            
+        
 
         OnlySword(newSword);
         swordSkillController.SetUpSword(swordFinalDirection, swordGravity, player);

@@ -121541,7 +121541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cd: 0
-  swordType: 1
+  swordType: 0
   bounceAmount: 4
   bounceG: 4
   swordPreFab: {fileID: 7059309140296874207, guid: c23902615ce62b945ba79c38306b78d2, type: 3}
@@ -122630,7 +122630,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3.5
+  m_GravityScale: 9.8
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -122727,7 +122727,7 @@ MonoBehaviour:
   - {x: 1, y: 2}
   - {x: 3, y: 1}
   moveSpeed: 12
-  jumpForce: 12
+  jumpForce: 25
   slideJumpSpeed: 7
   dashSpeed: 20
   dashContinue: 0.25

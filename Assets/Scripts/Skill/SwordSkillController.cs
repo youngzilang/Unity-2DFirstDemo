@@ -16,6 +16,10 @@ public class SwordSkillController : MonoBehaviour
     [SerializeField]private float bounceSpeed;
     private bool isBounce;
     private int bounceAmount;
+
+    [Header("¹á´©Êý¾Ý")]
+    private int pierceAmount;
+
     private List<Transform> transforms;
     private int transformsIndex;
 
@@ -51,6 +55,7 @@ public class SwordSkillController : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, transforms[transformsIndex].position, bounceSpeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, transforms[transformsIndex].position) < .1f)
             {
+                transforms[transformsIndex].GetComponent<Enemy>()?.Damage();
                 transformsIndex++;
                 bounceAmount--;
 
@@ -75,6 +80,11 @@ public class SwordSkillController : MonoBehaviour
         transforms = new List<Transform>();
     }
 
+    public void SetUpPierce(int _pierceAmount)
+    {
+        pierceAmount = _pierceAmount;
+    }
+
     public void SwordReturn()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -87,7 +97,7 @@ public class SwordSkillController : MonoBehaviour
         this.player = player;
         rb.velocity = direction;
         rb.gravityScale = g;
-
+        if(pierceAmount<=0)
         animator.SetBool("isFlip", true);
     }
 
@@ -95,6 +105,8 @@ public class SwordSkillController : MonoBehaviour
     {
         
         if (isReturn) return;
+
+        collision.GetComponent<Enemy>()?.Damage();
 
         if (collision.GetComponent<Enemy>() != null)
         {
@@ -117,6 +129,12 @@ public class SwordSkillController : MonoBehaviour
 
     private void SwordStuck(Collider2D collision)
     {
+        if (pierceAmount > 0 && collision.GetComponent<Enemy>() != null)
+        {
+            pierceAmount--;
+            return;
+        }
+
         isRotate = false;
         collider2D.enabled = false;
         rb.isKinematic = true;
