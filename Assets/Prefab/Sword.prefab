@@ -216,3 +216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   returnSpeed: 30
+  bounceSpeed: 20
+  bounceAmount: 4
+  transforms: []

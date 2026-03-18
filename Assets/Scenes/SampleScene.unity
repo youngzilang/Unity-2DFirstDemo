@@ -122450,6 +122450,7 @@ MonoBehaviour:
   dashSpeed: 20
   dashContinue: 0.25
   reAttackTime: 0.2
+  swordForce: 3.5
 --- !u!114 &1844310488
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,13 @@ public class SwordSkillController : MonoBehaviour
     [SerializeField] private float returnSpeed;
     private bool isRotate=true;
     private bool isReturn;
+
+    public float bounceSpeed;
+    private bool isBounce=true;
+    public int bounceAmount;
+    public List<Transform> transforms;
+    private int transformsIndex;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -31,6 +38,27 @@ public class SwordSkillController : MonoBehaviour
             if (Vector2.Distance(transform.position, player.transform.position) < 1)
             {
                 SkillManager.instance.swordSkill.DestroyMoreSword();
+            }
+        }
+
+        if (isBounce && transforms.Count > 0)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, transforms[transformsIndex].position, bounceSpeed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, transforms[transformsIndex].position) < .1f)
+            {
+                transformsIndex++;
+                bounceAmount--;
+
+                if (bounceAmount <= 0)
+                {
+                    isBounce = false;
+                    isReturn = true;
+                }
+
+                if (transformsIndex >= transforms.Count)
+                {
+                    transformsIndex = 0;
+                }
             }
         }
     }
@@ -54,11 +82,36 @@ public class SwordSkillController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isReturn) return;
-        animator.SetBool("isFlip", false);
+
+        if (collision.GetComponent<Enemy>() != null)
+        {
+            if (isBounce && transforms.Count <= 0)
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 10);
+
+                foreach (var a in colliders)
+                {
+                    if (a.GetComponent<Enemy>() != null)
+                    {
+                        transforms.Add(a.transform);
+                    }
+                }
+            }
+        }
+
+        SwordStuck(collision);
+    }
+
+    private void SwordStuck(Collider2D collision)
+    {
+        
         isRotate = false;
         collider2D.enabled = false;
         rb.isKinematic = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        if (isBounce&&transforms.Count>0) return;
+
+        animator.SetBool("isFlip", false);
         transform.parent = collision.transform;
     }
 }
