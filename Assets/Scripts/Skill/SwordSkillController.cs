@@ -27,7 +27,8 @@ public class SwordSkillController : MonoBehaviour
     private float hitGap;
     private float hitTimer;
     private bool isStop;
-    private bool isSpin; 
+    private bool isSpin;
+    private float spinDirection;
 
 
     private List<Transform> transforms;
@@ -71,6 +72,9 @@ public class SwordSkillController : MonoBehaviour
             {
                 spinTimer -= Time.deltaTime;
                 hitTimer -= Time.deltaTime;
+
+                transform.position = Vector2.MoveTowards(transform.position, new Vector2(transform.position.x + spinDirection, transform.position.y),1.5f*Time.deltaTime);
+
                 if (spinTimer < 0)
                 {
                     isReturn = true;
@@ -157,6 +161,8 @@ public class SwordSkillController : MonoBehaviour
         rb.gravityScale = g;
         if(pierceAmount<=0)
         animator.SetBool("isFlip", true);
+
+        spinDirection = Mathf.Clamp(rb.velocity.x, -1, 1);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
