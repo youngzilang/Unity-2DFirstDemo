@@ -33,7 +33,7 @@ public class SwordSkillController : MonoBehaviour
 
     private List<Transform> transforms;
     private int transformsIndex;
-
+    private float freezeTime;
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -89,6 +89,7 @@ public class SwordSkillController : MonoBehaviour
                         if (a.GetComponent<Enemy>() != null)
                         {
                             a.GetComponent<Enemy>().Damage();
+                            a.GetComponent<Enemy>().StartCoroutine("FreezeTimeFor", freezeTime);
                         }
                     }
                 }
@@ -98,6 +99,8 @@ public class SwordSkillController : MonoBehaviour
 
     private void StopAndSpin()
     {
+        if (isStop) return;
+
         isStop = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         spinTimer = spinContinue;
@@ -110,7 +113,8 @@ public class SwordSkillController : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, transforms[transformsIndex].position, bounceSpeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, transforms[transformsIndex].position) < .1f)
             {
-                transforms[transformsIndex].GetComponent<Enemy>()?.Damage();
+                transforms[transformsIndex].GetComponent<Enemy>().Damage();
+                transforms[transformsIndex].GetComponent<Enemy>().StartCoroutine("FreezeTimeFor", freezeTime);
                 transformsIndex++;
                 bounceAmount--;
 
@@ -154,11 +158,12 @@ public class SwordSkillController : MonoBehaviour
         isReturn = true;
     }
 
-    public void SetUpSword(Vector2 direction, float g, Player player)
+    public void SetUpSword(Vector2 direction, float g, Player player,float _freezetime)
     {
         this.player = player;
         rb.velocity = direction;
         rb.gravityScale = g;
+        freezeTime = _freezetime;
         if(pierceAmount<=0)
         animator.SetBool("isFlip", true);
 
@@ -170,7 +175,14 @@ public class SwordSkillController : MonoBehaviour
 
         if (isReturn) return;
 
-        collision.GetComponent<Enemy>()?.Damage();
+
+        if (collision.GetComponent<Enemy>() != null)
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            enemy.Damage();
+            enemy.StartCoroutine("FreezeTimeFor", freezeTime);
+        }
+        
 
         BounceHitTarget(collision);
 

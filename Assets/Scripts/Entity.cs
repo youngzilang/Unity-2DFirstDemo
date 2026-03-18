@@ -52,7 +52,6 @@ public class Entity : MonoBehaviour
     {
         fX.StartCoroutine("Fx");
         StartCoroutine("Hitted");
-        Debug.Log(gameObject.name+"±»¹¥»÷!!!");
     }
 
     public IEnumerator Hitted()

@@ -31,6 +31,7 @@ public class SwordSkill : Skill
     [SerializeField] private GameObject swordPreFab;
     [SerializeField] private Vector2 launchDirection;
     [SerializeField] private float swordGravity;
+    [SerializeField] private float freezeTime;
 
 
     private Vector2 swordFinalDirection;
@@ -107,7 +108,7 @@ public class SwordSkill : Skill
         
 
         OnlySword(newSword);
-        swordSkillController.SetUpSword(swordFinalDirection, swordGravity, player);
+        swordSkillController.SetUpSword(swordFinalDirection, swordGravity, player,freezeTime);
         DotsActive(false);
     }
 

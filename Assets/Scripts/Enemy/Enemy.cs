@@ -9,6 +9,7 @@ public class Enemy : Entity
      public float idleTime;
      public float attackDistance;
     public float battleTime;
+    private float originalSpeed;
     [SerializeField] protected LayerMask player;
 
     [Header("¹ÖÎïÑ£ÔÎ")]
@@ -28,6 +29,7 @@ public class Enemy : Entity
     {
         base.Awake();
         stateMachine = new EnemyStateMachine();
+        originalSpeed = moveSpeed;
     }
 
     protected override void Update()
@@ -36,6 +38,28 @@ public class Enemy : Entity
         stateMachine.currentState.Update();
     }
 
+    public virtual void FreezeTime(bool isFreeze)
+    {
+        if (isFreeze)
+        {
+            moveSpeed = 0;
+            animator.speed = 0;
+        }
+        else
+        {
+            moveSpeed = originalSpeed;
+            animator.speed = 1;
+        }
+    }
+
+    protected virtual IEnumerator FreezeTimeFor(float _seconds)
+    {
+        FreezeTime(true);
+        yield return new WaitForSeconds(_seconds);
+        FreezeTime(false);
+    }
+
+    #region Stun
     public void OpenStunWindow()
     {
         canBeStun = true;
@@ -58,6 +82,7 @@ public class Enemy : Entity
         return false;
     }
 
+    #endregion
     public RaycastHit2D PlayerCheck() => Physics2D.Raycast(transform.position, Vector2.right*faceDir,attackDistance,player);
 
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
