@@ -22,6 +22,11 @@ public class SwordSkill : Skill
     [SerializeField] private int pierceAmount;
     [SerializeField] private float pierceG;
 
+    [Header("Ðý×ª·É½£")]
+    [SerializeField] private float maxSpinDistance;
+    [SerializeField] private float spinContinueTime;
+    [SerializeField] private float spinG;
+
     [Header("·Éµ¶Êý¾Ý")]
     [SerializeField] private GameObject swordPreFab;
     [SerializeField] private Vector2 launchDirection;
@@ -54,6 +59,7 @@ public class SwordSkill : Skill
         {
             case SwordType.Bounce:swordGravity = bounceG;break;
             case SwordType.Pierce:swordGravity = pierceG;break;
+            case SwordType.Spin:swordGravity = spinG;break;
         }
     }
 
@@ -95,6 +101,7 @@ public class SwordSkill : Skill
         {
             case SwordType.Bounce:swordSkillController.SetUpBounce(true, bounceAmount);break;
             case SwordType.Pierce:swordSkillController.SetUpPierce(pierceAmount); break;
+            case SwordType.Spin:swordSkillController.SetUpSpin(true, maxSpinDistance, spinContinueTime);break;
         }
             
         

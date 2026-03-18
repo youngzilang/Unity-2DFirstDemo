@@ -19,6 +19,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected float hitTime;
     [HideInInspector]public bool isHit;
 
+
     #region Components
     public FX fX { get; private set; }
     public Animator animator { get; private set; }
@@ -61,6 +62,7 @@ public class Entity : MonoBehaviour
         rb.velocity = new Vector2(hitMove * -faceDir, hitJump);
 
         yield return new WaitForSeconds(hitTime);
+
 
         isHit = false;
     }
