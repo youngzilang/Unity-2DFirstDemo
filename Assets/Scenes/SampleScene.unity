@@ -121588,6 +121588,7 @@ GameObject:
   - component: {fileID: 599219159}
   - component: {fileID: 599219162}
   - component: {fileID: 599219163}
+  - component: {fileID: 599219164}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -121682,6 +121683,25 @@ MonoBehaviour:
   dotPreFab: {fileID: 8633074834307594907, guid: f6cde89d9ce3f5548a1ec6f72597e911, type: 3}
   dotParent: {fileID: 1705566573}
   swordOnly: {fileID: 0}
+--- !u!114 &599219164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599219158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9701aa20b306caf4aafcfe1ee0dc421b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cd: 0
+  maxSize: 15
+  growSpeed: 1
+  smallerSpeed: 3
+  blackHolePrefab: {fileID: 5587465819146111374, guid: c027ca793f0b3a8489b08f8f7abb0137, type: 3}
+  cloneAttackAmount: 4
+  cloneAttackCd: 0.4
 --- !u!1 &770128059
 GameObject:
   m_ObjectHideFlags: 0
@@ -121797,13 +121817,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36902d9775df431459ea6d3d88355462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSize: 15
-  growSpeed: 1
-  isOpen: 1
-  freezrContinue: 5
-  cloneAttackCd: 0.3
-  cloneAttackAmount: 4
-  hotKeyPreFab: {fileID: 5587465819146111374, guid: c027ca793f0b3a8489b08f8f7abb0137, type: 3}
   keyCodes: 7100000077000000650000006600000074000000
 --- !u!212 &771127346
 SpriteRenderer:

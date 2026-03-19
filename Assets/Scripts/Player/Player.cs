@@ -40,6 +40,8 @@ public class Player : Entity
     public PlayerReAttackState reAttackState { get; private set; }
     public PlayerHoldState holdState { get; private set; }
     public PlayerAimState aimState { get; private set; }
+
+    public PlayerBlackHoleState blackHoleState { get; private set; }
     #endregion
 
     #region Manager
@@ -62,6 +64,7 @@ public class Player : Entity
         reAttackState = new PlayerReAttackState(this, stateMachine, "isReAttack");
         holdState = new PlayerHoldState(this, stateMachine, "isHold");
         aimState = new PlayerAimState(this, stateMachine, "isAim");
+        blackHoleState = new PlayerBlackHoleState(this, stateMachine, "isJump");
     }
 
     protected override void Start()

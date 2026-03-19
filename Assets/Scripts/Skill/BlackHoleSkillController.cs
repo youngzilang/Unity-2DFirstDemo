@@ -5,21 +5,20 @@ using UnityEngine;
 
 public class BlackHoleSkillController : MonoBehaviour
 {
-    [Header("ºÚ¶´ÐÅÏ¢")]
-    [SerializeField] private float maxSize;
-    [SerializeField] private float growSpeed;
-    [SerializeField] private float smallerSpeed;
-    [SerializeField] private bool isOpen;
-    [SerializeField] private float freezrContinue;
-    [SerializeField] private float cloneAttackCd;
-    [SerializeField] private float cloneAttackAmount;
+    
+     private float maxSize;
+     private float growSpeed;
+     private float smallerSpeed;
+    
+    private float cloneAttackCd;
+    private float cloneAttackAmount;
     private float cloneAttackTimer;
     private bool isClone;
     private bool isSmaller;
     private bool canCreatHotKey=true;
-
-    [Space]
-    [SerializeField] private GameObject hotKeyPreFab;
+    private bool isOpen = true;
+    
+    [SerializeField]private GameObject hotKeyPreFab;
     [SerializeField] private List<KeyCode> keyCodes;
 
     private List<Transform> enemyList= new List<Transform>();
@@ -33,29 +32,15 @@ public class BlackHoleSkillController : MonoBehaviour
             isClone = true;
             HotKeyDestroy();
             canCreatHotKey = false;
+            PlayerManager.instance.player.Transprent(true);
         }
 
-        if (isOpen&&!isSmaller)
+        if (isOpen && !isSmaller)
         {
-            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxSize,maxSize), growSpeed*Time.deltaTime);
+            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxSize, maxSize), growSpeed * Time.deltaTime);
         }
 
-        if (cloneAttackTimer < 0 && isClone)
-        {
-            cloneAttackTimer = cloneAttackCd;
-
-            int index = Random.Range(0, enemyList.Count);
-
-
-            SkillManager.instance.cloneSkill.ClonePrefab(enemyList[index], 0);
-
-            cloneAttackAmount--;
-            if (cloneAttackAmount <= 0)
-            {
-                isClone = false;
-                isSmaller = true;
-            }
-        }
+        CloneAttack();
 
         if (isSmaller)
         {
@@ -63,6 +48,42 @@ public class BlackHoleSkillController : MonoBehaviour
             if (transform.localScale.x < 0) Destroy(gameObject);
         }
 
+    }
+
+    public void SetUpBlackHole(float _maxSize,float _growSpeed,float _smallerSpeed,float _cloneAttackCd,float _cloneAttackAmount)
+    {
+        maxSize = _maxSize;
+        growSpeed = _growSpeed;
+        smallerSpeed = _smallerSpeed;
+        cloneAttackCd = _cloneAttackCd;
+        cloneAttackAmount = _cloneAttackAmount;
+    }
+
+
+    private void CloneAttack()
+    {
+        if (cloneAttackTimer < 0 && isClone)
+        {
+            cloneAttackTimer = cloneAttackCd;
+
+            int index = Random.Range(0, enemyList.Count);
+
+            if (cloneAttackAmount > 0)
+                SkillManager.instance.cloneSkill.ClonePrefab(enemyList[index], 0);
+
+            cloneAttackAmount--;
+            if (cloneAttackAmount <= 0)
+            {
+                Invoke("BlackHoleFinish", 0.5f);
+            }
+        }
+    }
+
+    private void BlackHoleFinish()
+    {
+        PlayerManager.instance.player.stateMachine.ChangeState(PlayerManager.instance.player.fallState);
+        isClone = false;
+        isSmaller = true;
     }
 
     private void HotKeyDestroy()
@@ -78,12 +99,15 @@ public class BlackHoleSkillController : MonoBehaviour
     {
         if(collision.GetComponent<Enemy>()!=null)
         {
-            collision.GetComponent<Enemy>().StartCoroutine("FreezeTimeFor", freezrContinue);
+            collision.GetComponent<Enemy>().FreezeTime(true);
 
             HotKeyCreat(collision);
         }
 
     }
+
+    private void OnTriggerExit2D(Collider2D collision) => collision.GetComponent<Enemy>()?.FreezeTime(false);
+    
 
     private void HotKeyCreat(Collider2D collision)
     {
