@@ -58,6 +58,11 @@ public class SwordSkillController : MonoBehaviour
 
         BounceLogic();
         SpinLogic();
+
+        if (Vector2.Distance(player.transform.position, transform.position) > 50)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void SpinLogic()
