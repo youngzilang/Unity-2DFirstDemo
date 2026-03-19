@@ -121675,7 +121675,8 @@ MonoBehaviour:
   spinG: 0
   swordPreFab: {fileID: 7059309140296874207, guid: c23902615ce62b945ba79c38306b78d2, type: 3}
   launchDirection: {x: 45, y: 40}
-  swordGravity: 4.5
+  swordGravity: 1
+  freezeTime: 1.5
   dotNum: 20
   dotBetween: 0.07
   dotPreFab: {fileID: 8633074834307594907, guid: f6cde89d9ce3f5548a1ec6f72597e911, type: 3}

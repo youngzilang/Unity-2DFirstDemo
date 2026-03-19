@@ -64,6 +64,7 @@ public class SwordSkillController : MonoBehaviour
     {
         if (isSpin)
         {
+
             if (Vector2.Distance(player.transform.position, transform.position) > spinDistance && !isStop)
             {
                 StopAndSpin();
@@ -176,8 +177,13 @@ public class SwordSkillController : MonoBehaviour
         if (isReturn) return;
 
 
+
         if (collision.GetComponent<Enemy>() != null)
         {
+            if (isSpin)
+            {
+                StopAndSpin();
+            }
             Enemy enemy = collision.GetComponent<Enemy>();
             enemy.Damage();
             enemy.StartCoroutine("FreezeTimeFor", freezeTime);
