@@ -8,21 +8,70 @@ public class BlackHoleSkillController : MonoBehaviour
     [Header("ºÚ¶´ÐÅÏ¢")]
     [SerializeField] private float maxSize;
     [SerializeField] private float growSpeed;
+    [SerializeField] private float smallerSpeed;
     [SerializeField] private bool isOpen;
     [SerializeField] private float freezrContinue;
+    [SerializeField] private float cloneAttackCd;
+    [SerializeField] private float cloneAttackAmount;
+    private float cloneAttackTimer;
+    private bool isClone;
+    private bool isSmaller;
+    private bool canCreatHotKey=true;
 
     [Space]
     [SerializeField] private GameObject hotKeyPreFab;
     [SerializeField] private List<KeyCode> keyCodes;
 
     private List<Transform> enemyList= new List<Transform>();
+    private List<GameObject> hotKeyToDestroy=new List<GameObject>();
     private void Update()
     {
-        if (isOpen)
+        cloneAttackTimer -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            isClone = true;
+            HotKeyDestroy();
+            canCreatHotKey = false;
+        }
+
+        if (isOpen&&!isSmaller)
         {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(maxSize,maxSize), growSpeed*Time.deltaTime);
         }
 
+        if (cloneAttackTimer < 0 && isClone)
+        {
+            cloneAttackTimer = cloneAttackCd;
+
+            int index = Random.Range(0, enemyList.Count);
+
+
+            SkillManager.instance.cloneSkill.ClonePrefab(enemyList[index], 0);
+
+            cloneAttackAmount--;
+            if (cloneAttackAmount <= 0)
+            {
+                isClone = false;
+                isSmaller = true;
+            }
+        }
+
+        if (isSmaller)
+        {
+            transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(-1, -1), smallerSpeed * Time.deltaTime);
+            if (transform.localScale.x < 0) Destroy(gameObject);
+        }
+
+    }
+
+    private void HotKeyDestroy()
+    {
+        if (hotKeyToDestroy.Count <= 0) return;
+        for(int i = 0; i < hotKeyToDestroy.Count; i++)
+        {
+            Destroy(hotKeyToDestroy[i]);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,7 +93,10 @@ public class BlackHoleSkillController : MonoBehaviour
             return;
         }
 
+        if (!canCreatHotKey) return;
+
         GameObject newButton = Instantiate(hotKeyPreFab, collision.transform.position + new Vector3(0, 2), Quaternion.identity);
+        hotKeyToDestroy.Add(newButton);
 
         KeyCode keyCode = keyCodes[Random.Range(0, keyCodes.Count)];
         keyCodes.Remove(keyCode);

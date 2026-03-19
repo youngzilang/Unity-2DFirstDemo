@@ -11,10 +11,10 @@ public class CloneSkill : Skill
     
 
 
-    public void ClonePrefab(Transform clonePosition)
+    public void ClonePrefab(Transform clonePosition, int xOffSet)
     {
         GameObject newClone = Instantiate(clonePrefab);
 
-        newClone.GetComponent<CloneSkillController>().SetUpClone(clonePosition, cloneCd,canCloneAttack);
+        newClone.GetComponent<CloneSkillController>().SetUpClone(clonePosition, cloneCd,canCloneAttack,xOffSet);
     }
 }

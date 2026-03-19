@@ -38,14 +38,14 @@ public class CloneSkillController : MonoBehaviour
         }
     }
 
-    public void SetUpClone(Transform clonePosition,float _cloneTimer,bool cloneAttack)
+    public void SetUpClone(Transform clonePosition,float _cloneTimer,bool cloneAttack, int xOffSet)
     {
         if(cloneAttack)
         {
             animator.SetInteger("attackNum", UnityEngine.Random.Range(1,4));
         }
 
-        transform.position = clonePosition.position;
+        transform.position = clonePosition.position+new Vector3(xOffSet,0);
         cloneTimer = _cloneTimer;
         FaceEnemy();
     }

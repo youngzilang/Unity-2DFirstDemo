@@ -15,7 +15,7 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
-        SkillManager.instance.cloneSkill.ClonePrefab(player.transform);
+        SkillManager.instance.cloneSkill.ClonePrefab(player.transform,0);
 
         dashContinueTimer = player.dashContinue;
         
