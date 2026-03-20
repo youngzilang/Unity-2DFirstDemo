@@ -121589,6 +121589,7 @@ GameObject:
   - component: {fileID: 599219162}
   - component: {fileID: 599219163}
   - component: {fileID: 599219164}
+  - component: {fileID: 599219165}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -121702,6 +121703,22 @@ MonoBehaviour:
   blackHolePrefab: {fileID: 757335977189383102, guid: 76b159edc1fb4214f98e7e33d1acc3c3, type: 3}
   cloneAttackAmount: 5
   cloneAttackCd: 0.35
+  balckHoleCd: 4
+--- !u!114 &599219165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599219158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dd18580ec79e4f47b0ebc0641591f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cd: 0
+  crystalPrefab: {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
+  crystalCd: 2
 --- !u!1 &770128059
 GameObject:
   m_ObjectHideFlags: 0
