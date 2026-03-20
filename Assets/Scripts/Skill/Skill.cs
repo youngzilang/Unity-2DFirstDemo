@@ -23,6 +23,7 @@ public class Skill : MonoBehaviour
     {
         if (cdTimer < 0)
         {
+            UseSkill();
             cdTimer = cd;
             return true;
         }

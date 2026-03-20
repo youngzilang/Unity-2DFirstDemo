@@ -121718,7 +121718,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cd: 0
   crystalPrefab: {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
-  crystalCd: 2
+  crystalCd: 1
+  growSpeed: 3
+  moveSpeed: 5
 --- !u!1 &770128059
 GameObject:
   m_ObjectHideFlags: 0

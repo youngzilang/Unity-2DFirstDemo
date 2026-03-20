@@ -9,16 +9,33 @@ public class CrystalSkill : Skill
     [SerializeField] private float growSpeed;
     [SerializeField] private float moveSpeed;
     private GameObject currentCtystal;
-   
 
+    [Header("Ë®¾§Êý¾Ý")]
+    [SerializeField] private float crystalAmount;
+    [SerializeField] private float crystalAttackCd;
+    [SerializeField] private float skillUseWindow;
+    [SerializeField] private List<GameObject> crystalsList= new List<GameObject>();
+    [SerializeField] private bool isCrystalAttack;
+
+    /// <summary>
+    /// 
+    /// </summary>
     public override void UseSkill()
     {
         base.UseSkill();
 
+        CanUseCrystal();
+
+       // SingleCrystalAttack();
+
+    }
+
+    private void SingleCrystalAttack()
+    {
         if (!currentCtystal)
         {
             currentCtystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
-            currentCtystal.GetComponent<CrystalSkillController>().SetUpCrystal(crystalCd,growSpeed,moveSpeed);
+            currentCtystal.GetComponent<CrystalSkillController>().SetUpCrystal(crystalCd, growSpeed, moveSpeed);
         }
         else
         {
@@ -28,9 +45,53 @@ public class CrystalSkill : Skill
             currentCtystal.transform.position = originalPosition;
             crystalSkillController.Boom();
         }
-            
     }
 
+    public bool CanUseCrystal()
+    {
+        if (isCrystalAttack)
+        {
+            if (crystalsList.Count > 0)
+            {
+                if (crystalsList.Count == crystalAmount)
+                    Invoke("FillCrystal", skillUseWindow);
 
+                cd = 0;
+                GameObject modelCrystal = crystalsList[crystalsList.Count - 1];
+                GameObject newCrystal = Instantiate(modelCrystal,player.transform.position,Quaternion.identity);
 
+                crystalsList.Remove(modelCrystal);
+                newCrystal.GetComponent<CrystalSkillController>()?.SetUpCrystal(crystalCd, growSpeed, moveSpeed);
+
+                if (crystalsList.Count <= 0)
+                {
+                    cd = crystalAttackCd;
+                    AddCrystalAttackList();
+                }
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    private void AddCrystalAttackList()
+    {
+        while (crystalsList.Count < crystalAmount)
+        { crystalsList.Add(crystalPrefab); }
+        
+    }
+
+    public override bool CanSkill()
+    {
+        return base.CanSkill();
+    }
+
+    private void FillCrystal()
+    {
+        if (cdTimer > 0) return;
+
+        cdTimer = crystalAttackCd;
+        AddCrystalAttackList();
+    }
 }

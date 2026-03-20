@@ -83,7 +83,7 @@ public class Player : Entity
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            skillManager.crystalSkill.UseSkill();
+            skillManager.crystalSkill.CanSkill();
         }
     }
 
