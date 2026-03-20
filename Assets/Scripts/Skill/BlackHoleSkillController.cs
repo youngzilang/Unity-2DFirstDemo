@@ -1,38 +1,49 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BlackHoleSkillController : MonoBehaviour
 {
-    
-     private float maxSize;
-     private float growSpeed;
-     private float smallerSpeed;
-    
+
+    private float maxSize;
+    private float growSpeed;
+    private float smallerSpeed;
+    private float blackHoleTimer;
     private float cloneAttackCd;
     private float cloneAttackAmount;
     private float cloneAttackTimer;
     private bool isClone;
     private bool isSmaller;
-    private bool canCreatHotKey=true;
+    private bool canCreatHotKey = true;
     private bool isOpen = true;
-    
-    [SerializeField]private GameObject hotKeyPreFab;
+    private bool isDisapper = true;
+
+    [SerializeField] private GameObject hotKeyPreFab;
     [SerializeField] private List<KeyCode> keyCodes;
 
-    private List<Transform> enemyList= new List<Transform>();
-    private List<GameObject> hotKeyToDestroy=new List<GameObject>();
+    private List<Transform> enemyList = new List<Transform>();
+    private List<GameObject> hotKeyToDestroy = new List<GameObject>();
+
+    public bool playerExit { get; private set; }
+
     private void Update()
     {
         cloneAttackTimer -= Time.deltaTime;
+        blackHoleTimer -= Time.deltaTime;
+
+        if (blackHoleTimer < 0)
+        {
+            blackHoleTimer = Mathf.Infinity;
+
+            if (enemyList.Count > 0)
+                ReleaseCloneAttack();
+            else BlackHoleFinish();
+
+        }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            isClone = true;
-            HotKeyDestroy();
-            canCreatHotKey = false;
-            PlayerManager.instance.player.Transprent(true);
+            ReleaseCloneAttack();
         }
 
         if (isOpen && !isSmaller)
@@ -50,23 +61,38 @@ public class BlackHoleSkillController : MonoBehaviour
 
     }
 
-    public void SetUpBlackHole(float _maxSize,float _growSpeed,float _smallerSpeed,float _cloneAttackCd,float _cloneAttackAmount)
+    private void ReleaseCloneAttack()
+    {
+        isClone = true;
+        HotKeyDestroy();
+        canCreatHotKey = false;
+        if (isDisapper)
+        {
+            isDisapper = false;
+            PlayerManager.instance.player.Transprent(true);
+        }
+        
+    }
+
+    public void SetUpBlackHole(float _maxSize, float _growSpeed, float _smallerSpeed, float _cloneAttackCd, float _cloneAttackAmount, float blackholecd)
     {
         maxSize = _maxSize;
         growSpeed = _growSpeed;
         smallerSpeed = _smallerSpeed;
         cloneAttackCd = _cloneAttackCd;
         cloneAttackAmount = _cloneAttackAmount;
+        blackHoleTimer = blackholecd;
     }
 
 
     private void CloneAttack()
     {
+        if (enemyList.Count <= 0) return;
         if (cloneAttackTimer < 0 && isClone)
         {
             cloneAttackTimer = cloneAttackCd;
 
-            int index = Random.Range(0, enemyList.Count);
+            int index = UnityEngine.Random.Range(0, enemyList.Count);
 
             if (cloneAttackAmount > 0)
                 SkillManager.instance.cloneSkill.ClonePrefab(enemyList[index], 0);
@@ -81,7 +107,9 @@ public class BlackHoleSkillController : MonoBehaviour
 
     private void BlackHoleFinish()
     {
-        PlayerManager.instance.player.stateMachine.ChangeState(PlayerManager.instance.player.fallState);
+        HotKeyDestroy();
+        playerExit = true;
+        // PlayerManager.instance.player.stateMachine.ChangeState(PlayerManager.instance.player.fallState);
         isClone = false;
         isSmaller = true;
     }
@@ -89,7 +117,7 @@ public class BlackHoleSkillController : MonoBehaviour
     private void HotKeyDestroy()
     {
         if (hotKeyToDestroy.Count <= 0) return;
-        for(int i = 0; i < hotKeyToDestroy.Count; i++)
+        for (int i = 0; i < hotKeyToDestroy.Count; i++)
         {
             Destroy(hotKeyToDestroy[i]);
         }
@@ -97,7 +125,7 @@ public class BlackHoleSkillController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<Enemy>()!=null)
+        if (collision.GetComponent<Enemy>() != null)
         {
             collision.GetComponent<Enemy>().FreezeTime(true);
 
@@ -107,7 +135,7 @@ public class BlackHoleSkillController : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision) => collision.GetComponent<Enemy>()?.FreezeTime(false);
-    
+
 
     private void HotKeyCreat(Collider2D collision)
     {
@@ -122,7 +150,7 @@ public class BlackHoleSkillController : MonoBehaviour
         GameObject newButton = Instantiate(hotKeyPreFab, collision.transform.position + new Vector3(0, 2), Quaternion.identity);
         hotKeyToDestroy.Add(newButton);
 
-        KeyCode keyCode = keyCodes[Random.Range(0, keyCodes.Count)];
+        KeyCode keyCode = keyCodes[UnityEngine.Random.Range(0, keyCodes.Count)];
         keyCodes.Remove(keyCode);
 
         BlackHoleHotKeyController blackHoleHotKeyController = newButton.GetComponent<BlackHoleHotKeyController>();

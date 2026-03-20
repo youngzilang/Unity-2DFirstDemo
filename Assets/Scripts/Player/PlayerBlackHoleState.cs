@@ -49,5 +49,10 @@ public class PlayerBlackHoleState : PlayerState
             
         }
 
+        if (player.skillManager.blackHoleSkill.BlackHoleFinish())
+        {
+            player.stateMachine.ChangeState(player.fallState);
+        }
+
     }
 }

@@ -12,7 +12,9 @@ public class BlackHoleSkill : Skill
     [SerializeField] private GameObject blackHolePrefab;
     [SerializeField] private int cloneAttackAmount;
     [SerializeField] private float cloneAttackCd;
-
+    [SerializeField] private float balckHoleCd;
+    
+    private BlackHoleSkillController controller;
     public override bool CanSkill()
     {
         return base.CanSkill();
@@ -22,12 +24,25 @@ public class BlackHoleSkill : Skill
     {
         base.UseSkill();
 
-        GameObject infectBlackHole = Instantiate(blackHolePrefab,player.transform.position,Quaternion.identity);
-        infectBlackHole.GetComponent<BlackHoleSkillController>().SetUpBlackHole(maxSize, growSpeed, smallerSpeed, cloneAttackCd, cloneAttackAmount);
+        GameObject infectBlackHole = Instantiate(blackHolePrefab,player.transform.position+new Vector3(0,5),Quaternion.identity);
+        controller= infectBlackHole.GetComponent<BlackHoleSkillController>();
+        controller.SetUpBlackHole(maxSize, growSpeed, smallerSpeed, cloneAttackCd, cloneAttackAmount,balckHoleCd);
     }
 
     protected override void Update()
     {
         base.Update();
+    }
+
+    public bool BlackHoleFinish()
+    {
+        if (!controller.playerExit) return false;
+
+        if (controller.playerExit)
+        {
+            controller = null;
+            return true;
+        }
+        return false;
     }
 }
