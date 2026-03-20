@@ -81,6 +81,10 @@ public class Player : Entity
     
         DashNow();
 
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            skillManager.crystalSkill.UseSkill();
+        }
     }
 
     public IEnumerator Busy(float _seconds)
