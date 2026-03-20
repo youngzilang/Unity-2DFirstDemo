@@ -10,7 +10,9 @@ public class CrystalSkillController : MonoBehaviour
     private float crystalTimer;
     private bool isBoom = true;
     private float growSpeed;
+    private float moveSpeed;
     private bool isGrow;
+    private bool isMove=true;
 
     private void Update()
     {
@@ -22,6 +24,20 @@ public class CrystalSkillController : MonoBehaviour
         {
             transform.localScale = Vector2.Lerp(transform.localScale, new Vector2(3,3), growSpeed * Time.deltaTime);
         }
+
+        if (isMove)
+        {
+            if (FollowClosestEnemy())
+            {
+                transform.position = Vector2.MoveTowards(transform.position, FollowClosestEnemy().position, moveSpeed * Time.deltaTime);
+                if (Vector2.Distance(transform.position, FollowClosestEnemy().position) < 1)
+                {
+                    Boom();
+                    isMove = false;
+                }
+            }
+            
+        }
     }
 
     public void Boom()
@@ -31,16 +47,18 @@ public class CrystalSkillController : MonoBehaviour
             if (isBoom)
             {
                 isGrow = true;
+                isMove = false;
                 animator.SetTrigger("Boom");
             }
             else selfDestroy();
         }
     }
 
-    public void SetUpCrystal(float _crystalCd, float _growSpeed)
+    public void SetUpCrystal(float _crystalCd, float _growSpeed,float _moveSpeed)
     {
         growSpeed = _growSpeed;
         crystalTimer = _crystalCd;
+        moveSpeed = _moveSpeed;
     }
 
     private void selfDestroy(){
@@ -61,5 +79,32 @@ public class CrystalSkillController : MonoBehaviour
                 collider.GetComponent<Enemy>().Damage();
             }
         }
+    }
+
+    private Transform FollowClosestEnemy()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
+
+        Transform closestEnemy=null;
+
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var collider in colliders)
+        {
+            if (collider.GetComponent<Enemy>() != null)
+            {
+
+
+                float distance = Vector2.Distance(transform.position, collider.transform.position);
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestEnemy = collider.transform;
+
+                }
+            }
+        }
+        return closestEnemy;
     }
 }

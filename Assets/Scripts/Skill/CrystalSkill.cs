@@ -7,6 +7,7 @@ public class CrystalSkill : Skill
     [SerializeField]private GameObject crystalPrefab;
     [SerializeField] private float crystalCd;
     [SerializeField] private float growSpeed;
+    [SerializeField] private float moveSpeed;
     private GameObject currentCtystal;
    
 
@@ -17,7 +18,7 @@ public class CrystalSkill : Skill
         if (!currentCtystal)
         {
             currentCtystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
-            currentCtystal.GetComponent<CrystalSkillController>().SetUpCrystal(crystalCd,growSpeed);
+            currentCtystal.GetComponent<CrystalSkillController>().SetUpCrystal(crystalCd,growSpeed,moveSpeed);
         }
         else
         {
