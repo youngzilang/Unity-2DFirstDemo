@@ -15,7 +15,7 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
-        SkillManager.instance.cloneSkill.ClonePrefab(player.transform,0);
+        SkillManager.instance.cloneSkill.CreatDashStartClone(player.transform);
 
         dashContinueTimer = player.dashContinue;
         
@@ -24,6 +24,7 @@ public class PlayerDashState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        SkillManager.instance.cloneSkill.CreatDashOverClone(player.transform);
         player.SetVe(0, 0);
     }
 

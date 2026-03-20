@@ -40,9 +40,11 @@ public class SkeletonBattleState : EnemyState
             if (stateTimer < 0|| Vector2.Distance(player.position, skeleton.transform.position) > 7) stateMachine.ChangeState(skeleton.idleState);
         }
 
-        
-        if (player.position.x > skeleton.rb.position.x) dir = 1;
-        else dir = -1;
+        if(Vector2.Distance(player.transform.position, skeleton.rb.position)>1)
+        {
+            if (player.position.x > skeleton.rb.position.x) dir = 1;
+            else dir = -1;
+        }
 
         skeleton.SetVe(skeleton.moveSpeed * dir, skeleton.rb.velocity.y);
     }

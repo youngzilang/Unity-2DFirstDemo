@@ -34,7 +34,8 @@ public class PlayerReAttackState : PlayerState
                 if (collider.GetComponent<Enemy>().StunCheck())
                 {
                     stateTimer = 10;
-                    stateMachine.ChangeState(player.reAttackState);
+                    player.animator.SetBool("isReAttackSuccess", true);
+                    player.skillManager.cloneSkill.DelayCreatReAttackClone(player.transform, 5 * player.faceDir);
                 }
             }
         }

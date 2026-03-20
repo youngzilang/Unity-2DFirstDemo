@@ -121721,6 +121721,14 @@ MonoBehaviour:
   crystalCd: 1
   growSpeed: 3
   moveSpeed: 5
+  crystalAmount: 3
+  crystalAttackCd: 4
+  skillUseWindow: 2.5
+  crystalsList:
+  - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
+  - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
+  - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
+  isCrystalAttack: 1
 --- !u!1 &770128059
 GameObject:
   m_ObjectHideFlags: 0
