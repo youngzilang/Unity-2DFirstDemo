@@ -15,8 +15,8 @@ public class CloneSkillController : MonoBehaviour
     private Animator animator;
     private float cloneTimer;
     private Transform closestEnemy;
-
-
+    private bool canAddClone;
+    private float chance;
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -38,13 +38,14 @@ public class CloneSkillController : MonoBehaviour
         }
     }
 
-    public void SetUpClone(Transform clonePosition,float _cloneTimer,bool cloneAttack, int xOffSet)
+    public void SetUpClone(Transform clonePosition,float _cloneTimer,bool cloneAttack, int xOffSet,bool _canaddclone,float _chance)
     {
         if(cloneAttack)
         {
             animator.SetInteger("attackNum", UnityEngine.Random.Range(1,4));
         }
-
+        chance = _chance;
+        canAddClone = _canaddclone;
         transform.position = clonePosition.position+new Vector3(xOffSet,0);
         cloneTimer = _cloneTimer;
         FaceEnemy();
@@ -64,6 +65,11 @@ public class CloneSkillController : MonoBehaviour
             if (collider.GetComponent<Enemy>() != null)
             {
                 collider.GetComponent<Enemy>().Damage();
+
+                if (UnityEngine.Random.Range(0, 100) <chance)
+                {
+                    SkillManager.instance.cloneSkill.ClonePrefab(collider.transform, 1);
+                }
             }
         }
     }
