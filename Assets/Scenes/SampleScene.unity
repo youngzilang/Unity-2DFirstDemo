@@ -107652,6 +107652,7 @@ GameObject:
   - component: {fileID: 93941995}
   - component: {fileID: 93941994}
   - component: {fileID: 93941996}
+  - component: {fileID: 93941997}
   m_Layer: 7
   m_Name: Skeleton
   m_TagString: Untagged
@@ -107803,6 +107804,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMaterial: {fileID: 2100000, guid: 848a2593d3532d64098b19ca2bd3a456, type: 2}
   hitTime: 0.15
+--- !u!114 &93941997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93941991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f196be70133154b8e40cae8337416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  maxHP: 0
 --- !u!1 &103710389
 GameObject:
   m_ObjectHideFlags: 0
@@ -121657,8 +121672,8 @@ MonoBehaviour:
   addCloneChance: 0
   dashStartClone: 1
   dashOverClone: 1
-  cloneReAttack: 0
-  canAddClone: 0
+  cloneReAttack: 1
+  canAddClone: 1
   crystalInsteadClone: 0
 --- !u!114 &599219163
 MonoBehaviour:
@@ -122217,6 +122232,7 @@ GameObject:
   - component: {fileID: 916907021}
   - component: {fileID: 916907020}
   - component: {fileID: 916907019}
+  - component: {fileID: 916907024}
   m_Layer: 7
   m_Name: Skeleton (3)
   m_TagString: Untagged
@@ -122368,6 +122384,20 @@ Transform:
   - {fileID: 1910759413}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &916907024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916907018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f196be70133154b8e40cae8337416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  maxHP: 0
 --- !u!1 &985653996
 GameObject:
   m_ObjectHideFlags: 0
@@ -122603,6 +122633,7 @@ GameObject:
   - component: {fileID: 1101883894}
   - component: {fileID: 1101883893}
   - component: {fileID: 1101883892}
+  - component: {fileID: 1101883897}
   m_Layer: 7
   m_Name: Skeleton (2)
   m_TagString: Untagged
@@ -122754,6 +122785,20 @@ Transform:
   - {fileID: 1131881780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1101883897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101883891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f196be70133154b8e40cae8337416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  maxHP: 0
 --- !u!1 &1113642636
 GameObject:
   m_ObjectHideFlags: 0
@@ -122910,6 +122955,7 @@ GameObject:
   - component: {fileID: 1142375096}
   - component: {fileID: 1142375095}
   - component: {fileID: 1142375094}
+  - component: {fileID: 1142375099}
   m_Layer: 7
   m_Name: Skeleton (1)
   m_TagString: Untagged
@@ -123061,6 +123107,20 @@ Transform:
   - {fileID: 103710391}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1142375099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142375093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f196be70133154b8e40cae8337416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  maxHP: 0
 --- !u!1 &1170549081
 GameObject:
   m_ObjectHideFlags: 0
@@ -123753,6 +123813,7 @@ GameObject:
   - component: {fileID: 1844310484}
   - component: {fileID: 1844310487}
   - component: {fileID: 1844310488}
+  - component: {fileID: 1844310489}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -123892,6 +123953,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMaterial: {fileID: 2100000, guid: 848a2593d3532d64098b19ca2bd3a456, type: 2}
   hitTime: 0.15
+--- !u!114 &1844310489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844310483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f196be70133154b8e40cae8337416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  maxHP: 0
 --- !u!1 &1872925708
 GameObject:
   m_ObjectHideFlags: 0
@@ -123989,6 +124064,7 @@ GameObject:
   - component: {fileID: 1881720075}
   - component: {fileID: 1881720074}
   - component: {fileID: 1881720073}
+  - component: {fileID: 1881720078}
   m_Layer: 7
   m_Name: Skeleton (4)
   m_TagString: Untagged
@@ -124140,6 +124216,20 @@ Transform:
   - {fileID: 2055035226}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1881720078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881720072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f196be70133154b8e40cae8337416c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  maxHP: 0
 --- !u!1 &1910759411
 GameObject:
   m_ObjectHideFlags: 0
