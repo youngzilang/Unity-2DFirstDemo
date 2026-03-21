@@ -13,10 +13,16 @@ public class CloneSkill : Skill
     [SerializeField] private bool dashOverClone;
     [SerializeField] private bool cloneReAttack;
     [SerializeField] private bool canAddClone;
-
+    [SerializeField] private bool crystalInsteadClone;
 
     public void ClonePrefab(Transform clonePosition, int xOffSet)
     {
+        if (crystalInsteadClone)
+        {
+            SkillManager.instance.crystalSkill.CreatCrystal();
+            return;
+        }
+
         GameObject newClone = Instantiate(clonePrefab);
 
         newClone.GetComponent<CloneSkillController>().SetUpClone(clonePosition, cloneCd,canCloneAttack,xOffSet,canAddClone,addCloneChance);

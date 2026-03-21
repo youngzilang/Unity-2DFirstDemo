@@ -44,7 +44,6 @@ public class PlayerBlackHoleState : PlayerState
            if( player.skillManager.blackHoleSkill.CanSkill())
             {
                 isSkill = true;
-                player.skillManager.blackHoleSkill.UseSkill();
             }
             
         }

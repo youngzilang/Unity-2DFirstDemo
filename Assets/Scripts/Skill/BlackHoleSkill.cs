@@ -13,7 +13,7 @@ public class BlackHoleSkill : Skill
     [SerializeField] private int cloneAttackAmount;
     [SerializeField] private float cloneAttackCd;
     [SerializeField] private float balckHoleCd;
-    
+
     private BlackHoleSkillController controller;
     public override bool CanSkill()
     {
@@ -23,6 +23,10 @@ public class BlackHoleSkill : Skill
     public override void UseSkill()
     {
         base.UseSkill();
+
+        
+
+        Debug.Log($"【黑洞生成】帧号={Time.frameCount}，对象ID={gameObject.GetInstanceID()}", gameObject);
 
         GameObject infectBlackHole = Instantiate(blackHolePrefab,player.transform.position+new Vector3(0,5),Quaternion.identity);
         controller= infectBlackHole.GetComponent<BlackHoleSkillController>();

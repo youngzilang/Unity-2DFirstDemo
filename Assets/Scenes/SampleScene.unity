@@ -121654,9 +121654,12 @@ MonoBehaviour:
   clonePrefab: {fileID: 8200740811521087934, guid: e0ce1be2d9b68da46bb46a2ba140f2d0, type: 3}
   cloneCd: 1.5
   canCloneAttack: 1
-  dashStartClone: 1
-  dashOverClone: 1
-  cloneReAttack: 1
+  addCloneChance: 0
+  dashStartClone: 0
+  dashOverClone: 0
+  cloneReAttack: 0
+  canAddClone: 0
+  crystalInsteadClone: 0
 --- !u!114 &599219163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121731,7 +121734,8 @@ MonoBehaviour:
   - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
   - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
   - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
-  isCrystalAttack: 1
+  isCrystalAttack: 0
+  cloneInsteadCrystal: 0
 --- !u!1 &770128059
 GameObject:
   m_ObjectHideFlags: 0

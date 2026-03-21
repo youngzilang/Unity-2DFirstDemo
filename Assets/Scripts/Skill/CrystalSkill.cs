@@ -32,8 +32,7 @@ public class CrystalSkill : Skill
     {
         if (!currentCtystal)
         {
-            currentCtystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
-            currentCtystal.GetComponent<CrystalSkillController>().SetUpCrystal(crystalCd, growSpeed, moveSpeed);
+            CreatCrystal();
         }
         else
         {
@@ -50,6 +49,12 @@ public class CrystalSkill : Skill
             else
             crystalSkillController.Boom();
         }
+    }
+
+    public void CreatCrystal()
+    {
+        currentCtystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
+        currentCtystal.GetComponent<CrystalSkillController>().SetUpCrystal(crystalCd, growSpeed, moveSpeed);
     }
 
     public bool CanUseCrystal()

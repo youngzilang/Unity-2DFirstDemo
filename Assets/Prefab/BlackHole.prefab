@@ -135,3 +135,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hotKeyPreFab: {fileID: 5587465819146111374, guid: c027ca793f0b3a8489b08f8f7abb0137, type: 3}
   keyCodes: 7100000077000000650000007400000079000000
+  enemyList: []

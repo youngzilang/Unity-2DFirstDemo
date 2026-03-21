@@ -66,9 +66,12 @@ public class CloneSkillController : MonoBehaviour
             {
                 collider.GetComponent<Enemy>().Damage();
 
-                if (UnityEngine.Random.Range(0, 100) <chance)
+                if (canAddClone)
                 {
-                    SkillManager.instance.cloneSkill.ClonePrefab(collider.transform, 1);
+                    if (UnityEngine.Random.Range(0, 100) < chance)
+                    {
+                        SkillManager.instance.cloneSkill.ClonePrefab(collider.transform, 1);
+                    }
                 }
             }
         }

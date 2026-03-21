@@ -21,8 +21,9 @@ public class BlackHoleSkillController : MonoBehaviour
     [SerializeField] private GameObject hotKeyPreFab;
     [SerializeField] private List<KeyCode> keyCodes;
 
-    private List<Transform> enemyList = new List<Transform>();
+    public List<Transform> enemyList = new List<Transform>();
     private List<GameObject> hotKeyToDestroy = new List<GameObject>();
+    private HashSet<Enemy> already=new HashSet<Enemy>();
 
     public bool playerExit { get; private set; }
 
@@ -108,10 +109,12 @@ public class BlackHoleSkillController : MonoBehaviour
     private void BlackHoleFinish()
     {
         HotKeyDestroy();
+
         playerExit = true;
         // PlayerManager.instance.player.stateMachine.ChangeState(PlayerManager.instance.player.fallState);
         isClone = false;
         isSmaller = true;
+        already.Clear();
     }
 
     private void HotKeyDestroy()
@@ -125,12 +128,19 @@ public class BlackHoleSkillController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Enemy>() != null)
-        {
-            collision.GetComponent<Enemy>().FreezeTime(true);
+        Enemy enemy = collision.GetComponent<Enemy>();
+        if (enemy == null || already.Contains(enemy)||!canCreatHotKey) return;
+
+        
+        already.Add(enemy);
+
+
+        
+        
+            enemy.FreezeTime(true);
 
             HotKeyCreat(collision);
-        }
+        
 
     }
 
