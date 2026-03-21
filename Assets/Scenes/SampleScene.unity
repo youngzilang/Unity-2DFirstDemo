@@ -121654,6 +121654,9 @@ MonoBehaviour:
   clonePrefab: {fileID: 8200740811521087934, guid: e0ce1be2d9b68da46bb46a2ba140f2d0, type: 3}
   cloneCd: 1.5
   canCloneAttack: 1
+  dashStartClone: 1
+  dashOverClone: 1
+  cloneReAttack: 1
 --- !u!114 &599219163
 MonoBehaviour:
   m_ObjectHideFlags: 0

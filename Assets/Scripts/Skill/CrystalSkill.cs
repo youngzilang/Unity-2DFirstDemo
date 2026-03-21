@@ -16,17 +16,15 @@ public class CrystalSkill : Skill
     [SerializeField] private float skillUseWindow;
     [SerializeField] private List<GameObject> crystalsList= new List<GameObject>();
     [SerializeField] private bool isCrystalAttack;
+    [SerializeField] private bool cloneInsteadCrystal;
 
-    /// <summary>
-    /// 
-    /// </summary>
     public override void UseSkill()
     {
         base.UseSkill();
 
-        CanUseCrystal();
+        if(CanUseCrystal())return;
 
-       // SingleCrystalAttack();
+        SingleCrystalAttack();
 
     }
 
@@ -43,6 +41,13 @@ public class CrystalSkill : Skill
             CrystalSkillController crystalSkillController = currentCtystal.GetComponent<CrystalSkillController>();
             player.transform.position = currentCtystal.transform.position;
             currentCtystal.transform.position = originalPosition;
+
+            if (cloneInsteadCrystal)
+            {
+                player.skillManager.cloneSkill.ClonePrefab(currentCtystal.transform,0);
+                Destroy(currentCtystal);
+            }
+            else
             crystalSkillController.Boom();
         }
     }
