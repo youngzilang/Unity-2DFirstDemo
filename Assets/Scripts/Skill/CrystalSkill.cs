@@ -17,6 +17,7 @@ public class CrystalSkill : Skill
     [SerializeField] private List<GameObject> crystalsList= new List<GameObject>();
     [SerializeField] private bool isCrystalAttack;
     [SerializeField] private bool cloneInsteadCrystal;
+   
 
     public override void UseSkill()
     {
@@ -51,10 +52,14 @@ public class CrystalSkill : Skill
         }
     }
 
+    public void RandomChooseTarget() => currentCtystal.GetComponent<CrystalSkillController>().RandomCrystalAttack();
+
     public void CreatCrystal()
     {
         currentCtystal = Instantiate(crystalPrefab, player.transform.position, Quaternion.identity);
         currentCtystal.GetComponent<CrystalSkillController>().SetUpCrystal(crystalCd, growSpeed, moveSpeed);
+
+        
     }
 
     public bool CanUseCrystal()

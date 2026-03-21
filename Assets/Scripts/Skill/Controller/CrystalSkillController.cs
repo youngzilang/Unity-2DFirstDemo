@@ -14,6 +14,8 @@ public class CrystalSkillController : MonoBehaviour
     private bool isGrow;
     private bool isMove=true;
 
+    private Transform closestTarget;
+    [SerializeField] private LayerMask theEnemy;
     private void Update()
     {
         crystalTimer -= Time.deltaTime;
@@ -27,10 +29,10 @@ public class CrystalSkillController : MonoBehaviour
 
         if (isMove)
         {
-            if (FollowClosestEnemy())
+            if (closestTarget)
             {
-                transform.position = Vector2.MoveTowards(transform.position, FollowClosestEnemy().position, moveSpeed * Time.deltaTime);
-                if (Vector2.Distance(transform.position, FollowClosestEnemy().position) < 1)
+                transform.position = Vector2.MoveTowards(transform.position, closestTarget.position, moveSpeed * Time.deltaTime);
+                if (Vector2.Distance(transform.position, closestTarget.position) < 1)
                 {
                     Boom();
                     isMove = false;
@@ -39,6 +41,19 @@ public class CrystalSkillController : MonoBehaviour
             
         }
     }
+
+    public void RandomCrystalAttack()
+    {
+        float r = SkillManager.instance.blackHoleSkill.R();
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, r,theEnemy);
+
+        if(colliders.Length>0)
+        closestTarget = colliders[Random.Range(0, colliders.Length)].transform;
+    }
+
+
+
 
     public void Boom()
     {

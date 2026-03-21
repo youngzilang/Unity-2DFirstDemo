@@ -121655,8 +121655,8 @@ MonoBehaviour:
   cloneCd: 1.5
   canCloneAttack: 1
   addCloneChance: 0
-  dashStartClone: 0
-  dashOverClone: 0
+  dashStartClone: 1
+  dashOverClone: 1
   cloneReAttack: 0
   canAddClone: 0
   crystalInsteadClone: 0

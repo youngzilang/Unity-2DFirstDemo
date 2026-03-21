@@ -24,10 +24,6 @@ public class BlackHoleSkill : Skill
     {
         base.UseSkill();
 
-        
-
-        Debug.Log($"【黑洞生成】帧号={Time.frameCount}，对象ID={gameObject.GetInstanceID()}", gameObject);
-
         GameObject infectBlackHole = Instantiate(blackHolePrefab,player.transform.position+new Vector3(0,5),Quaternion.identity);
         controller= infectBlackHole.GetComponent<BlackHoleSkillController>();
         controller.SetUpBlackHole(maxSize, growSpeed, smallerSpeed, cloneAttackCd, cloneAttackAmount,balckHoleCd);
@@ -48,5 +44,10 @@ public class BlackHoleSkill : Skill
             return true;
         }
         return false;
+    }
+
+    public float R()
+    {
+        return maxSize / 2;
     }
 }

@@ -83,6 +83,9 @@ public class BlackHoleSkillController : MonoBehaviour
         cloneAttackCd = _cloneAttackCd;
         cloneAttackAmount = _cloneAttackAmount;
         blackHoleTimer = blackholecd;
+
+        if (SkillManager.instance.cloneSkill.crystalInsteadClone)
+            isDisapper = false;
     }
 
 
@@ -96,7 +99,19 @@ public class BlackHoleSkillController : MonoBehaviour
             int index = UnityEngine.Random.Range(0, enemyList.Count);
 
             if (cloneAttackAmount > 0)
-                SkillManager.instance.cloneSkill.ClonePrefab(enemyList[index], 0);
+            {
+                if (SkillManager.instance.cloneSkill.crystalInsteadClone)
+                {
+                    SkillManager.instance.crystalSkill.CreatCrystal();
+                    SkillManager.instance.crystalSkill.RandomChooseTarget();
+                }
+                else
+                {
+                    SkillManager.instance.cloneSkill.ClonePrefab(enemyList[index], 0);
+                }
+            }
+                
+            
 
             cloneAttackAmount--;
             if (cloneAttackAmount <= 0)

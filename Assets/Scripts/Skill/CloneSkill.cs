@@ -13,7 +13,7 @@ public class CloneSkill : Skill
     [SerializeField] private bool dashOverClone;
     [SerializeField] private bool cloneReAttack;
     [SerializeField] private bool canAddClone;
-    [SerializeField] private bool crystalInsteadClone;
+    public bool crystalInsteadClone;
 
     public void ClonePrefab(Transform clonePosition, int xOffSet)
     {
