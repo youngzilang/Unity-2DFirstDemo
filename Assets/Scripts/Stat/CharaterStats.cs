@@ -6,21 +6,26 @@ public class CharaterStats : MonoBehaviour
 {
     [Header("主面板")]
     public Stat strength;//体力值：+1 点伤害，+1% 暴击伤害
-    public Stat intelligence;//智力值：+1 魔法伤害，+ 魔法抗性
+    public Stat intelligence;//智力值：+1 魔法伤害，+ 暴击率
     public Stat agility;//敏捷值：+1闪避率
     public Stat vatility;//活力值: 生命
 
-    [Header("衍生面板")]
-    public Stat maxHP;
-    public Stat defence;
-    public Stat evasion;
-    public Stat damage;
+    [Header("攻击性属性")]
+    public Stat damage;//攻击力
+    public Stat criticalChance;//暴击率
+    public Stat criticalDamage;//暴击伤害
+
+    [Header("防御性属性")]
+    public Stat maxHP;//最大血量
+    public Stat defence;//防御力
+    public Stat evasion;//闪避值
 
     [SerializeField]private int currentHP;
 
 
     protected virtual void Start()
     {
+        criticalDamage.SetDefaultValue(150);
         currentHP = maxHP.GetValue();
 
     }
@@ -49,10 +54,11 @@ public class CharaterStats : MonoBehaviour
 
     }
 
-    private bool EvasionSuccessOrNot()
+    public bool EvasionSuccessOrNot()
     {
         int totalEvasion = agility.GetValue() + evasion.GetValue();
         if (Random.Range(0, 100) < totalEvasion) return true;
         return false;
     }
+
 }

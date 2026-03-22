@@ -23,4 +23,9 @@ public class Stat
         buff.Remove(_buff);
     }
 
+    public void SetDefaultValue(int _value)
+    {
+        value = _value;
+    }
+
 }
