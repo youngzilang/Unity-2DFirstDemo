@@ -25,6 +25,8 @@ public class Enemy : Entity
 
     protected EnemyStateMachine stateMachine { get; private set; }
 
+    public string lastAniBoolName;
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,6 +39,12 @@ public class Enemy : Entity
         base.Update();
         stateMachine.currentState.Update();
     }
+
+    public virtual void SetAniBoolName(string _name)
+    {
+        lastAniBoolName = _name;
+    }
+
 
     public virtual void FreezeTime(bool isFreeze)
     {

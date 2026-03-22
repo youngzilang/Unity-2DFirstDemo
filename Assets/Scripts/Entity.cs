@@ -25,7 +25,7 @@ public class Entity : MonoBehaviour
     public Animator animator { get; private set; }
     public Rigidbody2D rb { get; private set; }
     public SpriteRenderer sr { get; private set; }
-
+    public CapsuleCollider2D capsule { get; private set; }
     public CharaterStats stats { get; private set; }
     #endregion
 
@@ -46,6 +46,7 @@ public class Entity : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         stats = GetComponent<CharaterStats>();
+        capsule = GetComponent<CapsuleCollider2D>();
     }
 
     protected virtual void Update()

@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class EnemyStat : CharaterStats
 {
-   
+    private Enemy enemy;
 
     protected override void Start()
     {
         base.Start();
+        enemy = GetComponent<Enemy>();
     }
 
     public override void BeDamaged(int _damage)
     {
         base.BeDamaged(_damage);
+        enemy.Damage();
     }
 
     public override void DoingDamage(CharaterStats _stats)
@@ -24,5 +26,6 @@ public class EnemyStat : CharaterStats
     public override void Die()
     {
         base.Die();
+        enemy.Die();
     }
 }

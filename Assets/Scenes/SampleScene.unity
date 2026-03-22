@@ -122324,6 +122324,7 @@ MonoBehaviour:
   hitJump: 0
   hitTime: 0
   isHit: 0
+  lastAniBoolName: 
   attackVe:
   - {x: 2, y: 1}
   - {x: 1, y: 2}
@@ -122362,13 +122363,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage:
-    value: 0
+    value: 10
     buff: 
   strength:
     value: 0
     buff: 
   maxHP:
-    value: 0
+    value: 10
     buff: 
   currentHP: 0
 --- !u!1 &1872925708
@@ -122466,9 +122467,9 @@ GameObject:
   - component: {fileID: 1881720077}
   - component: {fileID: 1881720076}
   - component: {fileID: 1881720075}
-  - component: {fileID: 1881720074}
   - component: {fileID: 1881720073}
   - component: {fileID: 1881720078}
+  - component: {fileID: 1881720079}
   m_Layer: 7
   m_Name: Skeleton (4)
   m_TagString: Untagged
@@ -122490,51 +122491,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMaterial: {fileID: 2100000, guid: 848a2593d3532d64098b19ca2bd3a456, type: 2}
   hitTime: 0.15
---- !u!61 &1881720074
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881720072}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.041367054, y: -0.15167737}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.4136667, y: 2.1306872}
-  m_EdgeRadius: 0
 --- !u!50 &1881720075
 Rigidbody2D:
   serializedVersion: 4
@@ -122587,6 +122543,7 @@ MonoBehaviour:
   hitJump: 12
   hitTime: 0.07
   isHit: 0
+  lastAniBoolName: 
   moveSpeed: 2
   idleTime: 2
   attackDistance: 1
@@ -122633,15 +122590,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage:
-    value: 0
+    value: 7
     buff: 
   strength:
     value: 0
     buff: 
   maxHP:
-    value: 0
+    value: 100
     buff: 
   currentHP: 0
+--- !u!70 &1881720079
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881720072}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0925535, y: -0.1905514}
+  m_Size: {x: 0.9246571, y: 2.0126445}
+  m_Direction: 0
 --- !u!1 &2039557098
 GameObject:
   m_ObjectHideFlags: 0
