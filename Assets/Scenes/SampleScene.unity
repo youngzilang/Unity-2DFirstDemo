@@ -122324,7 +122324,6 @@ MonoBehaviour:
   hitJump: 0
   hitTime: 0
   isHit: 0
-  lastAniBoolName: 
   attackVe:
   - {x: 2, y: 1}
   - {x: 1, y: 2}
@@ -122362,14 +122361,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c5eafc3c5b691499617421d619e564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strength:
+    value: 0
+    buff: 
+  intelligence:
+    value: 0
+    buff: 
+  agility:
+    value: 50
+    buff: 
+  vatility:
+    value: 0
+    buff: 
   damage:
     value: 10
     buff: 
-  strength:
+  criticalChance:
+    value: 0
+    buff: 
+  criticalDamage:
     value: 0
     buff: 
   maxHP:
     value: 10
+    buff: 
+  defence:
+    value: 10
+    buff: 
+  evasion:
+    value: 30
     buff: 
   currentHP: 0
 --- !u!1 &1872925708
@@ -122543,7 +122563,6 @@ MonoBehaviour:
   hitJump: 12
   hitTime: 0.07
   isHit: 0
-  lastAniBoolName: 
   moveSpeed: 2
   idleTime: 2
   attackDistance: 1
@@ -122557,6 +122576,7 @@ MonoBehaviour:
   attackCd: 0.4
   lastAttackTime: 0
   stunSign: {fileID: 2055035224}
+  lastAniBoolName: 
 --- !u!4 &1881720077
 Transform:
   m_ObjectHideFlags: 0
@@ -122589,14 +122609,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0d54983cd691e489d1b3542e88e62f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage:
-    value: 7
-    buff: 
   strength:
     value: 0
     buff: 
+  intelligence:
+    value: 0
+    buff: 
+  agility:
+    value: 0
+    buff: 
+  vatility:
+    value: 0
+    buff: 
+  damage:
+    value: 7
+    buff: 
+  criticalChance:
+    value: 0
+    buff: 
+  criticalDamage:
+    value: 0
+    buff: 
   maxHP:
-    value: 100
+    value: 10
+    buff: 
+  defence:
+    value: 0
+    buff: 
+  evasion:
+    value: 0
     buff: 
   currentHP: 0
 --- !u!70 &1881720079

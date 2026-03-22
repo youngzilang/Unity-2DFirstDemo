@@ -35,8 +35,9 @@ public class CharaterStats : MonoBehaviour
 
         int total = damage.GetValue() + strength.GetValue();
 
-        total = total - _stats.defence.GetValue() < 0 ? 0 : total - _stats.defence.GetValue();
+        if (CriticalOrNot()) total = CalculateCriticalDamage(total);
 
+        total = CountDamageAfterDefence(total,_stats);
         _stats.BeDamaged(total);
     }
 
@@ -61,4 +62,20 @@ public class CharaterStats : MonoBehaviour
         return false;
     }
 
+    public bool CriticalOrNot()
+    {
+        if (Random.Range(0, 100) < criticalChance.GetValue()+intelligence.GetValue()) return true;
+        return false;
+    }
+
+    public int CountDamageAfterDefence(int _damage, CharaterStats _stats)
+    {
+        return _damage - _stats.defence.GetValue() < 0 ? 0 : _damage - _stats.defence.GetValue();
+    }
+
+    public int CalculateCriticalDamage(int _damage)
+    {
+        float total = (strength.GetValue() + criticalDamage.GetValue()) * 0.01f;
+        return Mathf.RoundToInt(total * _damage);
+    }
 }
