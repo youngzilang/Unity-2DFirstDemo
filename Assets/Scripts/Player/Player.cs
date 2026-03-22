@@ -40,7 +40,7 @@ public class Player : Entity
     public PlayerReAttackState reAttackState { get; private set; }
     public PlayerHoldState holdState { get; private set; }
     public PlayerAimState aimState { get; private set; }
-
+    public PlayerDeadState deadState { get; private set; }
     public PlayerBlackHoleState blackHoleState { get; private set; }
     #endregion
 
@@ -65,6 +65,7 @@ public class Player : Entity
         holdState = new PlayerHoldState(this, stateMachine, "isHold");
         aimState = new PlayerAimState(this, stateMachine, "isAim");
         blackHoleState = new PlayerBlackHoleState(this, stateMachine, "isJump");
+        deadState = new PlayerDeadState(this, stateMachine, "isDie");
     }
 
     protected override void Start()
@@ -114,5 +115,9 @@ public class Player : Entity
         stateMachine.currentState.AnimationFinishTrigger();
     }
 
-    
+    public override void Die()
+    {
+        base.Die();
+        stateMachine.ChangeState(deadState);
+    }
 }

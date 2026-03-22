@@ -53,6 +53,11 @@ public class Entity : MonoBehaviour
 
     }
 
+    public virtual void Die()
+    {
+
+    }
+
     public void Damage()
     {
         fX.StartCoroutine("Fx");

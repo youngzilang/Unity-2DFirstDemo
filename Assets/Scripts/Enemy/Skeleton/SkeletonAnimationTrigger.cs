@@ -20,7 +20,9 @@ public class SkeletonAnimationTrigger : MonoBehaviour
         {
             if (collider.GetComponent<Player>() != null)
             {
-                collider.GetComponent<Player>().Damage();
+                PlayerStat target= collider.GetComponentInChildren<PlayerStat>();
+                skeleton.stats.DoingDamage(target);
+                //collider.GetComponent<Player>().Damage();
             }
         }
     }

@@ -10,21 +10,28 @@ public class CharaterStats : MonoBehaviour
 
     [SerializeField]private int currentHP;
 
-    private void Start()
+    protected Entity entity;
+
+    protected virtual void Start()
     {
         currentHP = maxHP.GetValue();
+
+        entity = GetComponent<Entity>();
     }
 
-    public virtual void CountDamage(CharaterStats _stats)
+    public virtual void DoingDamage(CharaterStats _stats)
     {
 
         int total = damage.GetValue() + strength.GetValue();
-        BeDamaged(total);
+        _stats.BeDamaged(total);
     }
 
     public virtual void BeDamaged(int _damage)
     {
         currentHP -= _damage;
+
+        entity.Damage();
+
         if (currentHP <= 0) Die();
     }
 

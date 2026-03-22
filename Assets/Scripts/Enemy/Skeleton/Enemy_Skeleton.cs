@@ -47,4 +47,9 @@ public class Enemy_Skeleton : Enemy
         }
         return false;
     }
+
+    public override void Die()
+    {
+        base.Die();
+    }
 }
