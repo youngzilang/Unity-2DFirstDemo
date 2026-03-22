@@ -122368,7 +122368,7 @@ MonoBehaviour:
     value: 0
     buff: 
   agility:
-    value: 50
+    value: 0
     buff: 
   vatility:
     value: 0
@@ -122383,14 +122383,29 @@ MonoBehaviour:
     value: 0
     buff: 
   maxHP:
-    value: 10
+    value: 100
     buff: 
   defence:
-    value: 10
+    value: 0
     buff: 
   evasion:
-    value: 30
+    value: 0
     buff: 
+  magicResistance:
+    value: 0
+    buff: 
+  fireDamage:
+    value: 0
+    buff: 
+  isFire: 0
+  iceDamage:
+    value: 0
+    buff: 
+  isIce: 0
+  lightDamage:
+    value: 0
+    buff: 
+  isLight: 0
   currentHP: 0
 --- !u!1 &1872925708
 GameObject:
@@ -122622,7 +122637,7 @@ MonoBehaviour:
     value: 0
     buff: 
   damage:
-    value: 7
+    value: 10
     buff: 
   criticalChance:
     value: 0
@@ -122639,6 +122654,21 @@ MonoBehaviour:
   evasion:
     value: 0
     buff: 
+  magicResistance:
+    value: 0
+    buff: 
+  fireDamage:
+    value: 0
+    buff: 
+  isFire: 0
+  iceDamage:
+    value: 0
+    buff: 
+  isIce: 0
+  lightDamage:
+    value: 0
+    buff: 
+  isLight: 0
   currentHP: 0
 --- !u!70 &1881720079
 CapsuleCollider2D:

@@ -8,7 +8,7 @@ public class CharaterStats : MonoBehaviour
     public Stat strength;//体力值：+1 点伤害，+1% 暴击伤害
     public Stat intelligence;//智力值：+1 魔法伤害，+ 暴击率
     public Stat agility;//敏捷值：+1闪避率
-    public Stat vatility;//活力值: 生命
+    public Stat vatility;//活力值: +生命
 
     [Header("攻击性属性")]
     public Stat damage;//攻击力
@@ -19,6 +19,18 @@ public class CharaterStats : MonoBehaviour
     public Stat maxHP;//最大血量
     public Stat defence;//防御力
     public Stat evasion;//闪避值
+    public Stat magicResistance;//法抗
+
+    [Header("法伤类属性")]
+    public Stat fireDamage;//火属性
+    public bool isFire;
+    public Stat iceDamage;//冰
+    public bool isIce;
+    public Stat lightDamage;//光
+    public bool isLight;
+
+
+
 
     [SerializeField]private int currentHP;
 
@@ -29,6 +41,15 @@ public class CharaterStats : MonoBehaviour
         currentHP = maxHP.GetValue();
 
     }
+
+    public virtual void DoingMagicDamage(CharaterStats _stats)
+    {
+        int total = fireDamage.GetValue() + iceDamage.GetValue() + lightDamage.GetValue()+intelligence.GetValue();
+        total =total- magicResistance.GetValue()<0?0:total- magicResistance.GetValue();
+        _stats.BeDamaged(total);
+    }
+
+    
 
     public virtual void DoingDamage(CharaterStats _stats)
     {
@@ -50,6 +71,14 @@ public class CharaterStats : MonoBehaviour
         if (currentHP <= 0) Die();
     }
 
+    public void ApplyElement(bool _fire, bool _ice, bool _light)
+    {
+        if (isFire || isIce || isLight) return;
+
+        isFire = _fire;
+        isIce = _ice;
+        isLight = _light;
+    }
     public virtual  void Die()
     {
 
