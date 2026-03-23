@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,7 @@ public class Entity : MonoBehaviour
     public int faceDir { get; private set; } = 1;
     protected bool faceRight { get; private set; } = true;
 
+    public Action onFlip;
 
     protected virtual void Awake()
     {
@@ -100,6 +102,9 @@ public class Entity : MonoBehaviour
         faceDir = -faceDir;
         faceRight = !faceRight;
         transform.Rotate(0, 180, 0);
+
+
+        onFlip?.Invoke();
     }
 
     public void UpdateFaceDirection(float inputX)

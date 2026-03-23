@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class CharaterStats : MonoBehaviour
@@ -33,7 +35,7 @@ public class CharaterStats : MonoBehaviour
     public bool isIce;//»¤¼×Öµ½µµÍ20%
     public bool isLight;//ÉÁ±ÜÂÊ½µµÍ20%
 
-    [SerializeField]private int currentHP;
+    public int currentHP;
 
     private float fireTimer;
     private float fireDamageCd=.3f;
@@ -43,10 +45,12 @@ public class CharaterStats : MonoBehaviour
     private float iceTimer;
     private float lightTimer;
 
+    public Action onHPChange;
+
     protected virtual void Start()
     {
         criticalDamage.SetDefaultValue(150);
-        currentHP = maxHP.GetValue();
+        currentHP = GetMaxHp();
 
     }
 
@@ -74,7 +78,7 @@ public class CharaterStats : MonoBehaviour
 
         if (fireDamageTimer < 0 && isFire)
         {
-            currentHP -= beBurnDamage;
+            DecreaseHp(beBurnDamage);
             Debug.Log(gameObject.name+"±»×ÆÉÕ£¡" + "µ±Ç°HP£º" + currentHP);
             if (currentHP <= 0) Die();
             fireDamageTimer = fireDamageCd;
@@ -102,7 +106,7 @@ public class CharaterStats : MonoBehaviour
 
         while (!fireOrNot && !iceOrNot && !lightOrNot)
         {
-            int ran = Random.Range(0, 100);
+            int ran = UnityEngine.Random.Range(0, 100);
             if (ran < 33&&fireDamage.GetValue()>0)
             {
                 fireOrNot = true;
@@ -149,7 +153,7 @@ public class CharaterStats : MonoBehaviour
     {
         if (EvasionSuccessOrNot()) return;
 
-        currentHP -= _damage;
+        DecreaseHp(_damage);
 
         if (currentHP <= 0) Die();
     }
@@ -187,13 +191,13 @@ public class CharaterStats : MonoBehaviour
         int totalEvasion = agility.GetValue() + evasion.GetValue();
         if (isLight) totalEvasion = totalEvasion - 20 < 0 ? 0 : totalEvasion - 20;
 
-        if (Random.Range(0, 100) < totalEvasion) return true;
+        if (UnityEngine.Random.Range(0, 100) < totalEvasion) return true;
         return false;
     }
     //±©»÷ÅÐ¶Ï
     public bool CriticalOrNot()
     {
-        if (Random.Range(0, 100) < criticalChance.GetValue()+intelligence.GetValue()) return true;
+        if (UnityEngine.Random.Range(0, 100) < criticalChance.GetValue()+intelligence.GetValue()) return true;
         return false;
     }
 
@@ -210,5 +214,19 @@ public class CharaterStats : MonoBehaviour
     {
         float total = (strength.GetValue() + criticalDamage.GetValue()) * 0.01f;
         return Mathf.RoundToInt(total * _damage);
+    }
+
+    public virtual void DecreaseHp(int _damage)
+    {
+        currentHP -= _damage;
+        if (onHPChange != null)
+        {
+            onHPChange();
+        }
+    }
+
+    public int GetMaxHp()
+    {
+        return maxHP.GetValue() + vatility.GetValue() * 5;
     }
 }
