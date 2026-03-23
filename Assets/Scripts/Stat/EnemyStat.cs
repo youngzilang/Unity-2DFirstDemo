@@ -12,6 +12,11 @@ public class EnemyStat : CharaterStats
         enemy = GetComponent<Enemy>();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     public override void BeDamaged(int _damage)
     {
         base.BeDamaged(_damage);

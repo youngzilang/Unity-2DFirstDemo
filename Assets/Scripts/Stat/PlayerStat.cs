@@ -9,6 +9,11 @@ public class PlayerStat : CharaterStats
         base.Start();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     public override void BeDamaged(int _damage)
     {
         base.BeDamaged(_damage);

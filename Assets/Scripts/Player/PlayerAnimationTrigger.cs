@@ -20,9 +20,10 @@ public class PlayerAnimationTrigger : MonoBehaviour
             if (collider.GetComponent<Enemy>() != null)
             {
                 EnemyStat target = collider.GetComponent<EnemyStat>();
-                player.stats.DoingDamage(target);
-               // collider.GetComponent<Enemy>().Damage();
-               // collider.GetComponent<CharaterStats>().BeDamaged(player.stats.damage.GetValue());
+                player.stats.DoingMagicDamage(target);
+               // player.stats.DoingDamage(target);
+                // collider.GetComponent<Enemy>().Damage();
+                // collider.GetComponent<CharaterStats>().BeDamaged(player.stats.damage.GetValue());
             }
         }
     }

@@ -122383,15 +122383,15 @@ MonoBehaviour:
     value: 0
     buff: 
   maxHP:
-    value: 100
+    value: 1000
     buff: 
   defence:
     value: 0
     buff: 
-  evasion:
+  magicResistance:
     value: 0
     buff: 
-  magicResistance:
+  evasion:
     value: 0
     buff: 
   fireDamage:
@@ -122503,8 +122503,8 @@ GameObject:
   - component: {fileID: 1881720076}
   - component: {fileID: 1881720075}
   - component: {fileID: 1881720073}
-  - component: {fileID: 1881720078}
   - component: {fileID: 1881720079}
+  - component: {fileID: 1881720078}
   m_Layer: 7
   m_Name: Skeleton (4)
   m_TagString: Untagged
@@ -122651,14 +122651,14 @@ MonoBehaviour:
   defence:
     value: 0
     buff: 
-  evasion:
-    value: 0
-    buff: 
   magicResistance:
     value: 0
     buff: 
-  fireDamage:
+  evasion:
     value: 0
+    buff: 
+  fireDamage:
+    value: 10
     buff: 
   isFire: 0
   iceDamage:

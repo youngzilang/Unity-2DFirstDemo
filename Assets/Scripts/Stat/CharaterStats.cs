@@ -6,9 +6,9 @@ public class CharaterStats : MonoBehaviour
 {
     [Header("主面板")]
     public Stat strength;//体力值：+1 点伤害，+1% 暴击伤害
-    public Stat intelligence;//智力值：+1 魔法伤害，+ 暴击率
-    public Stat agility;//敏捷值：+1闪避率
-    public Stat vatility;//活力值: +生命
+    public Stat intelligence;//智力值：+1 魔法伤害，+ 1%暴击率
+    public Stat agility;//敏捷值：+1%闪避率
+    public Stat vatility;//活力值: +5生命
 
     [Header("攻击性属性")]
     public Stat damage;//攻击力
@@ -18,22 +18,30 @@ public class CharaterStats : MonoBehaviour
     [Header("防御性属性")]
     public Stat maxHP;//最大血量
     public Stat defence;//防御力
-    public Stat evasion;//闪避值
     public Stat magicResistance;//法抗
+    public Stat evasion;//闪避值
+    
 
     [Header("法伤类属性")]
     public Stat fireDamage;//火属性
-    public bool isFire;
     public Stat iceDamage;//冰
-    public bool isIce;
     public Stat lightDamage;//光
-    public bool isLight;
 
 
-
+    [Header("负面效果")]
+    public bool isFire;//被点燃持续造成伤害
+    public bool isIce;//护甲值降低20%
+    public bool isLight;//闪避率降低20%
 
     [SerializeField]private int currentHP;
 
+    private float fireTimer;
+    private float fireDamageCd=.3f;
+    private float fireDamageTimer;
+    private int beBurnDamage;
+
+    private float iceTimer;
+    private float lightTimer;
 
     protected virtual void Start()
     {
@@ -42,15 +50,89 @@ public class CharaterStats : MonoBehaviour
 
     }
 
+    protected virtual void Update()
+    {
+        fireTimer -= Time.deltaTime;
+        fireDamageTimer -= Time.deltaTime;
+        iceTimer -= Time.deltaTime;
+        lightTimer -= Time.deltaTime;
+
+        if (fireTimer < 0)
+        {
+            isFire = false;
+        }
+
+        if (iceTimer < 0)
+        {
+            isIce = false;
+        }
+
+        if(lightTimer < 0)
+        {
+            isLight = false;
+        }
+
+        if (fireDamageTimer < 0 && isFire)
+        {
+            currentHP -= beBurnDamage;
+            Debug.Log(gameObject.name+"被灼烧！" + "当前HP：" + currentHP);
+            if (currentHP <= 0) Die();
+            fireDamageTimer = fireDamageCd;
+        }
+    }
+
+    //灼烧
+    private void BeBurn(int _beBurnDamage)
+    {
+        beBurnDamage = _beBurnDamage;
+    }
+
+    //魔法攻击
     public virtual void DoingMagicDamage(CharaterStats _stats)
     {
         int total = fireDamage.GetValue() + iceDamage.GetValue() + lightDamage.GetValue()+intelligence.GetValue();
         total =total- magicResistance.GetValue()<0?0:total- magicResistance.GetValue();
         _stats.BeDamaged(total);
+
+        if(Mathf.Max(fireDamage.GetValue(),iceDamage.GetValue(),lightDamage.GetValue())<=0)return;
+
+        bool fireOrNot = fireDamage.GetValue() > iceDamage.GetValue() && fireDamage.GetValue() > lightDamage.GetValue();
+        bool iceOrNot= iceDamage.GetValue() > fireDamage.GetValue() && iceDamage.GetValue() > lightDamage.GetValue();
+        bool lightOrNot= lightDamage.GetValue() > iceDamage.GetValue() && lightDamage.GetValue() > fireDamage.GetValue();
+
+        while (!fireOrNot && !iceOrNot && !lightOrNot)
+        {
+            int ran = Random.Range(0, 100);
+            if (ran < 33&&fireDamage.GetValue()>0)
+            {
+                fireOrNot = true;
+                Debug.Log("Fire!");
+                _stats.ApplyElement(fireOrNot, iceOrNot, lightOrNot);
+                return;
+            }
+            else if (ran < 66&& iceDamage.GetValue()>0)
+            {
+                iceOrNot = true;
+                Debug.Log("Ice!");
+                _stats.ApplyElement(fireOrNot, iceOrNot, lightOrNot);
+                return;
+            }
+            else if(ran<100 && lightDamage.GetValue()>0)
+            {
+                lightOrNot = true;
+                Debug.Log("Light!");
+                _stats.ApplyElement(fireOrNot, iceOrNot, lightOrNot);
+                return;
+            }
+        }
+        
+        if(fireOrNot)
+        _stats.BeBurn(Mathf.RoundToInt(fireDamage.GetValue() * .2f));
+
+        _stats.ApplyElement(fireOrNot, iceOrNot, lightOrNot);
     }
 
-    
-
+    //物理攻击
     public virtual void DoingDamage(CharaterStats _stats)
     {
 
@@ -62,6 +144,7 @@ public class CharaterStats : MonoBehaviour
         _stats.BeDamaged(total);
     }
 
+    //受击伤害判定
     public virtual void BeDamaged(int _damage)
     {
         if (EvasionSuccessOrNot()) return;
@@ -70,38 +153,59 @@ public class CharaterStats : MonoBehaviour
 
         if (currentHP <= 0) Die();
     }
-
+    //负面效果判定
     public void ApplyElement(bool _fire, bool _ice, bool _light)
     {
         if (isFire || isIce || isLight) return;
 
-        isFire = _fire;
-        isIce = _ice;
-        isLight = _light;
+        if (_fire)
+        {
+            isFire = _fire;
+            fireTimer = 2;
+        }
+        if(_ice)
+        {
+            isIce = _ice;
+            iceTimer = 2;
+        }
+        if (_light)
+        {
+            isLight = _light;
+            lightTimer = 2;
+        }
+        
     }
+    //死亡
     public virtual  void Die()
     {
 
     }
 
+    //闪避判断
     public bool EvasionSuccessOrNot()
     {
         int totalEvasion = agility.GetValue() + evasion.GetValue();
+        if (isLight) totalEvasion = totalEvasion - 20 < 0 ? 0 : totalEvasion - 20;
+
         if (Random.Range(0, 100) < totalEvasion) return true;
         return false;
     }
-
+    //暴击判断
     public bool CriticalOrNot()
     {
         if (Random.Range(0, 100) < criticalChance.GetValue()+intelligence.GetValue()) return true;
         return false;
     }
 
+    //穿甲
     public int CountDamageAfterDefence(int _damage, CharaterStats _stats)
     {
+        if (isIce) _damage = Mathf.RoundToInt(_damage * .8f);
+
         return _damage - _stats.defence.GetValue() < 0 ? 0 : _damage - _stats.defence.GetValue();
     }
 
+    //暴伤
     public int CalculateCriticalDamage(int _damage)
     {
         float total = (strength.GetValue() + criticalDamage.GetValue()) * 0.01f;
