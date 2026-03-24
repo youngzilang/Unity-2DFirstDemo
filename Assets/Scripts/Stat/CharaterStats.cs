@@ -31,7 +31,7 @@ public class CharaterStats : MonoBehaviour
 
 
     [Header("负面效果")]
-    public bool isFire;//被点燃持续造成伤害
+    public bool isFire;//被点燃持续造成伤害(敌方火属性的20%)
     public bool isIce;//护甲值降低20%
     public bool isLight;//闪避率降低20%
 
@@ -44,14 +44,17 @@ public class CharaterStats : MonoBehaviour
 
     private float iceTimer;
     private float lightTimer;
+    private float elementTimer;
 
     public Action onHPChange;
+
+    private FX fX;
 
     protected virtual void Start()
     {
         criticalDamage.SetDefaultValue(150);
         currentHP = GetMaxHp();
-
+        fX = GetComponent<FX>();
     }
 
     protected virtual void Update()
@@ -166,16 +169,19 @@ public class CharaterStats : MonoBehaviour
         {
             isFire = _fire;
             fireTimer = 2;
+            fX.FireFor(fireTimer);
         }
         if(_ice)
         {
             isIce = _ice;
             iceTimer = 2;
+            fX.IceFor(iceTimer);
         }
         if (_light)
         {
             isLight = _light;
             lightTimer = 2;
+            fX.LightFor(lightTimer);
         }
         
     }
