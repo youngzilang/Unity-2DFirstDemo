@@ -12,10 +12,14 @@ public class Player : Entity
     public float moveSpeed;
     public float jumpForce;
     public float slideJumpSpeed;
+    private float originalMoveSpeed;
+    private float originalJumpForce;
+    private float origianlSlideJumpSpeed;
 
     [Header("冲刺数据")]
     public float dashSpeed;
     public float dashContinue;
+    private float origianlDashSpeed;
 
     [Header("反击时长")]
     public float reAttackTime;
@@ -73,6 +77,10 @@ public class Player : Entity
         base.Start();
         skillManager = SkillManager.instance;
         stateMachine.Initialize(idleState);
+        origianlDashSpeed = dashSpeed;
+        origianlSlideJumpSpeed = slideJumpSpeed;
+        originalJumpForce = jumpForce;
+        originalMoveSpeed = moveSpeed;
     }
 
     protected override  void Update()
@@ -86,6 +94,26 @@ public class Player : Entity
         {
             skillManager.crystalSkill.CanSkill();
         }
+    }
+
+    public override void SlowByIce(float _slowPercent, float _slowTime)
+    {
+        moveSpeed = moveSpeed * (1 - _slowPercent);
+        jumpForce= jumpForce* (1 - _slowPercent);
+        slideJumpSpeed = slideJumpSpeed * (1 - _slowPercent);
+        dashSpeed = dashSpeed * (1 - _slowPercent);
+        animator.speed = 1 - _slowPercent;
+
+        Invoke("SlowOver", _slowTime);
+    }
+
+    public override void SlowOver()
+    {
+        base.SlowOver();
+        moveSpeed = originalMoveSpeed;
+        jumpForce = originalJumpForce;
+        slideJumpSpeed = origianlSlideJumpSpeed;
+        dashSpeed = origianlDashSpeed;
     }
 
     public IEnumerator Busy(float _seconds)

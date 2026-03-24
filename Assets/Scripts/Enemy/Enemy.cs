@@ -45,6 +45,18 @@ public class Enemy : Entity
         lastAniBoolName = _name;
     }
 
+    public override void SlowByIce(float _slowPercent, float _slowTime)
+    {
+        moveSpeed = moveSpeed * (1 - _slowPercent);
+        animator.speed = 1 - _slowPercent;
+        Invoke("SlowOver", _slowTime);
+    }
+
+    public override void SlowOver()
+    {
+        base.SlowOver();
+        moveSpeed = originalSpeed;
+    }
 
     public virtual void FreezeTime(bool isFreeze)
     {

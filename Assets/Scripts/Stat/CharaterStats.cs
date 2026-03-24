@@ -44,17 +44,19 @@ public class CharaterStats : MonoBehaviour
 
     private float iceTimer;
     private float lightTimer;
-    private float elementTimer;
+    private float elementTimer=2;
 
     public Action onHPChange;
 
     private FX fX;
+    private Entity entity;
 
     protected virtual void Start()
     {
         criticalDamage.SetDefaultValue(150);
         currentHP = GetMaxHp();
         fX = GetComponent<FX>();
+        entity = GetComponent<Entity>();
     }
 
     protected virtual void Update()
@@ -168,19 +170,20 @@ public class CharaterStats : MonoBehaviour
         if (_fire)
         {
             isFire = _fire;
-            fireTimer = 2;
+            fireTimer = elementTimer;
             fX.FireFor(fireTimer);
         }
         if(_ice)
         {
             isIce = _ice;
-            iceTimer = 2;
+            iceTimer = elementTimer;
+            entity.SlowByIce(.2f, iceTimer);
             fX.IceFor(iceTimer);
         }
         if (_light)
         {
             isLight = _light;
-            lightTimer = 2;
+            lightTimer = elementTimer;
             fX.LightFor(lightTimer);
         }
         

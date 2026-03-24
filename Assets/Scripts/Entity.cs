@@ -56,6 +56,16 @@ public class Entity : MonoBehaviour
 
     }
 
+    public virtual void SlowByIce(float _slowPercent,float _slowTime)
+    {
+        
+    }
+
+    public virtual void SlowOver()
+    {
+        animator.speed = 1;
+    }
+
     public virtual void Die()
     {
 

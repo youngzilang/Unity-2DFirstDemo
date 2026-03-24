@@ -123130,9 +123130,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitMaterial: {fileID: 2100000, guid: 848a2593d3532d64098b19ca2bd3a456, type: 2}
   hitTime: 0.15
-  fireColor: []
-  iceColor: []
-  lightColor: []
+  fireColor:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
+  iceColor:
+  - {r: 0.3066038, g: 0.8004235, b: 1, a: 1}
+  - {r: 0.30980393, g: 0.8039216, b: 1, a: 1}
+  lightColor:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1844310489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123158,7 +123164,7 @@ MonoBehaviour:
     value: 0
     buff: 
   damage:
-    value: 10
+    value: 0
     buff: 
   criticalChance:
     value: 0
@@ -123179,10 +123185,10 @@ MonoBehaviour:
     value: 0
     buff: 
   fireDamage:
-    value: 10
+    value: 0
     buff: 
   iceDamage:
-    value: 20
+    value: 10
     buff: 
   lightDamage:
     value: 0
@@ -123314,8 +123320,8 @@ MonoBehaviour:
   - {r: 0.9622642, g: 0.22241013, b: 0.22241013, a: 1}
   - {r: 0.7924528, g: 0.2728729, b: 0.2728729, a: 1}
   iceColor:
-  - {r: 0.4481132, g: 0.4481132, b: 1, a: 1}
-  - {r: 0.21226418, g: 0.21226418, b: 1, a: 1}
+  - {r: 0.4198113, g: 0.4198113, b: 1, a: 1}
+  - {r: 0.41960785, g: 0.41960785, b: 1, a: 1}
   lightColor:
   - {r: 0.9811321, g: 0.90910375, b: 0.6525454, a: 1}
   - {r: 0.9622642, g: 0.8734256, b: 0.16794233, a: 1}
@@ -123452,10 +123458,10 @@ MonoBehaviour:
     value: 0
     buff: 
   fireDamage:
-    value: 10
+    value: 0
     buff: 
   iceDamage:
-    value: 0
+    value: 10
     buff: 
   lightDamage:
     value: 0
@@ -123496,8 +123502,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0925535, y: -0.1905514}
-  m_Size: {x: 0.9246571, y: 2.0126445}
+  m_Offset: {x: 0.102229714, y: -0.1905514}
+  m_Size: {x: 1.6407006, y: 2.0126445}
   m_Direction: 0
 --- !u!1 &2039557098
 GameObject:
