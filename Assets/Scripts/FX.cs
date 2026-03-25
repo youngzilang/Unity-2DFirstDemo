@@ -25,6 +25,12 @@ public class FX : MonoBehaviour
         originMaterial = spriteRenderer.material;
     }
 
+    public void Transprent(bool _transprent)
+    {
+        if (_transprent) spriteRenderer.color = Color.clear;
+        else spriteRenderer.color = Color.white;
+    }
+
     private  IEnumerator Fx()
     {
         spriteRenderer.material = hitMaterial;

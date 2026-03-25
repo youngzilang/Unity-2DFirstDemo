@@ -92,7 +92,7 @@ public class CrystalSkillController : MonoBehaviour
             if (collider.GetComponent<Enemy>() != null)
             {
 
-                collider.GetComponent<Enemy>().Damage();
+                PlayerManager.instance.player.stats.DoingMagicDamage(collider.GetComponent<CharaterStats>());
             }
         }
     }

@@ -94,7 +94,7 @@ public class SwordSkillController : MonoBehaviour
                     {
                         if (a.GetComponent<Enemy>() != null)
                         {
-                            a.GetComponent<Enemy>().Damage();
+                            PlayerManager.instance.player.stats.DoingDamage(a.GetComponent<CharaterStats>());
                             a.GetComponent<Enemy>().StartCoroutine("FreezeTimeFor", freezeTime);
                         }
                     }
@@ -119,7 +119,8 @@ public class SwordSkillController : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, transforms[transformsIndex].position, bounceSpeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, transforms[transformsIndex].position) < .1f)
             {
-                transforms[transformsIndex].GetComponent<Enemy>().Damage();
+                PlayerManager.instance.player.stats.DoingDamage(transforms[transformsIndex].GetComponent<CharaterStats>());
+                //transforms[transformsIndex].GetComponent<Enemy>().Damage();
                 transforms[transformsIndex].GetComponent<Enemy>().StartCoroutine("FreezeTimeFor", freezeTime);
                 transformsIndex++;
                 bounceAmount--;
@@ -190,7 +191,8 @@ public class SwordSkillController : MonoBehaviour
                 StopAndSpin();
             }
             Enemy enemy = collision.GetComponent<Enemy>();
-            enemy.Damage();
+            PlayerManager.instance.player.stats.DoingDamage(enemy.GetComponent<CharaterStats>());
+            //enemy.GetComponent<CharaterStats>();
             enemy.StartCoroutine("FreezeTimeFor", freezeTime);
         }
         

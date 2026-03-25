@@ -64,7 +64,7 @@ public class CloneSkillController : MonoBehaviour
         {
             if (collider.GetComponent<Enemy>() != null)
             {
-                collider.GetComponent<Enemy>().Damage();
+                PlayerManager.instance.player.stats.DoingDamage(collider.GetComponent<CharaterStats>());
 
                 if (canAddClone)
                 {

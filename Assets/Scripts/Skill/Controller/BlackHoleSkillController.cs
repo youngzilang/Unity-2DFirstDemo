@@ -70,7 +70,7 @@ public class BlackHoleSkillController : MonoBehaviour
         if (isDisapper)
         {
             isDisapper = false;
-            PlayerManager.instance.player.Transprent(true);
+            PlayerManager.instance.player.fX.Transprent(true);
         }
         
     }

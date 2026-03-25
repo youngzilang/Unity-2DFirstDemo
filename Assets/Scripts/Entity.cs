@@ -71,11 +71,10 @@ public class Entity : MonoBehaviour
 
     }
 
-    public void Damage()
-    {
-        fX.StartCoroutine("Fx");
-        StartCoroutine("Hitted");
-    }
+    public void Damage() => StartCoroutine("Hitted");
+
+    
+    
 
     public IEnumerator Hitted()
     {
@@ -145,10 +144,4 @@ public class Entity : MonoBehaviour
     }
     #endregion
 
-
-    public void Transprent(bool _transprent)
-    {
-        if (_transprent) sr.color = Color.clear;
-        else sr.color = Color.white;
-    }
 }

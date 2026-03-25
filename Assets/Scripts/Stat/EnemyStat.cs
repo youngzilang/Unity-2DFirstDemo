@@ -20,7 +20,6 @@ public class EnemyStat : CharaterStats
     public override void BeDamaged(int _damage)
     {
         base.BeDamaged(_damage);
-        enemy.Damage();
     }
 
     public override void DoingDamage(CharaterStats _stats)

@@ -17,7 +17,6 @@ public class PlayerStat : CharaterStats
     public override void BeDamaged(int _damage)
     {
         base.BeDamaged(_damage);
-        PlayerManager.instance.player.Damage();
     }
 
     public override void DoingDamage(CharaterStats _stats)

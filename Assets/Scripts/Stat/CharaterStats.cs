@@ -53,6 +53,8 @@ public class CharaterStats : MonoBehaviour
 
     [SerializeField] private GameObject thunderPrefab;
 
+    private bool isDead;
+
     protected virtual void Start()
     {
         criticalDamage.SetDefaultValue(150);
@@ -86,7 +88,7 @@ public class CharaterStats : MonoBehaviour
         if (fireDamageTimer < 0 && isFire)
         {
             DecreaseHp(beBurnDamage);
-            if (currentHP <= 0) Die();
+            if (currentHP <= 0&&!isDead) Die();
             fireDamageTimer = fireDamageCd;
         }
     }
@@ -162,7 +164,10 @@ public class CharaterStats : MonoBehaviour
 
         DecreaseHp(_damage);
 
-        if (currentHP <= 0) Die();
+        GetComponent<Entity>()?.Damage();
+        fX.StartCoroutine("Fx");
+
+        if (currentHP <= 0&&!isDead) Die();
     }
     //负面效果判定
     public void ApplyElement(bool _fire, bool _ice, bool _light)
@@ -238,7 +243,7 @@ public class CharaterStats : MonoBehaviour
     //死亡
     public virtual  void Die()
     {
-
+        isDead = true;
     }
 
     //闪避判断
