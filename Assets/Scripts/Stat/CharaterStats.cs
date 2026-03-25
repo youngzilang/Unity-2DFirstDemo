@@ -33,7 +33,7 @@ public class CharaterStats : MonoBehaviour
     [Header("负面效果")]
     public bool isFire;//被点燃持续造成伤害(敌方火属性的20%)
     public bool isIce;//护甲值降低20%
-    public bool isLight;//闪避率降低20%
+    public bool isLight;//闪避率降低20%(被闪电击中造成20%伤害)
 
     public int currentHP;
 
@@ -50,6 +50,8 @@ public class CharaterStats : MonoBehaviour
 
     private FX fX;
     private Entity entity;
+
+    [SerializeField] private GameObject thunderPrefab;
 
     protected virtual void Start()
     {
@@ -84,7 +86,6 @@ public class CharaterStats : MonoBehaviour
         if (fireDamageTimer < 0 && isFire)
         {
             DecreaseHp(beBurnDamage);
-            Debug.Log(gameObject.name+"被灼烧！" + "当前HP：" + currentHP);
             if (currentHP <= 0) Die();
             fireDamageTimer = fireDamageCd;
         }
@@ -138,6 +139,7 @@ public class CharaterStats : MonoBehaviour
         if(fireOrNot)
         _stats.BeBurn(Mathf.RoundToInt(fireDamage.GetValue() * .2f));
 
+
         _stats.ApplyElement(fireOrNot, iceOrNot, lightOrNot);
     }
 
@@ -165,29 +167,74 @@ public class CharaterStats : MonoBehaviour
     //负面效果判定
     public void ApplyElement(bool _fire, bool _ice, bool _light)
     {
-        if (isFire || isIce || isLight) return;
+        bool canFire = !isFire && !isIce && !isLight;
+        bool canIce=!isFire && !isIce && !isLight;
+        bool canLight = !isFire && !isIce;
 
-        if (_fire)
+        if (_fire&&canFire)
         {
             isFire = _fire;
             fireTimer = elementTimer;
             fX.FireFor(fireTimer);
         }
-        if(_ice)
+        if(_ice&&canIce)
         {
             isIce = _ice;
             iceTimer = elementTimer;
             entity.SlowByIce(.2f, iceTimer);
             fX.IceFor(iceTimer);
         }
-        if (_light)
+        if (_light&&canLight)
         {
-            isLight = _light;
-            lightTimer = elementTimer;
-            fX.LightFor(lightTimer);
+
+            if (!isLight)
+            {
+                ApplyThunder(_light);
+            }
+            else
+            {
+                if (GetComponent<Player>() != null) return;
+                ThunderClosestTarget();
+            }
         }
         
     }
+
+    public void ApplyThunder(bool _light)
+    {
+        if (isLight) return;
+        isLight = _light;
+        lightTimer = elementTimer;
+        fX.LightFor(lightTimer);
+    }
+
+    private void ThunderClosestTarget()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 25);
+        Transform cloestEnemy = null;
+        float maxDistance = Mathf.Infinity;
+        foreach (var item in colliders)
+        {
+            if (item.GetComponent<Enemy>() != null)
+            {
+                if (item.GetComponent<Enemy>() == GetComponent<Enemy>()) continue;
+                if (Vector2.Distance(transform.position, item.GetComponent<Enemy>().transform.position) < maxDistance)
+                {
+                    maxDistance = Vector2.Distance(transform.position, item.GetComponent<Enemy>().transform.position);
+                    cloestEnemy = item.GetComponent<Enemy>().transform;
+                }
+            }
+        }
+        if (cloestEnemy == null) cloestEnemy = transform;
+
+        if (cloestEnemy != null)
+        {
+            GameObject newThunder = Instantiate(thunderPrefab, transform.position, Quaternion.identity);
+
+            newThunder.GetComponent<ThunderController>().SetUpThunder(Mathf.RoundToInt(lightDamage.GetValue()*.2f), cloestEnemy.GetComponent<CharaterStats>());
+        }
+    }
+
     //死亡
     public virtual  void Die()
     {
