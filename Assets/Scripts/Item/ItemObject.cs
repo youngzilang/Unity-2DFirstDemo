@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour
 {
-    private SpriteRenderer sr;
+   
 
-    [SerializeField] private ItemData item; 
+    [SerializeField] private ItemData item;
 
-    private void Start()
+    private void OnValidate()
     {
-        sr = GetComponent<SpriteRenderer>();
-        sr.sprite = item.icon;
+        GetComponent<SpriteRenderer>().sprite = item.icon;
+        gameObject.name ="Item - "+ item.name;
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Player>() != null)
