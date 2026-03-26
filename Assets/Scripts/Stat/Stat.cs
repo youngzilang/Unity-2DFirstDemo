@@ -28,4 +28,13 @@ public class Stat
         value = _value;
     }
 
+    public void AddModify(int _value)
+    {
+        value += _value;
+    }
+
+    public void RemoveModify(int _value)
+    {
+        value += _value;
+    }
 }

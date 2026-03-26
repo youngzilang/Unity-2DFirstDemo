@@ -70,6 +70,7 @@ public class Inventory : MonoBehaviour
 
         equipment.Add(newItem);
         equipmentDictionary.Add(newEquipment, newItem);
+        newEquipment.AddModify();
         RemoveItem(_item);
     }
 
@@ -79,6 +80,7 @@ public class Inventory : MonoBehaviour
         {
             equipment.Remove(item1);
             equipmentDictionary.Remove(toDelete);
+            toDelete.RemoveModify();
         }
     }
 
