@@ -6,15 +6,46 @@ public class EnemyStat : CharaterStats
 {
     private Enemy enemy;
 
+    [Header("等级信息")]
+    [SerializeField] private int level=1;
+
+    [Range(0, 1)]
+    [SerializeField] private float percentagePlus=.4f;
+
+
+
     protected override void Start()
     {
+        LevelModify();
+
         base.Start();
         enemy = GetComponent<Enemy>();
+
+    }
+
+    private void LevelModify()
+    {
+        Modify(defence);
+        Modify(magicResistance);
+        Modify(damage);
+        Modify(maxHP);
+        Modify(fireDamage);
+        Modify(iceDamage);
+        Modify(lightDamage);
     }
 
     protected override void Update()
     {
         base.Update();
+    }
+
+    private void Modify(Stat stat)
+    {
+        for(int i = 1; i < level; i++)
+        {
+            float modify = stat.GetValue() * percentagePlus;
+            stat.AddModify(Mathf.RoundToInt(modify));
+        }
     }
 
     public override void BeDamaged(int _damage)

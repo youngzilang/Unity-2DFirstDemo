@@ -16,3 +16,17 @@ MonoBehaviour:
   itemName: StolenSword
   icon: {fileID: 552559057, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   equipmentType: 0
+  strength: 0
+  intelligence: 0
+  agility: 0
+  vatility: 0
+  damage: 12
+  criticalChance: 5
+  criticalDamage: 0
+  maxHP: 0
+  defence: 0
+  magicResistance: 0
+  evasion: 0
+  fireDamage: 0
+  iceDamage: 0
+  lightDamage: 0

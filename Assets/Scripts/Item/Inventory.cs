@@ -74,13 +74,13 @@ public class Inventory : MonoBehaviour
         RemoveItem(_item);
     }
 
-    private void UnEquip(ItemDataEquipment toDelete)
+    public void UnEquip(ItemDataEquipment OldEquipment)
     {
-        if (equipmentDictionary.TryGetValue(toDelete, out InventoryItem item1))
+        if (equipmentDictionary.TryGetValue(OldEquipment, out InventoryItem item1))
         {
             equipment.Remove(item1);
-            equipmentDictionary.Remove(toDelete);
-            toDelete.RemoveModify();
+            equipmentDictionary.Remove(OldEquipment);
+            OldEquipment.RemoveModify();
         }
     }
 
