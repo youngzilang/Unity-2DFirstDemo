@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlotUI : MonoBehaviour
+public class ItemSlotUI : MonoBehaviour,IPointerDownHandler
 {
-    [SerializeField]private Image image;
-    [SerializeField]private TextMeshProUGUI itemText;
+    [SerializeField] private Image image;
+    [SerializeField] private TextMeshProUGUI itemText;
 
     public InventoryItem item;
     public void UpdateSlotUI(InventoryItem _item)
@@ -22,6 +20,22 @@ public class ItemSlotUI : MonoBehaviour
 
             if (item.stackSize > 1) itemText.text = item.stackSize.ToString();
             else itemText.text = "";
+        }
+    }
+
+    public void CleanUpSlot()
+    {
+        item = null;
+        image.sprite = null;
+        image.color = Color.clear;
+        itemText.text= "";
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (item.data.itemType == ItemType.Equipment)
+        {
+            Inventory.instance.Equip(item.data);
         }
     }
 }

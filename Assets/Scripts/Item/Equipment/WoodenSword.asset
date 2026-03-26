@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1fe7b83cf1b9e4c83458ad265161a0, type: 3}
   m_Name: WoodenSword
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 1
   itemName: WoodenSword
   icon: {fileID: -296425438, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   equipmentType: 0
