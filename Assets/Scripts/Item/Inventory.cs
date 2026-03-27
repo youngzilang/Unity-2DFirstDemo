@@ -227,4 +227,19 @@ public class Inventory : MonoBehaviour
 
 
     public List<InventoryItem> GetEquipments() => equipment;
+
+    public ItemDataEquipment GetEquipmentByType(EquipmentType _type)
+    {
+        ItemDataEquipment toGetEquipment = null;
+
+        foreach (KeyValuePair<ItemDataEquipment, InventoryItem> equip in equipmentDictionary)
+        {
+            if (equip.Key.equipmentType == _type)
+            {
+                toGetEquipment = equip.Key;
+                break;
+            }
+        }
+        return toGetEquipment;
+    }
 }

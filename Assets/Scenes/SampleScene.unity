@@ -124555,7 +124555,7 @@ MonoBehaviour:
     value: 0
     buff: 
   damage:
-    value: 0
+    value: 20
     buff: 
   criticalChance:
     value: 0
@@ -126019,6 +126019,9 @@ MonoBehaviour:
   inventorySlotParent: {fileID: 1759281642}
   stashSlotParent: {fileID: 1984347930}
   equipSlotParent: {fileID: 1300111224}
+  inventoryItemSlot: []
+  stashItemSlot: []
+  equipItemSlot: []
 --- !u!4 &1269334261
 Transform:
   m_ObjectHideFlags: 0
@@ -126412,7 +126415,7 @@ MonoBehaviour:
     value: 0
     buff: 
   damage:
-    value: 0
+    value: 20
     buff: 
   criticalChance:
     value: 0
@@ -127780,6 +127783,7 @@ GameObject:
   - component: {fileID: 1844310487}
   - component: {fileID: 1844310488}
   - component: {fileID: 1844310489}
+  - component: {fileID: 1844310490}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -127988,6 +127992,22 @@ MonoBehaviour:
   isLight: 0
   currentHP: 0
   thunderPrefab: {fileID: 228082499740740191, guid: 32353bf62bf11fd4a851c521901ef1c1, type: 3}
+--- !u!114 &1844310490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844310483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a111fe5a291b9f54f9714560c74e8eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPrefab: {fileID: 6441186102319100905, guid: 0de83a6e4f741854e950b478ef7c1565, type: 3}
+  possibleDrop: []
+  dropAmount: 0
+  lostChance: 99
 --- !u!1 &1872925708
 GameObject:
   m_ObjectHideFlags: 0

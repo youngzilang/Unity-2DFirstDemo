@@ -21,9 +21,10 @@ public class PlayerAnimationTrigger : MonoBehaviour
             {
                 EnemyStat target = collider.GetComponent<EnemyStat>();
                 player.stats.DoingDamage(target);
-               // player.stats.DoingDamage(target);
+                // player.stats.DoingDamage(target);
                 // collider.GetComponent<Enemy>().Damage();
                 // collider.GetComponent<CharaterStats>().BeDamaged(player.stats.damage.GetValue());
+                Inventory.instance.GetEquipmentByType(EquipmentType.Weapon)?.UseItemEffect();
             }
         }
     }

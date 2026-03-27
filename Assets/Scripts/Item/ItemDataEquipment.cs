@@ -16,6 +16,8 @@ public class ItemDataEquipment : ItemData
 {
     public EquipmentType equipmentType;
 
+    public ItemEffect[] itemEffects;
+
     [Header("主面板")]
     public int strength;//体力值：+1 点伤害，+1% 暴击伤害
     public int intelligence;//智力值：+1 魔法伤害，+ 1%暴击率
@@ -78,5 +80,13 @@ public class ItemDataEquipment : ItemData
         playerStat.fireDamage.RemoveModify(fireDamage);
         playerStat.iceDamage.RemoveModify(iceDamage);
         playerStat.lightDamage.RemoveModify(lightDamage);
+    }
+
+    public void UseItemEffect()
+    {
+        foreach(var effect in itemEffects)
+        {
+            effect.ExcuteEffect();
+        }
     }
 }
