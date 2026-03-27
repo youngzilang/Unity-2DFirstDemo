@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerNormalAttackState : PlayerState
 {
-    private int attackCount ;
+    public int attackCount { get; private set; }
     private float mixAttackWindow=0.8f;
     private float attackTiming;
 

@@ -82,11 +82,11 @@ public class ItemDataEquipment : ItemData
         playerStat.lightDamage.RemoveModify(lightDamage);
     }
 
-    public void UseItemEffect()
+    public void UseItemEffect(Transform enemyPosition)
     {
         foreach(var effect in itemEffects)
         {
-            effect.ExcuteEffect();
+            effect.ExcuteEffect(enemyPosition);
         }
     }
 }

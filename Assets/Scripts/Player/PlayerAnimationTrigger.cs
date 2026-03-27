@@ -24,7 +24,7 @@ public class PlayerAnimationTrigger : MonoBehaviour
                 // player.stats.DoingDamage(target);
                 // collider.GetComponent<Enemy>().Damage();
                 // collider.GetComponent<CharaterStats>().BeDamaged(player.stats.damage.GetValue());
-                Inventory.instance.GetEquipmentByType(EquipmentType.Weapon)?.UseItemEffect();
+                Inventory.instance.GetEquipmentByType(EquipmentType.Weapon)?.UseItemEffect(target.transform);
             }
         }
     }
