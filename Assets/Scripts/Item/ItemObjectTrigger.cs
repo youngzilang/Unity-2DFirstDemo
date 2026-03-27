@@ -10,6 +10,7 @@ public class ItemObjectTrigger : MonoBehaviour
     {
         if (collision.GetComponent<Player> ()!= null)
         {
+            if (collision.GetComponent<CharaterStats>().isDead) return;
             itemObject.PickUpItem();
         }
     }

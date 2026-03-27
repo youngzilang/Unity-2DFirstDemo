@@ -29,6 +29,7 @@ public class CrystalSkillController : MonoBehaviour
 
         if (isMove)
         {
+            closestTarget = FollowClosestEnemy();
             if (closestTarget)
             {
                 transform.position = Vector2.MoveTowards(transform.position, closestTarget.position, moveSpeed * Time.deltaTime);

@@ -53,7 +53,7 @@ public class CharaterStats : MonoBehaviour
 
     [SerializeField] private GameObject thunderPrefab;
 
-    private bool isDead;
+    public bool isDead { get; private set; }
 
     protected virtual void Start()
     {

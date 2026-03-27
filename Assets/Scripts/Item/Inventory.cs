@@ -18,14 +18,16 @@ public class Inventory : MonoBehaviour
     public List<InventoryItem> equipment;
     public Dictionary<ItemDataEquipment, InventoryItem> equipmentDictionary;
 
+    public List<ItemData> justEquipments;
+
    [Header("Inventory UI")]
     [SerializeField]private Transform inventorySlotParent;
     [SerializeField] private Transform stashSlotParent;
     [SerializeField] private Transform equipSlotParent;
 
-    private ItemSlotUI[] inventoryItemSlot;
-    private ItemSlotUI[] stashItemSlot;
-    private EquipmentUI[] equipItemSlot;
+    public ItemSlotUI[] inventoryItemSlot;
+    public ItemSlotUI[] stashItemSlot;
+    public EquipmentUI[] equipItemSlot;
 
     private void Awake()
     {
@@ -38,15 +40,25 @@ public class Inventory : MonoBehaviour
         inventory = new List<InventoryItem>();
         inventoryDictionary = new Dictionary<ItemData, InventoryItem>();
 
-        stash= new List<InventoryItem>();
+        stash = new List<InventoryItem>();
         stashDictionary = new Dictionary<ItemData, InventoryItem>();
 
         equipment = new List<InventoryItem>();
         equipmentDictionary = new Dictionary<ItemDataEquipment, InventoryItem>();
 
         inventoryItemSlot = inventorySlotParent.GetComponentsInChildren<ItemSlotUI>();
-        stashItemSlot=stashSlotParent.GetComponentsInChildren<ItemSlotUI>();
+        stashItemSlot = stashSlotParent.GetComponentsInChildren<ItemSlotUI>();
         equipItemSlot = equipSlotParent.GetComponentsInChildren<EquipmentUI>();
+
+        JustEquipmentsAdd();
+    }
+
+    private void JustEquipmentsAdd()
+    {
+        for (int i = 0; i < justEquipments.Count; i++)
+        {
+            AddItem(justEquipments[i]);
+        }
     }
 
     public void Equip(ItemData _item)
@@ -144,7 +156,7 @@ public class Inventory : MonoBehaviour
         UpdateSlotUI();
     }
 
-    private void UpdateSlotUI()
+    public void  UpdateSlotUI()
     {
        for(int i = 0; i < equipItemSlot.Length; i++)
         {
@@ -213,4 +225,6 @@ public class Inventory : MonoBehaviour
 
     }
 
+
+    public List<InventoryItem> GetEquipments() => equipment;
 }

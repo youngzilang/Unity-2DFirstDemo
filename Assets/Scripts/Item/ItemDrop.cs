@@ -5,13 +5,11 @@ using UnityEngine;
 public class ItemDrop : MonoBehaviour
 {
     [SerializeField] private GameObject objectPrefab;
-    [SerializeField] private ItemData item;
-
     [SerializeField] private ItemData[] possibleDrop;
     [SerializeField]private int dropAmount;
     private List<ItemData> DropList = new List<ItemData>();
 
-    public void GenerateDropObject()
+    public virtual void GenerateDropObject()
     {
         for(int i = 0; i < possibleDrop.Length; i++)
         {
