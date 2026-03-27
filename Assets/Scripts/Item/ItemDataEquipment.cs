@@ -39,6 +39,9 @@ public class ItemDataEquipment : ItemData
     public int iceDamage;//±ù
     public int lightDamage;//¹â
 
+    [Header("¹¤ÒÕÍ¼Ö½")]
+    public List<InventoryItem> craftMaterial;
+
     public void AddModify()
     {
         PlayerStat playerStat = PlayerManager.instance.player.GetComponent<PlayerStat>();

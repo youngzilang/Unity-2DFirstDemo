@@ -176,4 +176,41 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public bool CraftOrNot(ItemDataEquipment equipmentToCraft,List<InventoryItem> requiredMateril)
+    {
+        List<InventoryItem> toUsedMaterial =new List<InventoryItem>();
+
+        for(int i = 0; i < requiredMateril.Count; i++)
+        {
+
+            if (stashDictionary.TryGetValue(requiredMateril[i].data,out InventoryItem value))
+            {
+                if (value.stackSize < requiredMateril[i].stackSize)
+                {
+                    Debug.Log("材料不足！");
+                    return false;
+                }
+                else
+                {
+                    toUsedMaterial.Add(value);
+                }
+            }
+            else
+            {
+                Debug.Log("材料不足！");
+                return false;
+            }
+        }
+
+        for(int i = 0; i < requiredMateril.Count; i++)
+        {
+            for (int j = 0; j < requiredMateril[i].stackSize; j++) RemoveItem(requiredMateril[i].data);
+        }
+
+        AddItem(equipmentToCraft);
+
+        return true;
+
+    }
+
 }
