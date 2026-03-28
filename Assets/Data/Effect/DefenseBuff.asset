@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2f28326021d324984d948636978938, type: 3}
   m_Name: DefenseBuff
   m_EditorClassIdentifier: 
-  buff: 8
-  buffAmount: 50
-  buffContinueTime: 5
+  buff: 11
+  buffAmount: 4
+  buffContinueTime: 3

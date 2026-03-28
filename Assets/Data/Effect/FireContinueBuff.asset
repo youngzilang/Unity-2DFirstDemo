@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be2f28326021d324984d948636978938, type: 3}
   m_Name: FireContinueBuff
   m_EditorClassIdentifier: 
-  buff: 0
-  buffAmount: 0
-  buffContinueTime: 0
+  buff: 11
+  buffAmount: 5
+  buffContinueTime: 3

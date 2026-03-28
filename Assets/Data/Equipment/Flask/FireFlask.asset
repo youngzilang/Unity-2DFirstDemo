@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1fe7b83cf1b9e4c83458ad265161a0, type: 3}
   m_Name: FireFlask
   m_EditorClassIdentifier: 
-  itemType: 0
-  itemName: 
-  icon: {fileID: 0}
-  dropChance: 0
-  equipmentType: 0
-  flaskCd: 0
-  itemEffects: []
+  itemType: 1
+  itemName: FireFlask
+  icon: {fileID: 2018474928, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
+  dropChance: 15
+  equipmentType: 3
+  armorCd: 0
+  flaskCd: 10
+  itemEffects:
+  - {fileID: 11400000, guid: 4459c60dc617c334980f7f61f7abbd82, type: 2}
   strength: 0
   intelligence: 0
   agility: 0
