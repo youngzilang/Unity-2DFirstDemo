@@ -95,6 +95,10 @@ public class SwordSkillController : MonoBehaviour
                         if (a.GetComponent<Enemy>() != null)
                         {
                             PlayerManager.instance.player.stats.DoingDamage(a.GetComponent<CharaterStats>());
+
+                            ItemDataEquipment amulet = Inventory.instance.GetEquipmentByType(EquipmentType.Amulet);
+                            if (amulet) amulet.UseItemEffect(a.transform);
+
                             a.GetComponent<Enemy>().StartCoroutine("FreezeTimeFor", freezeTime);
                         }
                     }
@@ -121,6 +125,9 @@ public class SwordSkillController : MonoBehaviour
             {
                 PlayerManager.instance.player.stats.DoingDamage(transforms[transformsIndex].GetComponent<CharaterStats>());
                 //transforms[transformsIndex].GetComponent<Enemy>().Damage();
+                ItemDataEquipment amulet = Inventory.instance.GetEquipmentByType(EquipmentType.Amulet);
+                if (amulet) amulet.UseItemEffect(transforms[transformsIndex].transform);
+
                 transforms[transformsIndex].GetComponent<Enemy>().StartCoroutine("FreezeTimeFor", freezeTime);
                 transformsIndex++;
                 bounceAmount--;
@@ -193,6 +200,10 @@ public class SwordSkillController : MonoBehaviour
             Enemy enemy = collision.GetComponent<Enemy>();
             PlayerManager.instance.player.stats.DoingDamage(enemy.GetComponent<CharaterStats>());
             //enemy.GetComponent<CharaterStats>();
+
+            ItemDataEquipment amulet = Inventory.instance.GetEquipmentByType(EquipmentType.Amulet);
+            if (amulet) amulet.UseItemEffect(enemy.transform);
+
             enemy.StartCoroutine("FreezeTimeFor", freezeTime);
         }
         

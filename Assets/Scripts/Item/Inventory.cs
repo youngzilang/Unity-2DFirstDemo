@@ -29,6 +29,8 @@ public class Inventory : MonoBehaviour
     public ItemSlotUI[] stashItemSlot;
     public EquipmentUI[] equipItemSlot;
 
+    private float lastFlaskTime;
+
     private void Awake()
     {
         if (!instance) instance = this;
@@ -241,5 +243,19 @@ public class Inventory : MonoBehaviour
             }
         }
         return toGetEquipment;
+    }
+
+    public void UseFlask()
+    {
+        ItemDataEquipment equipment = GetEquipmentByType(EquipmentType.Flask);
+
+        if (!equipment) return;
+
+        if (Time.time > equipment.flaskCd + lastFlaskTime)
+        {
+            equipment.UseItemEffect(null);
+            lastFlaskTime = Time.time;
+        }
+        else Debug.Log("¿‰»¥÷–!");
     }
 }

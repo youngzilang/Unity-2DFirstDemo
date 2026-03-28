@@ -286,6 +286,15 @@ public class CharaterStats : MonoBehaviour
         }
     }
 
+    public virtual void IncreaseHp(int _heal)
+    {
+        currentHP += _heal;
+
+        if (currentHP > GetMaxHp()) currentHP = GetMaxHp();
+
+        if (onHPChange != null) onHPChange();
+    }
+
     public int GetMaxHp()
     {
         return maxHP.GetValue() + vatility.GetValue() * 5;

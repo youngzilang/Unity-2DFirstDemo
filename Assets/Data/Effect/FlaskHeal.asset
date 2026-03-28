@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b1c26d51a67714d92f66e94c31c7d7, type: 3}
-  m_Name: IceFire Effect
+  m_Script: {fileID: 11500000, guid: 87c6301eedd35f34e83a853a29f9a983, type: 3}
+  m_Name: FlaskHeal
   m_EditorClassIdentifier: 
-  icefirePrefab: {fileID: 3589577328456766408, guid: aba2a17748000c84792af2159484777d, type: 3}
-  xV: 15
+  healPercent: 0.3

@@ -94,6 +94,9 @@ public class CrystalSkillController : MonoBehaviour
             {
 
                 PlayerManager.instance.player.stats.DoingMagicDamage(collider.GetComponent<CharaterStats>());
+
+                ItemDataEquipment amulet = Inventory.instance.GetEquipmentByType(EquipmentType.Amulet);
+                if (amulet) amulet.UseItemEffect(collider.transform);
             }
         }
     }

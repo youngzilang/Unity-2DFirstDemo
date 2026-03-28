@@ -94,6 +94,11 @@ public class Player : Entity
         {
             skillManager.crystalSkill.CanSkill();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Inventory.instance.UseFlask();
+        }
     }
 
     public override void SlowByIce(float _slowPercent, float _slowTime)

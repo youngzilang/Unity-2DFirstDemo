@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc1fe7b83cf1b9e4c83458ad265161a0, type: 3}
-  m_Name: Armor
+  m_Name: HealFlask
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Armor
-  icon: {fileID: 1167412048, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
-  dropChance: 40
-  equipmentType: 1
-  flaskCd: 0
-  itemEffects: []
+  itemName: HealFlask
+  icon: {fileID: 550385755, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
+  dropChance: 20
+  equipmentType: 3
+  flaskCd: 3
+  itemEffects:
+  - {fileID: 11400000, guid: 60675613eac11a14ea370647802f87a8, type: 2}
   strength: 0
   intelligence: 0
   agility: 0
@@ -26,15 +27,11 @@ MonoBehaviour:
   damage: 0
   criticalChance: 0
   criticalDamage: 0
-  maxHP: 30
-  defence: 10
+  maxHP: 0
+  defence: 0
   magicResistance: 0
   evasion: 0
   fireDamage: 0
   iceDamage: 0
   lightDamage: 0
-  craftMaterial:
-  - data: {fileID: 11400000, guid: bd5df1ace592a0f4fb39d2d44bc3ace7, type: 2}
-    stackSize: 1
-  - data: {fileID: 11400000, guid: f6f9d41ecf19d804eade3e5344d6f212, type: 2}
-    stackSize: 2
+  craftMaterial: []
