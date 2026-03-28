@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc1fe7b83cf1b9e4c83458ad265161a0, type: 3}
-  m_Name: Thunder
+  m_Name: ThunderSword
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Thunder
+  itemName: ThunderSword
   icon: {fileID: -1513691744, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   dropChance: 10
   equipmentType: 0
+  flaskCd: 0
   itemEffects:
   - {fileID: 11400000, guid: e37633b442f28104980fe67611b94928, type: 2}
   strength: 0

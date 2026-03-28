@@ -30,4 +30,12 @@ public class PlayerStat : CharaterStats
         PlayerManager.instance.player.Die();
         GetComponent<PlayerItemDrop>()?.GenerateDropObject();
     }
+
+    public override void DecreaseHp(int _damage)
+    {
+        base.DecreaseHp(_damage);
+
+        ItemDataEquipment armor = Inventory.instance.GetEquipmentByType(EquipmentType.Armor);
+        if (armor) armor.UseItemEffect(PlayerManager.instance.player.transform);
+    }
 }

@@ -35,6 +35,6 @@ public class Stat
 
     public void RemoveModify(int _value)
     {
-        value += _value;
+        value -= _value;
     }
 }

@@ -30,6 +30,10 @@ public class Inventory : MonoBehaviour
     public EquipmentUI[] equipItemSlot;
 
     private float lastFlaskTime;
+    private float lastDieArmorTime;
+
+    private float flaskTime;
+    private float dieArmorTime;
 
     private void Awake()
     {
@@ -251,11 +255,28 @@ public class Inventory : MonoBehaviour
 
         if (!equipment) return;
 
-        if (Time.time > equipment.flaskCd + lastFlaskTime)
+        if (Time.time > flaskTime + lastFlaskTime)
         {
+            flaskTime = equipment.flaskCd;
             equipment.UseItemEffect(null);
             lastFlaskTime = Time.time;
         }
         else Debug.Log("¿‰»¥÷–!");
+    }
+
+    public bool UseArmor()
+    {
+        ItemDataEquipment equipment = GetEquipmentByType(EquipmentType.Armor);
+
+        if (!equipment) return false;
+
+        if (Time.time > dieArmorTime + lastDieArmorTime)
+        {
+            dieArmorTime = equipment.armorCd;
+            lastDieArmorTime = Time.time;
+            return true;
+        }
+        else Debug.Log("¿‰»¥÷–!");
+        return false;
     }
 }

@@ -15,6 +15,7 @@ public enum EquipmentType
 public class ItemDataEquipment : ItemData
 {
     public EquipmentType equipmentType;
+    public float armorCd;
     public float flaskCd;
 
     public ItemEffect[] itemEffects;

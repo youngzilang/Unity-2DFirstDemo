@@ -93,6 +93,18 @@ public class CharaterStats : MonoBehaviour
         }
     }
 
+    public virtual void IncreaseBuff(int _buff,float continueTime,Stat _toAddStat)
+    {
+        StartCoroutine(AddBuff(_buff,continueTime,_toAddStat));
+    }
+
+    IEnumerator AddBuff(int _buff, float continueTime, Stat _toAddStat)
+    {
+        _toAddStat.AddModify(_buff);
+        yield return new WaitForSeconds(continueTime);
+        _toAddStat.RemoveModify(_buff);
+    }
+
     //×ÆÉÕ
     private void BeBurn(int _beBurnDamage)
     {
@@ -155,6 +167,8 @@ public class CharaterStats : MonoBehaviour
 
         total = CountDamageAfterDefence(total,_stats);
         _stats.BeDamaged(total);
+
+        DoingMagicDamage(_stats);
     }
 
     //ÊÜ»÷ÉËº¦ÅÐ¶¨

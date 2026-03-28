@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1fe7b83cf1b9e4c83458ad265161a0, type: 3}
+  m_Name: IceFireSword
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemName: IceFireSword
+  icon: {fileID: 884613782, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
+  dropChance: 10
+  equipmentType: 0
+  flaskCd: 0
+  itemEffects:
+  - {fileID: 11400000, guid: 4f3d8e8b5dfee3248a598ed215619503, type: 2}
+  strength: 0
+  intelligence: 0
+  agility: 0
+  vatility: 0
+  damage: 10
+  criticalChance: 0
+  criticalDamage: 0
+  maxHP: 0
+  defence: 0
+  magicResistance: 0
+  evasion: 0
+  fireDamage: 5
+  iceDamage: 6
+  lightDamage: 0
+  craftMaterial: []

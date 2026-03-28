@@ -58,6 +58,7 @@ public class Enemy : Entity
         moveSpeed = originalSpeed;
     }
 
+    public void FreezeEffect(float _continue) => StartCoroutine(FreezeTimeFor(_continue));
     public virtual void FreezeTime(bool isFreeze)
     {
         if (isFreeze)
