@@ -11,7 +11,7 @@ public class FreezeEffect : ItemEffect
     {
         PlayerStat playerStat = PlayerManager.instance.player.GetComponent<PlayerStat>();
 
-        if (playerStat.currentHP < playerStat.maxHP.GetValue() * 0.1) return;
+        if (playerStat.currentHP > playerStat.maxHP.GetValue() * 0.3) return;
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPosition.position, 2);
 

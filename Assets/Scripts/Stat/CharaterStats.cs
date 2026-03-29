@@ -4,6 +4,25 @@ using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
+public enum buffType
+{
+    strength,
+    intelligence,
+    agility,
+    vatility,
+    damage,
+    criticalChance,
+    criticalDamage,
+    maxHP,
+    defence,
+    magicResistance,
+    evasion,
+    fireDamage,
+    iceDamage,
+    lightDamage
+}
+
+
 public class CharaterStats : MonoBehaviour
 {
     [Header("Ö÷Ãæ°å")]
@@ -312,5 +331,27 @@ public class CharaterStats : MonoBehaviour
     public int GetMaxHp()
     {
         return maxHP.GetValue() + vatility.GetValue() * 5;
+    }
+
+    public Stat SelectBuff(buffType buff)
+    {
+        switch (buff)
+        {
+            case buffType.strength: return strength;
+            case buffType.intelligence: return intelligence;
+            case buffType.agility: return agility;
+            case buffType.vatility: return vatility;
+            case buffType.damage: return damage;
+            case buffType.criticalChance: return criticalChance;
+            case buffType.criticalDamage: return criticalDamage;
+            case buffType.maxHP: return maxHP;
+            case buffType.defence: return defence;
+            case buffType.magicResistance: return magicResistance;
+            case buffType.evasion: return evasion;
+            case buffType.fireDamage: return fireDamage;
+            case buffType.iceDamage: return iceDamage;
+            case buffType.lightDamage: return lightDamage;
+        }
+        return null;
     }
 }
