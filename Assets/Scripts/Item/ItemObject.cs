@@ -7,10 +7,6 @@ public class ItemObject : MonoBehaviour
     [SerializeField] private ItemData item;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Vector2 vector;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.O)) rb.velocity = vector;
-    }
 
     public void SetUpItemObject(ItemData _itemData,Vector2 _vector)
     {
@@ -25,6 +21,12 @@ public class ItemObject : MonoBehaviour
 
     public void PickUpItem()
     {
+        if (!Inventory.instance.BagFullOrNot() && item.itemType == ItemType.Equipment)
+        {
+            rb.velocity = new Vector2(0, 7);
+            return;
+        }
+
         Inventory.instance.AddItem(item);
         Destroy(gameObject);
     }

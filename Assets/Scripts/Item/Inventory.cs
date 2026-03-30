@@ -107,7 +107,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(ItemData _item)
     {
-        if (_item.itemType == ItemType.Equipment) AddToInventory(_item);
+        if (_item.itemType == ItemType.Equipment&&BagFullOrNot()) AddToInventory(_item);
         else if (_item.itemType == ItemType.Material) AddToStash(_item);
 
             UpdateSlotUI();
@@ -286,5 +286,15 @@ public class Inventory : MonoBehaviour
         }
         else Debug.Log("ÀäÈ´ÖĞ!");
         return false;
+    }
+
+    public bool BagFullOrNot()
+    {
+        if (inventory.Count >= inventoryItemSlot.Length)
+        {
+            Debug.Log("±³°üÒÑÂú!");
+            return false;
+        }
+        return true;
     }
 }
