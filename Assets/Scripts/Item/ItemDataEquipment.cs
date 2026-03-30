@@ -46,6 +46,8 @@ public class ItemDataEquipment : ItemData
     [Header("工艺图纸")]
     public List<InventoryItem> craftMaterial;
 
+    private int descriptionLine;
+
     public void AddModify()
     {
         PlayerStat playerStat = PlayerManager.instance.player.GetComponent<PlayerStat>();
@@ -89,6 +91,52 @@ public class ItemDataEquipment : ItemData
         foreach(var effect in itemEffects)
         {
             effect.ExcuteEffect(enemyPosition);
+        }
+    }
+
+    public override string Description()
+    {
+        sb.Length = 0;
+        descriptionLine = 0;
+
+        AddDescription("体力", strength);
+        AddDescription("智力", intelligence);
+        AddDescription("敏捷", agility);
+        AddDescription("活力", vatility);
+
+        AddDescription("攻击力", damage);
+        AddDescription("暴击率", criticalChance);
+        AddDescription("暴击伤害", criticalDamage);
+
+        AddDescription("最大生命值", maxHP);
+        AddDescription("防御力", defence);
+        AddDescription("魔抗", magicResistance);
+        AddDescription("闪避", evasion);
+
+        AddDescription("火属性", fireDamage);
+        AddDescription("冰属性", iceDamage);
+        AddDescription("雷属性", lightDamage);
+
+        if (descriptionLine < 4)
+        {
+            for(int i = 0; i < 4 - descriptionLine; i++)
+            {
+                sb.AppendLine();
+            }
+        }
+
+        return sb.ToString();
+    }
+
+    public void AddDescription(string _name,int value)
+    {
+        if (value != 0)
+        {
+            if (sb.Length > 0) sb.AppendLine();
+
+            if (value > 0) sb.Append("+ "+value+" "+_name);
+
+            descriptionLine++;
         }
     }
 }
