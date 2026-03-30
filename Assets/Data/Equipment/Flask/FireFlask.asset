@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FireFlask
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: FireFlask
+  itemName: "\u706B\u58F6"
   icon: {fileID: 2018474928, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   dropChance: 15
   equipmentType: 3

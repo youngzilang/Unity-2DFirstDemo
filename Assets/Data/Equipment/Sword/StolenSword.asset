@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: StolenSword
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: StolenSword
+  itemName: "\u94C1\u5251"
   icon: {fileID: 552559057, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   dropChance: 30
   equipmentType: 0
+  armorCd: 0
+  flaskCd: 0
+  itemEffects: []
   strength: 0
   intelligence: 0
   agility: 0

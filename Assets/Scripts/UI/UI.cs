@@ -5,10 +5,11 @@ using UnityEngine;
 public class UI : MonoBehaviour
 {
     public ItemToolTipUI tipUI;
-
+    public StatToolTipUI statTipUI;
     private void Start()
     {
         tipUI = GetComponentInChildren<ItemToolTipUI>(true);
+        statTipUI = GetComponentInChildren<StatToolTipUI>(true);
     }
     public void SwitchTo(GameObject menu)
     {

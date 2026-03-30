@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: ThunderSword
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: ThunderSword
+  itemName: "\u96F7\u9E23\u5251"
   icon: {fileID: -1513691744, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   dropChance: 10
   equipmentType: 0
+  armorCd: 0
   flaskCd: 0
   itemEffects:
   - {fileID: 11400000, guid: e37633b442f28104980fe67611b94928, type: 2}

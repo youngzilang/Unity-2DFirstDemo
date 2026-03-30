@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DieArmor
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: DieArmor
+  itemName: "\u4E0D\u6B7B\u9E1F"
   icon: {fileID: -1970170000, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   dropChance: 10
   equipmentType: 1

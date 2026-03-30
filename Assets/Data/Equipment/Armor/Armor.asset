@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Armor
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: Armor
+  itemName: "\u76D4\u7532"
   icon: {fileID: 1167412048, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   dropChance: 40
   equipmentType: 1

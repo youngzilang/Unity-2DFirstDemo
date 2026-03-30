@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: BloodSword
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: BloodSword
+  itemName: "\u6CE3\u8840\u5251"
   icon: {fileID: 414311741, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   dropChance: 10
   equipmentType: 0
+  armorCd: 0
   flaskCd: 0
   itemEffects:
   - {fileID: 11400000, guid: 98af4f35cd92e6f43a64c5ac3d4f6c4b, type: 2}

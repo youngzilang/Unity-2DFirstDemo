@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealFlask
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: HealFlask
+  itemName: "\u8840\u58F6"
   icon: {fileID: 550385755, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
   dropChance: 20
   equipmentType: 3
