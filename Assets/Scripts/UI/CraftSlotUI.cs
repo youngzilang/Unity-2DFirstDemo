@@ -2,14 +2,24 @@ using UnityEngine.EventSystems;
 
 public class CraftSlotUI : ItemSlotUI
 {
-    private void OnEnable()
+    protected override void Start()
     {
-        UpdateSlotUI(item);
+        base.Start();
     }
+
+    public void SetUpCraftSlot(ItemDataEquipment _equip)
+    {
+        if (!_equip) return;
+
+        item.data = _equip;
+
+        image.sprite = _equip.icon;
+        itemText.text = _equip.itemName;
+    }
+
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        ItemDataEquipment craft = item.data as ItemDataEquipment;
-        Inventory.instance.CraftOrNot(craft,craft.craftMaterial);
+        uI.craftWindow.SetUpCraftWindow(item.data as ItemDataEquipment);
     }
 }

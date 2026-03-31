@@ -46,7 +46,7 @@ public class ItemDataEquipment : ItemData
     [Header("π§“’Õº÷Ω")]
     public List<InventoryItem> craftMaterial;
 
-    private int descriptionLine;
+    public int descriptionLine;
 
     public void AddModify()
     {

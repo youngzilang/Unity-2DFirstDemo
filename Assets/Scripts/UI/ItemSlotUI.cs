@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Image image;
-    [SerializeField] private TextMeshProUGUI itemText;
+    [SerializeField] protected Image image;
+    [SerializeField] protected TextMeshProUGUI itemText;
 
-    public UI uI;
+    protected UI uI;
     public InventoryItem item;
 
-    private void Start()
+    protected virtual void Start()
     {
         uI = GetComponentInParent<UI>();
     }
@@ -45,6 +45,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         if (Input.GetKey(KeyCode.LeftControl))
         {
             Inventory.instance.RemoveItem(item.data);
+            uI.tipUI.HideToolTip();
             return;
         }
 
@@ -52,6 +53,8 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         {
             Inventory.instance.Equip(item.data);
         }
+
+        uI.tipUI.HideToolTip();
     }
 
     public void OnPointerEnter(PointerEventData eventData)

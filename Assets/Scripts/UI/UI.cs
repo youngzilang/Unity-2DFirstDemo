@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
 
     public ItemToolTipUI tipUI;
     public StatToolTipUI statTipUI;
+    public CraftWindowUI craftWindow;
     private void Start()
     {
         SwitchTo(null);
