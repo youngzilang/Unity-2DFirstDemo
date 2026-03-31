@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+    [SerializeField]private GameObject characterUI;
+    [SerializeField] private GameObject craftUI;
+    [SerializeField] private GameObject skillUI;
+    [SerializeField] private GameObject optionsUI;
+
     public ItemToolTipUI tipUI;
     public StatToolTipUI statTipUI;
     private void Start()
     {
-        tipUI = GetComponentInChildren<ItemToolTipUI>(true);
-        statTipUI = GetComponentInChildren<StatToolTipUI>(true);
+        SwitchTo(null);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X)) SwitchToWithKey(characterUI);
+        if (Input.GetKeyDown(KeyCode.V)) SwitchToWithKey(skillUI);
+        if (Input.GetKeyDown(KeyCode.B)) SwitchToWithKey(craftUI);
+        if (Input.GetKeyDown(KeyCode.N)) SwitchToWithKey(optionsUI);
+    }
+
     public void SwitchTo(GameObject menu)
     {
         for(int i = 0; i < transform.childCount; i++)
@@ -19,5 +32,16 @@ public class UI : MonoBehaviour
         }
 
         if (menu) menu.SetActive(true);
+    }
+
+    public void SwitchToWithKey(GameObject _menu)
+    {
+        if (_menu != null && _menu.activeSelf)
+        {
+            _menu.SetActive(false);
+            return;
+        }
+
+        SwitchTo(_menu);
     }
 }
