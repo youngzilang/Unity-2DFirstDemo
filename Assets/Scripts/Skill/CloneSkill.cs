@@ -9,8 +9,6 @@ public class CloneSkill : Skill
     [SerializeField] private float cloneCd;
     [SerializeField] private bool canCloneAttack;
     [SerializeField] private float addCloneChance;
-    [SerializeField] private bool dashStartClone;
-    [SerializeField] private bool dashOverClone;
     [SerializeField] private bool cloneReAttack;
     [SerializeField] private bool canAddClone;
     public bool crystalInsteadClone;
@@ -26,18 +24,6 @@ public class CloneSkill : Skill
         GameObject newClone = Instantiate(clonePrefab);
 
         newClone.GetComponent<CloneSkillController>().SetUpClone(clonePosition, cloneCd,canCloneAttack,xOffSet,canAddClone,addCloneChance);
-    }
-
-    public void CreatDashStartClone(Transform clonePosition)
-    {
-        if (dashStartClone)
-            ClonePrefab(clonePosition,0);
-    }
-
-    public void CreatDashOverClone(Transform clonePosition)
-    {
-        if (dashOverClone)
-            ClonePrefab(clonePosition, 0);
     }
 
     public void DelayCreatReAttackClone(Transform _transform,int _offset)

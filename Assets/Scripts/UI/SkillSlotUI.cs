@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,14 +20,19 @@ public class SkillSlotUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
     private UI uI;
     public bool unlocked;
 
+    [Header("技能花费")]
+    [SerializeField] private int skillPrice;
+
+    private void Awake()
+    {
+        GetComponent<Button>().onClick.AddListener(() => UnlockSkill());
+    }
 
     private void Start()
     {
         uI = GetComponentInParent<UI>();
         image = GetComponent<Image>();
         image.color = lockColor;
-
-        GetComponent<Button>().onClick.AddListener(() => UnlockSkill());
     }
 
     private void OnValidate()
@@ -36,6 +42,11 @@ public class SkillSlotUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public void UnlockSkill()
     {
+        //防止重复扣钱
+        if (unlocked) return;
+
+        if (!PlayerManager.instance.MoneyEnough(skillPrice)) return;
+
         for(int i = 0; i < shouldUnlock.Length; i++)
         {
             if (!shouldUnlock[i].unlocked)
@@ -61,6 +72,20 @@ public class SkillSlotUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
     public void OnPointerEnter(PointerEventData eventData)
     {
         uI.skillTipUI.ShowSkillToolTip(skillDescription, skillName);
+
+        Vector2 mousePosition = Input.mousePosition;
+
+        float offsetX = 0;
+        float offsetY = 0;
+
+        if (mousePosition.x > 370) offsetX = -230;
+
+
+        if (mousePosition.y > 200) offsetY = -50;
+        else offsetY = 100;
+
+
+        uI.skillTipUI.transform.position = new Vector2( mousePosition.x+offsetX,mousePosition.y+offsetY);
     }
 
     public void OnPointerExit(PointerEventData eventData)

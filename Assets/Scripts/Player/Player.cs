@@ -134,6 +134,7 @@ public class Player : Entity
 
     private void DashNow()
     {
+        if (!skillManager.dashSkill.dashUnlock) return;
         
         if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dashSkill.CanSkill())
         {

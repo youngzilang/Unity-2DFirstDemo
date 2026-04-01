@@ -48,6 +48,9 @@ public class ItemDataEquipment : ItemData
 
     public int descriptionLine;
 
+    [TextArea]
+    [SerializeField] private string effectDescription;
+
     public void AddModify()
     {
         PlayerStat playerStat = PlayerManager.instance.player.GetComponent<PlayerStat>();
@@ -123,6 +126,12 @@ public class ItemDataEquipment : ItemData
             {
                 sb.AppendLine();
             }
+        }
+
+        if (effectDescription.Length > 0)
+        {
+            sb.AppendLine();
+            sb.Append(effectDescription);
         }
 
         return sb.ToString();

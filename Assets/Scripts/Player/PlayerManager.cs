@@ -7,6 +7,8 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
     public Player player;
 
+    public int currency;
+
     private void Awake()
     {
         if (instance != null)
@@ -16,4 +18,15 @@ public class PlayerManager : MonoBehaviour
         else instance = this;
     }
 
+    public bool MoneyEnough(int _price)
+    {
+        if (_price > currency)
+        {
+            Debug.Log("»õ±Ò²»×ã!");
+            return false;
+        }
+
+        currency -= _price;
+        return true;
+    }
 }
