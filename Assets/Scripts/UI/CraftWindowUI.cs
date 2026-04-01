@@ -37,7 +37,7 @@ public class CraftWindowUI : MonoBehaviour
 
         // 关键代码：文字太多时自动缩小字体
         itemDescription.enableAutoSizing = true;  // 开启自动缩放
-        itemDescription.fontSizeMin = 14;         // 最小缩到 14 号（你可以改）
+        itemDescription.fontSizeMin = 14;         // 最小缩到 14 号
         itemDescription.fontSizeMax = 24;
 
         itemIcon.sprite = _equipment.icon;
