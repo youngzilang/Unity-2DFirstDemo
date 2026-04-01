@@ -35,7 +35,11 @@ public class PlayerReAttackState : PlayerState
                 {
                     stateTimer = 10;
                     player.animator.SetBool("isReAttackSuccess", true);
-                    player.skillManager.cloneSkill.DelayCreatReAttackClone(player.transform, 5 * player.faceDir);
+
+                    //调用反击恢复方法
+                    SkillManager.instance.parrySkill.UseSkill();
+
+                    SkillManager.instance.parrySkill.CloneOnParry(collider.transform,2*player.faceDir);
                 }
             }
         }

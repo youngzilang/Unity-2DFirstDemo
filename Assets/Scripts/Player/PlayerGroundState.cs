@@ -28,7 +28,7 @@ public class PlayerGroundState : PlayerState
 
         if (Input.GetKeyDown(KeyCode.Mouse1)&&IsSwordReturn()) stateMachine.ChangeState(player.aimState);
 
-        if (Input.GetKeyDown(KeyCode.C)) stateMachine.ChangeState(player.reAttackState);
+        if (Input.GetKeyDown(KeyCode.C)&&SkillManager.instance.parrySkill.parryUnlock) stateMachine.ChangeState(player.reAttackState);
 
         if (Input.GetKeyDown(KeyCode.Mouse0)) stateMachine.ChangeState(player.attackState);
 

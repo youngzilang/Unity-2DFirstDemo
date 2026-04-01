@@ -67,11 +67,11 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
         float offsetX = 0;
         float offsetY = 0;
 
-        if (mousePosition.x > 370) offsetX = -50;
+        if (mousePosition.x > 320) offsetX = -100;
 
 
-        if (mousePosition.y > 200) offsetY = -30;
-        else offsetY = 100;
+        if (mousePosition.y > 300) offsetY = -30;
+        else offsetY = 200;
 
         uI.tipUI.ShowToolTip(item.data as ItemDataEquipment);
 

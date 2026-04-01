@@ -9,7 +9,6 @@ public class CloneSkill : Skill
     [SerializeField] private float cloneCd;
     [SerializeField] private bool canCloneAttack;
     [SerializeField] private float addCloneChance;
-    [SerializeField] private bool cloneReAttack;
     [SerializeField] private bool canAddClone;
     public bool crystalInsteadClone;
 
@@ -28,7 +27,7 @@ public class CloneSkill : Skill
 
     public void DelayCreatReAttackClone(Transform _transform,int _offset)
     {
-        if (cloneReAttack) StartCoroutine(Delay(_transform, _offset));
+      StartCoroutine(Delay(_transform, _offset));
         
     }
 

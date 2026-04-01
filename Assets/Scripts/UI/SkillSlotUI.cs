@@ -78,7 +78,7 @@ public class SkillSlotUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
         float offsetX = 0;
         float offsetY = 0;
 
-        if (mousePosition.x > 370) offsetX = -230;
+        if (mousePosition.x > Screen.width/2) offsetX = -500;
 
 
         if (mousePosition.y > 200) offsetY = -50;
