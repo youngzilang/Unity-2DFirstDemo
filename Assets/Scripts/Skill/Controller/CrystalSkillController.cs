@@ -32,6 +32,7 @@ public class CrystalSkillController : MonoBehaviour
             closestTarget = FollowClosestEnemy();
             if (closestTarget)
             {
+                if(SkillManager.instance.crystalSkill.crystalMoveUnlock)
                 transform.position = Vector2.MoveTowards(transform.position, closestTarget.position, moveSpeed * Time.deltaTime);
                 if (Vector2.Distance(transform.position, closestTarget.position) < 1)
                 {
@@ -60,7 +61,7 @@ public class CrystalSkillController : MonoBehaviour
     {
         if (crystalTimer < 0)
         {
-            if (isBoom)
+            if (isBoom&&SkillManager.instance.crystalSkill.exploseUnlock)
             {
                 isGrow = true;
                 isMove = false;

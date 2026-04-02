@@ -109846,6 +109846,7 @@ MonoBehaviour:
   skillDescription: 
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &133242064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109986,6 +109987,7 @@ MonoBehaviour:
   skillDescription: "\u4F7F\u7528\u5E7B\u5F71\u6B65\u540E\u5728\u8EAB\u540E\u7559\u4E0B\u6B8B\u5F71"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 500
 --- !u!114 &152428692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110202,6 +110204,7 @@ MonoBehaviour:
   skillDescription: "\u751F\u6210\u6C34\u6676\u540E\u53D1\u52A8\uFF0C\u80FD\u77AC\u95F4\u4E0E\u6C34\u6676\u4EA4\u6362\u4F4D\u7F6E\uFF0C\u5E76\u5728\u539F\u5730\u7559\u4E0B\u4E00\u4E2A\u7206\u70B8\u6C34\u6676"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &179658104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125224,6 +125227,7 @@ MonoBehaviour:
   skillDescription: "\u98DE\u5251\u80FD\u5728\u76EE\u6807\u4E4B\u95F4\u53CD\u590D\u6A2A\u8DF3\u9020\u6210\u4F24\u5BB3"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!224 &326665687 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7192721251859342333, guid: 1444f69f70060a14cae4ce92971fa8ee, type: 3}
@@ -125448,6 +125452,7 @@ MonoBehaviour:
   skillDescription: "\u5728\u5206\u8EAB\u5904\u7206\u70B8"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &340456908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126237,7 +126242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000015259, y: 0}
+  m_AnchoredPosition: {x: -0.000030517578, y: 0}
   m_SizeDelta: {x: 999.72, y: 75.14}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &371272960
@@ -127185,6 +127190,7 @@ MonoBehaviour:
   skillDescription: "\u751F\u6210\u6C34\u6676\u540E\u53D1\u52A8\uFF0C\u53EF\u8DDF\u6C34\u6676\u77AC\u95F4\u4EA4\u6362\u4F4D\u7F6E\uFF0C\u7559\u4E0B\u4E00\u4E2A\u5F71\u5206\u8EAB"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &395833882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127681,7 +127687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000076293945, y: -37.569992}
+  m_AnchoredPosition: {x: -0.000061035156, y: -37.569992}
   m_SizeDelta: {x: 999.72, y: 125.14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &410334367
@@ -127819,6 +127825,7 @@ MonoBehaviour:
   skillDescription: "\u751F\u6210\u7206\u70B8\u6C34\u6676"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &412060490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131126,6 +131133,7 @@ GameObject:
   - component: {fileID: 599219163}
   - component: {fileID: 599219164}
   - component: {fileID: 599219165}
+  - component: {fileID: 599219166}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -131146,6 +131154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cd: 0.4
+  dashUnlockButton: {fileID: 1415406905}
+  cloneDashUnlockButton: {fileID: 152428691}
+  cloneDashArriveUnlockButton: {fileID: 1403445054}
 --- !u!114 &599219160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131189,11 +131200,8 @@ MonoBehaviour:
   cd: 0
   clonePrefab: {fileID: 8200740811521087934, guid: e0ce1be2d9b68da46bb46a2ba140f2d0, type: 3}
   cloneCd: 1.5
-  canCloneAttack: 1
+  canCloneAttack: 0
   addCloneChance: 0
-  dashStartClone: 0
-  dashOverClone: 0
-  cloneReAttack: 0
   canAddClone: 0
   crystalInsteadClone: 0
 --- !u!114 &599219163
@@ -131272,6 +131280,23 @@ MonoBehaviour:
   - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
   isCrystalAttack: 0
   cloneInsteadCrystal: 0
+--- !u!114 &599219166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599219158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48fc8858b8c0d484294b35d46769fc28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cd: 0
+  parryUnlockButton: {fileID: 1847409709}
+  restoreUnlockButton: {fileID: 2130989612}
+  parryWithCloneUnlockButton: {fileID: 1200829473}
+  restoreHpPercentage: 0.05
 --- !u!1 &610405903
 GameObject:
   m_ObjectHideFlags: 0
@@ -131546,6 +131571,7 @@ MonoBehaviour:
   skillDescription: "\u9489\u5728\u8EAB\u4E0A\u7684\u98DE\u5251\u6301\u7EED\u9020\u6210\u4F24\u5BB3"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!1 &615319278
 GameObject:
   m_ObjectHideFlags: 0
@@ -133215,6 +133241,7 @@ MonoBehaviour:
   skillDescription: "\u98DE\u5251\u80FD\u8FDE\u7EED\u7A7F\u900F\u591A\u4E2A\u76EE\u6807"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!1001 &684502731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -135533,6 +135560,7 @@ MonoBehaviour:
   skillDescription: 
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &884228298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136527,6 +136555,7 @@ MonoBehaviour:
   skillDescription: "\u95EA\u907F\u6210\u529F\u53EC\u5524\u51FA\u5E7B\u8C61"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &951769671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138061,6 +138090,7 @@ MonoBehaviour:
   skillDescription: "\u98DE\u5251\u5C06\u4EE5\u4E00\u4E2A\u65CB\u8F6C\u7684\u59FF\u6001\u524D\u8FDB\uFF0C\u6301\u7EED\u5BF9\u654C\u65B9\u9020\u6210\u4F24\u5BB3"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!1 &1022195002
 GameObject:
   m_ObjectHideFlags: 0
@@ -138776,6 +138806,7 @@ MonoBehaviour:
   skillDescription: "\u5206\u88C2\u51FA\u4E00\u4E9B\u865A\u5047\u7684\u5206\u8EAB"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &1069029536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139287,6 +139318,7 @@ MonoBehaviour:
   skillDescription: "\u6309\u4F4F\u9F20\u6807\u53F3\u952E\u7784\u51C6\uFF0C\u677E\u5F00\u5373\u53D1\u5C04\u98DE\u5251"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!1 &1110510285
 GameObject:
   m_ObjectHideFlags: 0
@@ -139328,7 +139360,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1113642638}
   - component: {fileID: 1113642637}
-  - component: {fileID: 1113642639}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -139349,6 +139380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1844310487}
+  currency: 1000000
 --- !u!4 &1113642638
 Transform:
   m_ObjectHideFlags: 0
@@ -139364,19 +139396,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1113642639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113642636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a4598630880cc04e89f9b0750086d8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cd: 1
 --- !u!1 &1120981205
 GameObject:
   m_ObjectHideFlags: 0
@@ -139720,6 +139739,7 @@ MonoBehaviour:
   skillDescription: "\u5206\u8EAB\u80FD\u8FDB\u884C\u653B\u51FB"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &1164299355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140480,6 +140500,7 @@ MonoBehaviour:
   skillDescription: "\u683C\u6321\u6210\u529F\u53EC\u5524\u4E00\u4E2A\u5206\u8EAB\u8FDB\u884C\u653B\u51FB"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &1200829474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143231,6 +143252,7 @@ MonoBehaviour:
   skillDescription: "\u5728\u672C\u4F53\u5468\u56F4\u751F\u6210\u4E00\u4E2A\u9ED1\u6D1E\uFF0C\u53EC\u5524\u5206\u8EAB\u653B\u51FB\u9ED1\u6D1E\u5185\u7684\u654C\u4EBA"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &1396772429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143455,6 +143477,7 @@ MonoBehaviour:
   skillDescription: "\u5E7B\u5F71\u6B65\u7ED3\u675F\u65F6\u4EA7\u751F\u4E00\u4E2A\u6B8B\u5F71"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 2000
 --- !u!114 &1403445055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143577,7 +143600,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407270479}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -143588,9 +143611,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.14, y: -386}
+  m_AnchoredPosition: {x: -511.00006, y: -285.85995}
   m_SizeDelta: {x: 999.72, y: 200.28}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1407270482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143769,6 +143792,7 @@ MonoBehaviour:
   skillDescription: "\u88AB\u98DE\u5251\u9489\u4F4F\uFF0C\u50F5\u76F4"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!1001 &1413399500
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143932,6 +143956,7 @@ MonoBehaviour:
   skillDescription: "\u5FEB\u901F\u79FB\u52A8"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 100
 --- !u!114 &1415406906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148768,6 +148793,7 @@ MonoBehaviour:
   skillDescription: "\u683C\u6321\u6210\u529F\u5BF9\u654C\u4EBA\u9020\u6210\u6655\u7729"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &1847409710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150845,6 +150871,7 @@ MonoBehaviour:
   skillDescription: "\u77AC\u79FB\u5931\u6548\uFF0C\u751F\u6210\u7684\u6C34\u6676\u8FFD\u8E2A\u6700\u8FD1\u7684\u654C\u4EBA"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &2024439421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151394,6 +151421,7 @@ MonoBehaviour:
   skillDescription: "\u77AC\u79FB\u5931\u6548\uFF0C\u80FD\u8FDE\u7EED\u751F\u6210\u591A\u4E2A\u6C34\u6676"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &2039574423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152567,6 +152595,7 @@ MonoBehaviour:
   skillDescription: "\u683C\u6321\u6210\u529F\u6062\u590D\u751F\u547D\u6216\u80FD\u91CF"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
+  skillPrice: 0
 --- !u!114 &2130989613
 MonoBehaviour:
   m_ObjectHideFlags: 0

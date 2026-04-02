@@ -36,3 +36,5 @@ MonoBehaviour:
   iceDamage: 0
   lightDamage: 12
   craftMaterial: []
+  descriptionLine: 3
+  effectDescription: "\u4F69\u6234\u6B64\u7269\u653B\u51FB\u80FD\u53EC\u5524\u51FA\u96F7\u5F27"

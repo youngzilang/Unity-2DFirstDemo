@@ -39,3 +39,5 @@ MonoBehaviour:
     stackSize: 1
   - data: {fileID: 11400000, guid: f6f9d41ecf19d804eade3e5344d6f212, type: 2}
     stackSize: 2
+  descriptionLine: 2
+  effectDescription: "\u666E\u901A\u76D4\u7532"

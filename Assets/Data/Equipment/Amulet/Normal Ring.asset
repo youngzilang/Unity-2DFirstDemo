@@ -36,3 +36,4 @@ MonoBehaviour:
   lightDamage: 0
   craftMaterial: []
   descriptionLine: 4
+  effectDescription: "\u5E73\u5E38\u7684\u6212\u6307"

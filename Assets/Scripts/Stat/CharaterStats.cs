@@ -278,6 +278,12 @@ public class CharaterStats : MonoBehaviour
     {
         isDead = true;
     }
+    
+
+    public virtual void OnEvasion()
+    {
+
+    }
 
     //…¡±‹≈–∂œ
     public bool EvasionSuccessOrNot()
@@ -285,7 +291,11 @@ public class CharaterStats : MonoBehaviour
         int totalEvasion = agility.GetValue() + evasion.GetValue();
         if (isLight) totalEvasion = totalEvasion - 20 < 0 ? 0 : totalEvasion - 20;
 
-        if (UnityEngine.Random.Range(0, 100) < totalEvasion) return true;
+        if (UnityEngine.Random.Range(0, 100) < totalEvasion)
+        {
+            OnEvasion();
+            return true;
+        }
         return false;
     }
     //±©ª˜≈–∂œ

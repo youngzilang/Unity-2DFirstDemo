@@ -90,7 +90,7 @@ public class Player : Entity
     
         DashNow();
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F)&&skillManager.crystalSkill.crystalUnlock)
         {
             skillManager.crystalSkill.CanSkill();
         }

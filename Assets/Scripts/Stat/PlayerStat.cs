@@ -38,4 +38,9 @@ public class PlayerStat : CharaterStats
         ItemDataEquipment armor = Inventory.instance.GetEquipmentByType(EquipmentType.Armor);
         if (armor) armor.UseItemEffect(PlayerManager.instance.player.transform);
     }
+
+    public override void OnEvasion()
+    {
+        SkillManager.instance.dodgeSkill.CloneOnDodge();
+    }
 }

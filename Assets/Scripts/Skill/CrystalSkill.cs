@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CrystalSkill : Skill
 {
@@ -15,10 +16,36 @@ public class CrystalSkill : Skill
     [SerializeField] private float crystalAttackCd;
     [SerializeField] private float skillUseWindow;
     [SerializeField] private List<GameObject> crystalsList= new List<GameObject>();
-    [SerializeField] private bool isCrystalAttack;
-    [SerializeField] private bool cloneInsteadCrystal;
-   
 
+    [Header("¼¼ÄÜ½âËø")]
+    [SerializeField] private SkillSlotUI crystalUnlockButton;
+    public bool crystalUnlock { get; private set; }
+
+    [SerializeField] private SkillSlotUI cloneInsteadCrystalUnlockButton;
+    public bool cloneInsteadCrystalUnlock { get; private set; }
+
+    [SerializeField] private SkillSlotUI exploseUnlockButton;
+    public bool exploseUnlock { get; private set; }
+
+    [SerializeField] private SkillSlotUI crystalMoveUnlockButton;
+    public bool crystalMoveUnlock { get; private set; }
+
+    [SerializeField] private SkillSlotUI multiCrystalUnlockButton;
+    public bool multiCrystalUnlock { get; private set; }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        crystalUnlockButton.GetComponent<Button>().onClick.AddListener(CrystalUnlock);
+        cloneInsteadCrystalUnlockButton.GetComponent<Button>().onClick.AddListener(CloneInsteadCrystalUnlock);
+        exploseUnlockButton.GetComponent<Button>().onClick.AddListener(ExploseUnlock);
+        crystalMoveUnlockButton.GetComponent<Button>().onClick.AddListener(CrystalMoveUnlock);
+        multiCrystalUnlockButton.GetComponent<Button>().onClick.AddListener(MultiCrystalUnlock);
+    }
+
+
+     
     public override void UseSkill()
     {
         base.UseSkill();
@@ -42,7 +69,7 @@ public class CrystalSkill : Skill
             player.transform.position = currentCtystal.transform.position;
             currentCtystal.transform.position = originalPosition;
 
-            if (cloneInsteadCrystal)
+            if (cloneInsteadCrystalUnlock)
             {
                 player.skillManager.cloneSkill.ClonePrefab(currentCtystal.transform,0);
                 Destroy(currentCtystal);
@@ -64,7 +91,7 @@ public class CrystalSkill : Skill
 
     public bool CanUseCrystal()
     {
-        if (isCrystalAttack)
+        if (multiCrystalUnlock)
         {
             if (crystalsList.Count > 0)
             {
@@ -108,5 +135,30 @@ public class CrystalSkill : Skill
 
         cdTimer = crystalAttackCd;
         AddCrystalAttackList();
+    }
+
+    private void CrystalUnlock()
+    {
+        if (crystalUnlockButton.unlocked) crystalUnlock = true;
+    }
+
+    private void CloneInsteadCrystalUnlock()
+    {
+        if (cloneInsteadCrystalUnlockButton.unlocked) cloneInsteadCrystalUnlock = true;
+    }
+
+    private void ExploseUnlock()
+    {
+        if (exploseUnlockButton.unlocked) exploseUnlock = true;
+    }
+
+    private void CrystalMoveUnlock()
+    {
+        if (crystalMoveUnlockButton.unlocked) crystalMoveUnlock = true;
+    }
+
+    private void MultiCrystalUnlock()
+    {
+        if (multiCrystalUnlockButton.unlocked) multiCrystalUnlock = true;
     }
 }

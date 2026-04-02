@@ -167,9 +167,9 @@ public class Inventory : MonoBehaviour
 
     public void  UpdateSlotUI()
     {
-       for(int i = 0; i < equipItemSlot.Length; i++)
+        for (int i = 0; i < equipItemSlot.Length; i++)
         {
-            foreach(KeyValuePair<ItemDataEquipment, InventoryItem> item in equipmentDictionary)
+            foreach (KeyValuePair<ItemDataEquipment, InventoryItem> item in equipmentDictionary)
             {
                 if (item.Key.equipmentType == equipItemSlot[i].slotType) equipItemSlot[i].UpdateSlotUI(item.Value);
             }
@@ -177,7 +177,7 @@ public class Inventory : MonoBehaviour
 
 
 
-        for(int i = 0; i < inventoryItemSlot.Length; i++)
+        for (int i = 0; i < inventoryItemSlot.Length; i++)
         {
             inventoryItemSlot[i].CleanUpSlot();
         }
@@ -196,7 +196,12 @@ public class Inventory : MonoBehaviour
             stashItemSlot[i].UpdateSlotUI(stash[i]);
         }
 
-        for(int i = 0; i < statSlot.Length; i++)
+        UpdateStatUI();
+    }
+
+    public void UpdateStatUI()
+    {
+        for (int i = 0; i < statSlot.Length; i++)
         {
             statSlot[i].UpdateStatValue();
         }

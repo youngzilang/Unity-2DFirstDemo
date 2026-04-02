@@ -41,3 +41,4 @@ MonoBehaviour:
   - data: {fileID: 11400000, guid: bd5df1ace592a0f4fb39d2d44bc3ace7, type: 2}
     stackSize: 5
   descriptionLine: 2
+  effectDescription: "\u653B\u51FB\u654C\u4EBA\u65F6\u4F1A\u53EC\u5524\u51FA\u96F7\u7535"
