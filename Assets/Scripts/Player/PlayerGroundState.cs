@@ -24,7 +24,7 @@ public class PlayerGroundState : PlayerState
         base.Update();
         player.UpdateFaceDirection(inputX);
 
-        if (Input.GetKeyDown(KeyCode.R)) stateMachine.ChangeState(player.blackHoleState);
+        if (Input.GetKeyDown(KeyCode.R)&& SkillManager.instance.blackHoleSkill.blackHoleUnlock) stateMachine.ChangeState(player.blackHoleState);
 
         if (Input.GetKeyDown(KeyCode.Mouse1)&&IsSwordReturn()&&SkillManager.instance.swordSkill.swordUnlock) stateMachine.ChangeState(player.aimState);
 

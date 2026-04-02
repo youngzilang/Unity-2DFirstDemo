@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BlackHoleSkill : Skill
 {
@@ -15,6 +16,12 @@ public class BlackHoleSkill : Skill
     [SerializeField] private float balckHoleCd;
 
     private BlackHoleSkillController controller;
+
+    [SerializeField] private SkillSlotUI blackHoleUnlockButton;
+    public bool blackHoleUnlock { get; private set; }
+
+
+
     public override bool CanSkill()
     {
         return base.CanSkill();
@@ -27,6 +34,13 @@ public class BlackHoleSkill : Skill
         GameObject infectBlackHole = Instantiate(blackHolePrefab,player.transform.position+new Vector3(0,5),Quaternion.identity);
         controller= infectBlackHole.GetComponent<BlackHoleSkillController>();
         controller.SetUpBlackHole(maxSize, growSpeed, smallerSpeed, cloneAttackCd, cloneAttackAmount,balckHoleCd);
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        blackHoleUnlockButton.GetComponent<Button>().onClick.AddListener(BlackHoleUnlock);
     }
 
     protected override void Update()
@@ -50,4 +64,10 @@ public class BlackHoleSkill : Skill
     {
         return maxSize / 2;
     }
+
+    private void BlackHoleUnlock()
+    {
+        if (blackHoleUnlockButton.unlocked) blackHoleUnlock = true;
+    }
+
 }

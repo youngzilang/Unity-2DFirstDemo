@@ -84,7 +84,7 @@ public class BlackHoleSkillController : MonoBehaviour
         cloneAttackAmount = _cloneAttackAmount;
         blackHoleTimer = blackholecd;
 
-        if (SkillManager.instance.cloneSkill.crystalInsteadClone)
+        if (SkillManager.instance.cloneSkill.crystalInsteadCloneUnlock)
             isDisapper = false;
     }
 
@@ -100,7 +100,7 @@ public class BlackHoleSkillController : MonoBehaviour
 
             if (cloneAttackAmount > 0)
             {
-                if (SkillManager.instance.cloneSkill.crystalInsteadClone)
+                if (SkillManager.instance.cloneSkill.crystalInsteadCloneUnlock)
                 {
                     SkillManager.instance.crystalSkill.CreatCrystal();
                     SkillManager.instance.crystalSkill.RandomChooseTarget();

@@ -43,4 +43,17 @@ public class PlayerStat : CharaterStats
     {
         SkillManager.instance.dodgeSkill.CloneOnDodge();
     }
+
+    public void CloneDoDamage(CharaterStats _stats,float _percentage)
+    {
+        int total = damage.GetValue() + strength.GetValue();
+        if (_percentage > 0) total = Mathf.RoundToInt(total * _percentage);
+
+        if (CriticalOrNot()) total = CalculateCriticalDamage(total);
+
+        total = CountDamageAfterDefence(total, _stats);
+        _stats.BeDamaged(total);
+
+        DoingMagicDamage(_stats);
+    }
 }

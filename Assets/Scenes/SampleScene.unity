@@ -131202,9 +131202,16 @@ MonoBehaviour:
   clonePrefab: {fileID: 8200740811521087934, guid: e0ce1be2d9b68da46bb46a2ba140f2d0, type: 3}
   cloneCd: 1.5
   canCloneAttack: 0
-  addCloneChance: 0
+  addCloneChance: 99
   canAddClone: 0
   crystalInsteadClone: 0
+  cloneAttackUnlockButton: {fileID: 1069029535}
+  cloneAttackPercentage: 0.3
+  aggresiveCloneUnlockButton: {fileID: 1164299354}
+  aggresiveCloneAttackPercentage: 0.8
+  mutipleCloneUnlockButton: {fileID: 884228297}
+  mutipleClonePercentage: 0.3
+  crystalInsteadCloneUnlockButton: {fileID: 340456907}
 --- !u!114 &599219163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131218,7 +131225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cd: 0
-  swordType: 1
+  swordType: 0
   bounceAmount: 4
   bounceG: 4
   pierceAmount: 2
@@ -138829,7 +138836,7 @@ MonoBehaviour:
   shouldUnlock: []
   shouldLock: []
   skillName: "\u5F71\u5206\u8EAB\u672F"
-  skillDescription: "\u5206\u88C2\u51FA\u4E00\u4E9B\u865A\u5047\u7684\u5206\u8EAB"
+  skillDescription: "\u4EA7\u751F\u7684\u5206\u8EAB\u80FD\u653B\u51FB\u654C\u4EBA\uFF0C\u5177\u6709\u672C\u4F5330%\u7684\u653B\u51FB\u529B"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
   skillPrice: 0
@@ -142531,7 +142538,7 @@ MonoBehaviour:
     value: 0
     buff: 
   damage:
-    value: 20
+    value: 10
     buff: 
   criticalChance:
     value: 0
@@ -142558,7 +142565,7 @@ MonoBehaviour:
     value: 0
     buff: 
   lightDamage:
-    value: 10
+    value: 0
     buff: 
   isFire: 0
   isIce: 0
@@ -148719,16 +148726,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength:
-    value: 5
+    value: 0
     buff: 
   intelligence:
-    value: 10
+    value: 0
     buff: 
   agility:
-    value: 5
+    value: 0
     buff: 
   vatility:
-    value: 5
+    value: 0
     buff: 
   damage:
     value: 10
@@ -148752,13 +148759,13 @@ MonoBehaviour:
     value: 0
     buff: 
   fireDamage:
-    value: 5
+    value: 0
     buff: 
   iceDamage:
-    value: 5
+    value: 0
     buff: 
   lightDamage:
-    value: 5
+    value: 0
     buff: 
   isFire: 0
   isIce: 0

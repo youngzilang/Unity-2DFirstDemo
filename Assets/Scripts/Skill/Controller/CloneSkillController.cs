@@ -17,6 +17,7 @@ public class CloneSkillController : MonoBehaviour
     private Transform closestEnemy;
     private bool canAddClone;
     private float chance;
+    private float cloneAttackAmount;
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -38,12 +39,13 @@ public class CloneSkillController : MonoBehaviour
         }
     }
 
-    public void SetUpClone(Transform clonePosition,float _cloneTimer,bool cloneAttack, int xOffSet,bool _canaddclone,float _chance)
+    public void SetUpClone(Transform clonePosition,float _cloneTimer,bool cloneAttack, int xOffSet,bool _canaddclone,float _chance,float _attack)
     {
         if(cloneAttack)
         {
             animator.SetInteger("attackNum", UnityEngine.Random.Range(1,4));
         }
+        cloneAttackAmount = _attack;
         chance = _chance;
         canAddClone = _canaddclone;
         transform.position = clonePosition.position+new Vector3(xOffSet,0);
@@ -64,7 +66,17 @@ public class CloneSkillController : MonoBehaviour
         {
             if (collider.GetComponent<Enemy>() != null)
             {
-                PlayerManager.instance.player.stats.DoingDamage(collider.GetComponent<CharaterStats>());
+                //PlayerManager.instance.player.stats.DoingDamage(collider.GetComponent<CharaterStats>());
+
+                PlayerStat playerStat = PlayerManager.instance.player.GetComponent<PlayerStat>();
+                EnemyStat enemyStat = collider.GetComponent<Enemy>().GetComponent<EnemyStat>();
+
+                playerStat.CloneDoDamage(enemyStat, cloneAttackAmount);
+
+                if (SkillManager.instance.cloneSkill.applyOnHitEffect)
+                {
+                    Inventory.instance.GetEquipmentByType(EquipmentType.Weapon)?.UseItemEffect(collider.transform);
+                }
 
                 if (canAddClone)
                 {
