@@ -1,5 +1,7 @@
 using System;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum SwordType
 {
@@ -45,6 +47,54 @@ public class SwordSkill : Skill
     private GameObject[] dots;
     public GameObject swordOnly;
 
+    [Header("¼¼ÄÜ½âËø")]
+    [SerializeField] private SkillSlotUI swordUnlockButton;
+    public bool swordUnlock { get; private set; }
+
+    [SerializeField] private SkillSlotUI freezeUnlockButton;
+    public bool freezeUnlock { get; private set; }
+
+    [SerializeField] private SkillSlotUI volnurableUnlockButton;
+    public bool volnurableUnlock { get; private set; }
+
+    [SerializeField] private SkillSlotUI bounceUnlockButton;
+    [SerializeField] private SkillSlotUI pierceUnlockButton;
+    [SerializeField] private SkillSlotUI spinUnlockButton;
+
+    #region Unlock
+
+    private void SwordUnlock()
+    {
+        if (swordUnlockButton.unlocked) swordUnlock = true;
+    }
+
+    private void FreezeUnlock()
+    {
+        if (freezeUnlockButton.unlocked) freezeUnlock = true;
+    }
+
+    private void VolnurableUnlock()
+    {
+        if (volnurableUnlockButton.unlocked) volnurableUnlock = true;
+    }
+
+    private void BounceUnlock()
+    {
+        if (bounceUnlockButton.unlocked) swordType=SwordType.Bounce;
+    }
+
+    private void PierceUnlock()
+    {
+        if (pierceUnlockButton.unlocked) swordType = SwordType.Pierce;
+    }
+
+    private void SpinUnlock()
+    {
+        if (spinUnlockButton.unlocked) swordType = SwordType.Spin;
+    }
+
+    #endregion
+
     protected override void Start()
     {
         base.Start();
@@ -52,6 +102,13 @@ public class SwordSkill : Skill
         DotsCreat();
 
         SetSwordG();
+
+        swordUnlockButton.GetComponent<Button>().onClick.AddListener(SwordUnlock);
+        freezeUnlockButton.GetComponent<Button>().onClick.AddListener(FreezeUnlock);
+        volnurableUnlockButton.GetComponent<Button>().onClick.AddListener(VolnurableUnlock);
+        bounceUnlockButton.GetComponent<Button>().onClick.AddListener(BounceUnlock);
+        pierceUnlockButton.GetComponent<Button>().onClick.AddListener(PierceUnlock);
+        spinUnlockButton.GetComponent<Button>().onClick.AddListener(SpinUnlock);
     }
 
     private void SetSwordG()

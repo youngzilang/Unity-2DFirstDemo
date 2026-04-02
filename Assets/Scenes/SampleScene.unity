@@ -109843,7 +109843,7 @@ MonoBehaviour:
   shouldUnlock: []
   shouldLock: []
   skillName: "\u95EA\u907F\u672C\u80FD"
-  skillDescription: 
+  skillDescription: "\u95EA\u907F\u7387+10%"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
   skillPrice: 0
@@ -131134,6 +131134,7 @@ GameObject:
   - component: {fileID: 599219164}
   - component: {fileID: 599219165}
   - component: {fileID: 599219166}
+  - component: {fileID: 599219167}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -131234,6 +131235,12 @@ MonoBehaviour:
   dotPreFab: {fileID: 8633074834307594907, guid: f6cde89d9ce3f5548a1ec6f72597e911, type: 3}
   dotParent: {fileID: 1705566573}
   swordOnly: {fileID: 0}
+  swordUnlockButton: {fileID: 1109687922}
+  freezeUnlockButton: {fileID: 1408046238}
+  volnurableUnlockButton: {fileID: 613010928}
+  bounceUnlockButton: {fileID: 324706109}
+  pierceUnlockButton: {fileID: 673716251}
+  spinUnlockButton: {fileID: 1018585165}
 --- !u!114 &599219164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131278,8 +131285,11 @@ MonoBehaviour:
   - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
   - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
   - {fileID: 5817225104803162681, guid: 6752126f880003a43890bbd4ee2cd1c8, type: 3}
-  isCrystalAttack: 0
-  cloneInsteadCrystal: 0
+  crystalUnlockButton: {fileID: 412060489}
+  cloneInsteadCrystalUnlockButton: {fileID: 395833881}
+  exploseUnlockButton: {fileID: 179658103}
+  crystalMoveUnlockButton: {fileID: 2024439420}
+  multiCrystalUnlockButton: {fileID: 2039574422}
 --- !u!114 &599219166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131297,6 +131307,22 @@ MonoBehaviour:
   restoreUnlockButton: {fileID: 2130989612}
   parryWithCloneUnlockButton: {fileID: 1200829473}
   restoreHpPercentage: 0.05
+--- !u!114 &599219167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599219158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb318d2c45d58d24cae885f2445cd466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cd: 0
+  dodgeUnlockButton: {fileID: 133242063}
+  evasionAmount: 10
+  dodgeCloneUnlockButton: {fileID: 951769670}
 --- !u!1 &610405903
 GameObject:
   m_ObjectHideFlags: 0
@@ -131568,7 +131594,7 @@ MonoBehaviour:
   - {fileID: 1408046238}
   shouldLock: []
   skillName: "\u6D41\u8840"
-  skillDescription: "\u9489\u5728\u8EAB\u4E0A\u7684\u98DE\u5251\u6301\u7EED\u9020\u6210\u4F24\u5BB3"
+  skillDescription: "\u50F5\u76F4\u671F\u95F4\uFF0C\u654C\u4EBA\u53D7\u5230\u7684\u6700\u7EC8\u4F24\u5BB3+10%"
   lockColor: {r: 0.3018868, g: 0.25489497, b: 0.25489497, a: 0.7176471}
   unlocked: 0
   skillPrice: 0

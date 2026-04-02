@@ -74,6 +74,8 @@ public class CharaterStats : MonoBehaviour
 
     public bool isDead { get; private set; }
 
+    private bool vulnerable;
+
     protected virtual void Start()
     {
         criticalDamage.SetDefaultValue(150);
@@ -115,6 +117,15 @@ public class CharaterStats : MonoBehaviour
     public virtual void IncreaseBuff(int _buff,float continueTime,Stat _toAddStat)
     {
         StartCoroutine(AddBuff(_buff,continueTime,_toAddStat));
+    }
+
+    public void MakeVulnerable(float _continue)=> StartCoroutine(VulnerableCoroutine(_continue));
+
+    private IEnumerator VulnerableCoroutine(float _continue)
+    {
+        vulnerable = true;
+        yield return new WaitForSeconds(_continue);
+        vulnerable = false;
     }
 
     IEnumerator AddBuff(int _buff, float continueTime, Stat _toAddStat)
@@ -322,6 +333,8 @@ public class CharaterStats : MonoBehaviour
 
     public virtual void DecreaseHp(int _damage)
     {
+        if (vulnerable) _damage = Mathf.RoundToInt(_damage * 1.1f);
+
         currentHP -= _damage;
         if (onHPChange != null)
         {

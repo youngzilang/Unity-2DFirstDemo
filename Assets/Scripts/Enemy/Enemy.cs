@@ -75,9 +75,9 @@ public class Enemy : Entity
 
     protected virtual IEnumerator FreezeTimeFor(float _seconds)
     {
-        FreezeTime(true);
-        yield return new WaitForSeconds(_seconds);
-        FreezeTime(false);
+            FreezeTime(true);
+            yield return new WaitForSeconds(_seconds);
+            FreezeTime(false);
     }
 
     #region Stun
