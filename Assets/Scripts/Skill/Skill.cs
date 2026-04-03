@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour
 {
-    [SerializeField] protected float cd;
+    [SerializeField] public float cd;
     protected float cdTimer;
 
     protected Player player;

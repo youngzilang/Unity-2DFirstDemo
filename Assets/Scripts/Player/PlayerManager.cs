@@ -17,7 +17,10 @@ public class PlayerManager : MonoBehaviour
         }
         else instance = this;
     }
-
+    private void Update()
+    {
+        Debug.Log(Input.mousePosition);
+    }
     public bool MoneyEnough(int _price)
     {
         if (_price > currency)
@@ -29,4 +32,6 @@ public class PlayerManager : MonoBehaviour
         currency -= _price;
         return true;
     }
+
+    public int GetCurrency() => currency;
 }

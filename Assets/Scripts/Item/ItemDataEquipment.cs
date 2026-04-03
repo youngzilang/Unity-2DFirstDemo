@@ -120,6 +120,12 @@ public class ItemDataEquipment : ItemData
         AddDescription("±ùÊôÐÔ", iceDamage);
         AddDescription("À×ÊôÐÔ", lightDamage);
 
+        if (effectDescription.Length > 0)
+        {
+            sb.AppendLine(); sb.AppendLine();
+            sb.AppendLine(effectDescription);
+        }
+
         if (descriptionLine < 4)
         {
             for(int i = 0; i < 4 - descriptionLine; i++)
@@ -128,11 +134,6 @@ public class ItemDataEquipment : ItemData
             }
         }
 
-        if (effectDescription.Length > 0)
-        {
-            sb.AppendLine();
-            sb.Append(effectDescription);
-        }
 
         return sb.ToString();
     }

@@ -17,6 +17,7 @@ public class HealthUI : MonoBehaviour
         myStat = GetComponentInParent<CharaterStats>();
         entity.onFlip += FlipUI;
         myStat.onHPChange += UpdateHp;
+
     }
 
     private void UpdateHp()
@@ -25,7 +26,8 @@ public class HealthUI : MonoBehaviour
         slider.value = myStat.currentHP;
     }
 
-    private void FlipUI()=> rectTransform.Rotate(0, 180, 0);
+    private void FlipUI() => rectTransform.Rotate(0, 180, 0);
+    
 
 
     private void OnDisable()

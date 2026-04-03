@@ -34,7 +34,7 @@ public class Inventory : MonoBehaviour
     private float lastFlaskTime;
     private float lastDieArmorTime;
 
-    private float flaskTime;
+    public float flaskTime { get; private set; }
     private float dieArmorTime;
 
     private void Awake()

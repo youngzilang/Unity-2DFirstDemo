@@ -8,6 +8,7 @@ public class UI : MonoBehaviour
     [SerializeField] private GameObject craftUI;
     [SerializeField] private GameObject skillUI;
     [SerializeField] private GameObject optionsUI;
+    [SerializeField] private GameObject inGameUI;
 
     public ItemToolTipUI tipUI;
     public StatToolTipUI statTipUI;
@@ -21,7 +22,7 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-        SwitchTo(null);
+        SwitchTo(inGameUI);
     }
 
     private void Update()
@@ -47,9 +48,19 @@ public class UI : MonoBehaviour
         if (_menu != null && _menu.activeSelf)
         {
             _menu.SetActive(false);
+            CheckInGameUI();
             return;
         }
 
         SwitchTo(_menu);
+    }
+
+    public void CheckInGameUI()
+    {
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).gameObject.activeSelf) return;
+        }
+        SwitchTo(inGameUI);
     }
 }

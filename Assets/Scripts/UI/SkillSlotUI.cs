@@ -71,21 +71,8 @@ public class SkillSlotUI : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        uI.skillTipUI.ShowSkillToolTip(skillDescription, skillName);
+        uI.skillTipUI.ShowSkillToolTip(skillDescription, skillName,skillPrice);
 
-        Vector2 mousePosition = Input.mousePosition;
-
-        float offsetX = 0;
-        float offsetY = 0;
-
-        if (mousePosition.x > Screen.width/2) offsetX = -500;
-
-
-        if (mousePosition.y > 200) offsetY = -50;
-        else offsetY = 100;
-
-
-        uI.skillTipUI.transform.position = new Vector2( mousePosition.x+offsetX,mousePosition.y+offsetY);
     }
 
     public void OnPointerExit(PointerEventData eventData)
