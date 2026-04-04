@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1fe7b83cf1b9e4c83458ad265161a0, type: 3}
+  m_Name: DieArmor
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemName: "\u4E0D\u6B7B\u9E1F"
+  icon: {fileID: -1970170000, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
+  dropChance: 10
+  equipmentType: 1
+  armorCd: 15
+  flaskCd: 0
+  itemEffects:
+  - {fileID: 11400000, guid: 325fce91d9559014bb594f93e78d5deb, type: 2}
+  strength: 5
+  intelligence: 0
+  agility: 0
+  vatility: 0
+  damage: 0
+  criticalChance: 0
+  criticalDamage: 0
+  maxHP: 50
+  defence: 5
+  magicResistance: 5
+  evasion: 0
+  fireDamage: 0
+  iceDamage: 0
+  lightDamage: 0
+  craftMaterial: []
+  descriptionLine: 4
+  effectDescription: "\u4E0D\u6B7B\u9E1F\u7684\u7FBD\u6BDB\u7F16\u5236\u800C\u6210\uFF0C\u751F\u547D\u503C\u5C0F\u4E8E30%\u65F6\u53D7\u51FB\u4F1A\u51B0\u51BB\u5468\u56F4\u654C\u4EBA2\u79D2"

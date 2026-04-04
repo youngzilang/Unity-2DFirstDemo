@@ -13,7 +13,7 @@ public class ItemToolTipUI : ToolTipUI
 
     public void ShowToolTip(ItemDataEquipment item )
     {
-        
+        if (item.itemType != ItemType.Equipment) return;
         itemName.text = item.itemName;
         itemType.text = item.equipmentType.ToString();
         itemDescription.text = item.Description();

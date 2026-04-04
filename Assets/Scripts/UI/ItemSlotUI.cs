@@ -40,7 +40,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerEnterHandl
 
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        if (item == null) return;
+        if (item == null||item.data==null) return;
 
         if (Input.GetKey(KeyCode.LeftControl))
         {

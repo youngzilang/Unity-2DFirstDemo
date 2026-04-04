@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc1fe7b83cf1b9e4c83458ad265161a0, type: 3}
+  m_Name: AmuletByGod
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemName: "\u795E\u7684\u9879\u94FE"
+  icon: {fileID: -1704470519, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
+  dropChance: 10
+  equipmentType: 2
+  armorCd: 0
+  flaskCd: 0
+  itemEffects:
+  - {fileID: 11400000, guid: e37633b442f28104980fe67611b94928, type: 2}
+  strength: 0
+  intelligence: 0
+  agility: 0
+  vatility: 0
+  damage: 0
+  criticalChance: 0
+  criticalDamage: 0
+  maxHP: 10
+  defence: 0
+  magicResistance: 10
+  evasion: 0
+  fireDamage: 0
+  iceDamage: 0
+  lightDamage: 12
+  craftMaterial: []
+  descriptionLine: 3
+  effectDescription: "\u4F69\u6234\u6B64\u7269\u653B\u51FB\u80FD\u53EC\u5524\u51FA\u96F7\u5F27"
