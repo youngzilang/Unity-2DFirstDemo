@@ -17,11 +17,14 @@ public class PlayerDeadState : PlayerState
     {
         base.Enter();
         player.rb.velocity = new Vector2(0, 0);
+
+        GameObject.Find("Canvas").GetComponent<UI>().SwitchOnEnd();
     }
 
     public override void Exit()
     {
         base.Exit();
+
     }
 
     public override void Update()
