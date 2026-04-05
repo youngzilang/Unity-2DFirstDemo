@@ -41,7 +41,13 @@ public class CloneSkill : Skill
     }
 
 
-
+    protected override void CheckUnlock()
+    {
+        CloneAttackUnlock();
+        AggresiveCloneUnlock();
+        MutipleCloneUnlock();
+        CrystalInsteadCloneUnlock();
+    }
 
     #region Unlock
 

@@ -15,20 +15,32 @@ public class SaveManager : MonoBehaviour
 
     private string fileName="gameData";
 
+    [SerializeField]private bool encryptData;
+
     private void Awake()
     {
         if (instance != null) Destroy(instance.gameObject);
         else instance = this;
+
+        saveManagers = FindAllSaveManagers();
+
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName,encryptData);
+
+        LoadGame();
     }
 
     private void Start()
     {
-        saveManagers = FindAllSaveManagers();
-
-        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-
-        LoadGame();
+        
     }
+
+    [ContextMenu("É¾³ý´æµµÊý¾Ý!")]
+    public void DeleteGameData()
+    {
+        dataHandler = new FileDataHandler(Application.persistentDataPath, fileName,encryptData);
+        dataHandler.Delete();
+    }
+
 
     public void NewGame()
     {
@@ -71,4 +83,11 @@ public class SaveManager : MonoBehaviour
         IEnumerable<ISaveManager> saveManagers = FindObjectsOfType<MonoBehaviour>(true).OfType<ISaveManager>();
         return new List<ISaveManager>(saveManagers);
     }
+
+    public bool HaveDataOrNot()
+    {
+        if (dataHandler.Load() != null) return true;
+        return false;
+    }
+
 }

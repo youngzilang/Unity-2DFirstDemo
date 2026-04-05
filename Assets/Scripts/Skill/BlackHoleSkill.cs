@@ -48,6 +48,11 @@ public class BlackHoleSkill : Skill
         base.Update();
     }
 
+    protected override void CheckUnlock()
+    {
+        BlackHoleUnlock();
+    }
+
     public bool BlackHoleFinish()
     {
         if (!controller.playerExit) return false;

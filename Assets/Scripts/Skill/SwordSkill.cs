@@ -138,6 +138,15 @@ public class SwordSkill : Skill
         }
     }
 
+    protected override void CheckUnlock()
+    {
+        SwordUnlock();
+        FreezeUnlock();
+        VolnurableUnlock();
+        BounceUnlock();
+        PierceUnlock();
+        SpinUnlock();
+    }
     public void OnlySword(GameObject onlySword)
     {
         swordOnly = onlySword;

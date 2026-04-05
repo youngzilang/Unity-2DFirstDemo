@@ -27,6 +27,12 @@ public class ParrySkill : Skill
         parryWithCloneUnlockButton.GetComponent<Button>().onClick.AddListener(ParryWithCloneUnlock);
     }
 
+    protected override void CheckUnlock()
+    {
+        ParryUnlock();
+        RestoreUnlock();
+        ParryWithCloneUnlock();
+    }
     public override bool CanSkill()
     {
         return base.CanSkill();

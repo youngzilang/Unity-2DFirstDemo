@@ -21,7 +21,11 @@ public class DodgeSkill : Skill
         dodgeCloneUnlockButton.GetComponent<Button>().onClick.AddListener(DodgeCloneUnlock);
     }
 
-
+    protected override void CheckUnlock()
+    {
+        DodgeUnlock();
+        DodgeCloneUnlock();
+    }
     private void DodgeUnlock()
     {
         if (dodgeUnlockButton.unlocked)

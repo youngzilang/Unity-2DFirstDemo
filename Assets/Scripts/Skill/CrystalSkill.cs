@@ -45,7 +45,14 @@ public class CrystalSkill : Skill
     }
 
 
-     
+    protected override void CheckUnlock()
+    {
+        CrystalUnlock();
+        CloneInsteadCrystalUnlock();
+        ExploseUnlock();
+        CrystalMoveUnlock();
+        MultiCrystalUnlock();
+    }
     public override void UseSkill()
     {
         base.UseSkill();

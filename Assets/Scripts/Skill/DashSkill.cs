@@ -19,11 +19,19 @@ public class DashSkill : Skill
 
     protected override void Start()
     {
+        base.Start();
+
         dashUnlockButton.GetComponent<Button>().onClick.AddListener(unlockDash);
         cloneDashUnlockButton.GetComponent<Button>().onClick.AddListener(unlockcloneDash);
         cloneDashArriveUnlockButton.GetComponent<Button>().onClick.AddListener(unlockcloneDashArrive);
     }
-   
+
+    protected override void CheckUnlock()
+    {
+        unlockDash();
+        unlockcloneDash();
+        unlockcloneDashArrive();
+    }
     public override bool CanSkill()
     {
         return base.CanSkill();
