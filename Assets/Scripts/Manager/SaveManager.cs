@@ -19,14 +19,18 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null) Destroy(instance.gameObject);
-        else instance = this;
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+       instance = this;
 
         saveManagers = FindAllSaveManagers();
 
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName,encryptData);
 
-        LoadGame();
+        Invoke("LoadGame", .5f);
     }
 
     private void Start()

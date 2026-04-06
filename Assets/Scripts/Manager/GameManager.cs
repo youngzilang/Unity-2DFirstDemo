@@ -5,17 +5,20 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour,ISaveManager
 {
     public static GameManager instance;
-    [SerializeField] private CheckPoint[] checkPoints;
+    private CheckPoint[] checkPoints;
 
     private void Awake()
     {
-        if (instance != null) Destroy(instance.gameObject);
-        else instance = this;
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
     }
-
-    private void Start()
+    public void FindAllCheckPoints()
     {
-        checkPoints = FindObjectsOfType<CheckPoint>();
+        checkPoints = FindObjectsOfType<CheckPoint>(true);
     }
 
     public void RestartScene()
@@ -26,7 +29,9 @@ public class GameManager : MonoBehaviour,ISaveManager
 
     public void LoadData(GameData _data)
     {
-        foreach(KeyValuePair<string,bool> keyValuePair in _data.checkPoints)
+        FindAllCheckPoints();
+
+        foreach (KeyValuePair<string,bool> keyValuePair in _data.checkPoints)
         {
             foreach(CheckPoint checkPoint in checkPoints)
             {
@@ -39,9 +44,14 @@ public class GameManager : MonoBehaviour,ISaveManager
     {
         _data.checkPoints.Clear();
 
+        FindAllCheckPoints();
+
         foreach(CheckPoint checkPoint in checkPoints)
         {
             _data.checkPoints.Add(checkPoint.id, checkPoint.active);
         }
     }
+
+
+
 }

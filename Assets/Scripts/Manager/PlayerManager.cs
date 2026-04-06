@@ -11,11 +11,12 @@ public class PlayerManager : MonoBehaviour,ISaveManager
 
     private void Awake()
     {
-        if (instance != null)
+        if (instance != null&&instance!=this)
         {
             Destroy(gameObject);
+            return;
         }
-        else instance = this;
+        instance = this;
     }
   
     public bool MoneyEnough(int _price)

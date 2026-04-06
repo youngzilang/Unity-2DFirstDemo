@@ -20,11 +20,12 @@ public class SkillManager : MonoBehaviour
     public DodgeSkill dodgeSkill { get; private set; }
     private void Awake()
     {
-        if (instance != null)
+        if (instance != null&&instance!=this)
         {
             Destroy(gameObject);
+            return;
         }
-        else instance = this;
+        instance = this;
     }
     
 
