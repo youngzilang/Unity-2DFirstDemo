@@ -30,7 +30,7 @@ public class SaveManager : MonoBehaviour
 
         dataHandler = new FileDataHandler(Application.persistentDataPath, fileName,encryptData);
 
-        Invoke("LoadGame", .5f);
+        Invoke("LoadGame", .1f);
     }
 
     private void Start()

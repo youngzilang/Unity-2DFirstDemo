@@ -6,6 +6,7 @@ public class EnemyStat : CharaterStats
 {
     private Enemy enemy;
     private ItemDrop myDrop;
+    public Stat soulDropAmount;
 
     [Header("等级信息")]
     [SerializeField] private int level=1;
@@ -17,6 +18,7 @@ public class EnemyStat : CharaterStats
 
     protected override void Start()
     {
+        soulDropAmount.SetDefaultValue(100);
         LevelModify();
 
         base.Start();
@@ -33,6 +35,7 @@ public class EnemyStat : CharaterStats
         Modify(fireDamage);
         Modify(iceDamage);
         Modify(lightDamage);
+        Modify(soulDropAmount);
     }
 
     protected override void Update()
@@ -63,6 +66,7 @@ public class EnemyStat : CharaterStats
     {
         base.Die();
         enemy.Die();
+        PlayerManager.instance.currency += soulDropAmount.GetValue();
         myDrop.GenerateDropObject();
     }
 }

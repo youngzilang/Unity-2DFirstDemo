@@ -14,7 +14,10 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private Image blackHoleImage;
     [SerializeField] private Image flaskImage;
 
-    [SerializeField] private TextMeshProUGUI currentSoul; 
+    [Header("Áé»ê")]
+    [SerializeField] private TextMeshProUGUI currentSoul;
+    [SerializeField] private float soulAmount;
+    [SerializeField] private float increaseRate;
     private void Start()
     {
         if (myStat) myStat.onHPChange += UpdateHp;
@@ -22,14 +25,14 @@ public class InGameUI : MonoBehaviour
 
     private void Update()
     {
-        currentSoul.text = PlayerManager.instance.GetCurrency().ToString("#,#");
+        UpdateSoul();
 
-        if (Input.GetKeyDown(KeyCode.LeftShift)&&SkillManager.instance.dashSkill.dashUnlock) SetCd(dashImage);
+        if (Input.GetKeyDown(KeyCode.LeftShift) && SkillManager.instance.dashSkill.dashUnlock) SetCd(dashImage);
         if (Input.GetKeyDown(KeyCode.C) && SkillManager.instance.parrySkill.parryUnlock) SetCd(parryImage);
         if (Input.GetKeyDown(KeyCode.F) && SkillManager.instance.crystalSkill.crystalUnlock) SetCd(crystalImage);
         if (Input.GetKeyDown(KeyCode.Mouse1) && SkillManager.instance.swordSkill.swordUnlock) SetCd(swordImage);
         if (Input.GetKeyDown(KeyCode.R) && SkillManager.instance.blackHoleSkill.blackHoleUnlock) SetCd(blackHoleImage);
-        if (Input.GetKeyDown(KeyCode.Alpha1)&&Inventory.instance.GetEquipmentByType(EquipmentType.Flask)) SetCd(flaskImage);
+        if (Input.GetKeyDown(KeyCode.Alpha1) && Inventory.instance.GetEquipmentByType(EquipmentType.Flask)) SetCd(flaskImage);
 
         CheckCd(dashImage, SkillManager.instance.dashSkill.cd);
         CheckCd(parryImage, SkillManager.instance.parrySkill.cd);
@@ -37,6 +40,14 @@ public class InGameUI : MonoBehaviour
         CheckCd(swordImage, SkillManager.instance.swordSkill.cd);
         CheckCd(blackHoleImage, SkillManager.instance.blackHoleSkill.cd);
         CheckCd(flaskImage, Inventory.instance.flaskTime);
+    }
+
+    private void UpdateSoul()
+    {
+        if (PlayerManager.instance.GetCurrency() > soulAmount) soulAmount += Time.deltaTime * increaseRate;
+        else soulAmount = PlayerManager.instance.GetCurrency();
+
+        currentSoul.text = ((int)soulAmount).ToString();
     }
 
     private void UpdateHp()
