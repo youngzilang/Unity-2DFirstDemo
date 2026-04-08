@@ -13,6 +13,8 @@ public class Skill : MonoBehaviour
     {
         player = PlayerManager.instance.player;
         CheckUnlock();
+
+        if (SaveManager.instance != null) SaveManager.instance.OnGameLoaded += CheckUnlock;
     }
 
     protected virtual void Update()
@@ -39,5 +41,10 @@ public class Skill : MonoBehaviour
     public virtual void UseSkill()
     {
 
+    }
+
+    private void OnDestroy()
+    {
+        if (SaveManager.instance != null) SaveManager.instance.OnGameLoaded -= CheckUnlock;
     }
 }

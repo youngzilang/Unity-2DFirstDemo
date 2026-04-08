@@ -14,6 +14,9 @@ public class AudioManager : MonoBehaviour
     public bool play;
     private int index;
 
+
+    private bool isDestroyed = false;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -33,6 +36,18 @@ public class AudioManager : MonoBehaviour
         else
         {
             if (!bgm[index].isPlaying) PlayBGM(index);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // 销毁时标记状态，终止所有协程
+        isDestroyed = true;
+        StopAllCoroutines();
+        // 清空单例引用
+        if (instance == this)
+        {
+            instance = null;
         }
     }
 

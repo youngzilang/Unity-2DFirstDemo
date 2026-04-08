@@ -193,6 +193,8 @@ public class CharaterStats : MonoBehaviour
 
         int total = damage.GetValue() + strength.GetValue();
 
+        _stats.GetComponent<Entity>().SetUpKnockBackDir(transform);
+
         if (CriticalOrNot()) total = CalculateCriticalDamage(total);
 
         total = CountDamageAfterDefence(total,_stats);

@@ -34,6 +34,8 @@ public class Entity : MonoBehaviour
     public int faceDir { get; private set; } = 1;
     protected bool faceRight { get; private set; } = true;
 
+    public int knocBackDir { get; private set; }
+
     public Action onFlip;
 
     protected virtual void Awake()
@@ -80,15 +82,31 @@ public class Entity : MonoBehaviour
     {
         isHit = true;
 
-        rb.velocity = new Vector2(hitMove * -faceDir, hitJump);
+        rb.velocity = new Vector2(hitMove * knocBackDir, hitJump);
 
         yield return new WaitForSeconds(hitTime);
 
-
         isHit = false;
+
+        SetUpZeroKnockBack();
     }
 
+    public void SetUpKnokBackPower(int _hitMove,int _hitJump)
+    {
+        hitMove = _hitMove;
+        hitJump = _hitJump;
+    }
 
+    public virtual void SetUpKnockBackDir(Transform _damage)
+    {
+        if (_damage.position.x > transform.position.x) knocBackDir = -1;
+        else knocBackDir = 1;
+    }
+
+    protected virtual void SetUpZeroKnockBack()
+    {
+
+    }
 
     #region LayerCheck
     protected virtual void OnDrawGizmos()

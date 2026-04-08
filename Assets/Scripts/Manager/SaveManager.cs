@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ public class SaveManager : MonoBehaviour
     private string fileName="gameData";
 
     [SerializeField]private bool encryptData;
+
+    public event Action OnGameLoaded;
 
     private void Awake()
     {
@@ -65,6 +68,8 @@ public class SaveManager : MonoBehaviour
         {
             saveManager.LoadData(gameData);
         }
+
+        OnGameLoaded?.Invoke();
     }
 
     public void SaveGame()

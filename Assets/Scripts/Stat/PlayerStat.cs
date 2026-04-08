@@ -39,6 +39,12 @@ public class PlayerStat : CharaterStats
     {
         base.DecreaseHp(_damage);
 
+        if (_damage > GetMaxHp() * .3f)
+        {
+            PlayerManager.instance.player.SetUpKnokBackPower(10, 15);
+            AudioManager.instance.PlaySFX(17);
+        }
+
         ItemDataEquipment armor = Inventory.instance.GetEquipmentByType(EquipmentType.Armor);
         if (armor) armor.UseItemEffect(PlayerManager.instance.player.transform);
     }

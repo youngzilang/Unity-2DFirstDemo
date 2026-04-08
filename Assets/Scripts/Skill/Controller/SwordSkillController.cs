@@ -104,6 +104,7 @@ public class SwordSkillController : MonoBehaviour
 
     private void SwordDamage(Enemy a)
     {
+        a.GetComponent<Entity>().SetUpKnockBackDir(transform);
         PlayerManager.instance.player.stats.DoingDamage(a.GetComponent<CharaterStats>());
 
         ItemDataEquipment amulet = Inventory.instance.GetEquipmentByType(EquipmentType.Amulet);
@@ -130,6 +131,7 @@ public class SwordSkillController : MonoBehaviour
     {
         if (isBounce && transforms.Count > 0)
         {
+            transforms[transformsIndex].GetComponent<Entity>().SetUpKnockBackDir(transform);
             transform.position = Vector2.MoveTowards(transform.position, transforms[transformsIndex].position, bounceSpeed * Time.deltaTime);
             if (Vector2.Distance(transform.position, transforms[transformsIndex].position) < .1f)
             {

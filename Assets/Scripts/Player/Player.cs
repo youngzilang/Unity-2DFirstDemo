@@ -154,4 +154,10 @@ public class Player : Entity
         base.Die();
         stateMachine.ChangeState(deadState);
     }
+
+    protected override void SetUpZeroKnockBack()
+    {
+        hitMove = 0;
+        hitJump = 0;
+    }
 }

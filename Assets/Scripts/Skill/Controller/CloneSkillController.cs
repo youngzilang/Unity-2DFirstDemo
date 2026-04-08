@@ -67,6 +67,7 @@ public class CloneSkillController : MonoBehaviour
             if (collider.GetComponent<Enemy>() != null)
             {
                 //PlayerManager.instance.player.stats.DoingDamage(collider.GetComponent<CharaterStats>());
+                collider.GetComponent<Enemy>().SetUpKnockBackDir(transform);
 
                 PlayerStat playerStat = PlayerManager.instance.player.GetComponent<PlayerStat>();
                 EnemyStat enemyStat = collider.GetComponent<Enemy>().GetComponent<EnemyStat>();

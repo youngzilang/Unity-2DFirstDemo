@@ -93,7 +93,7 @@ public class CrystalSkillController : MonoBehaviour
         {
             if (collider.GetComponent<Enemy>() != null)
             {
-
+                collider.GetComponent<Enemy>().SetUpKnockBackDir(transform);
                 PlayerManager.instance.player.stats.DoingMagicDamage(collider.GetComponent<CharaterStats>());
 
                 ItemDataEquipment amulet = Inventory.instance.GetEquipmentByType(EquipmentType.Amulet);
