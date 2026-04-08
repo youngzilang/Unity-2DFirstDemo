@@ -76,6 +76,8 @@ public class CharaterStats : MonoBehaviour
 
     private bool vulnerable;
 
+    public bool invincible { get; private set; }
+
     protected virtual void Start()
     {
         criticalDamage.SetDefaultValue(150);
@@ -206,6 +208,8 @@ public class CharaterStats : MonoBehaviour
     //ÊÜ»÷ÉËº¦ÅÐ¶¨
     public virtual void BeDamaged(int _damage)
     {
+        if (invincible) return;
+
         if (EvasionSuccessOrNot()) return;
 
         DecreaseHp(_damage);
@@ -332,6 +336,8 @@ public class CharaterStats : MonoBehaviour
         float total = (strength.GetValue() + criticalDamage.GetValue()) * 0.01f;
         return Mathf.RoundToInt(total * _damage);
     }
+
+    public void SetInvincible(bool _invincible) => invincible = _invincible;
 
     public virtual void DecreaseHp(int _damage)
     {

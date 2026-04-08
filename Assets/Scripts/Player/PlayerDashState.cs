@@ -18,6 +18,8 @@ public class PlayerDashState : PlayerState
         SkillManager.instance.dashSkill.CloneOnDash(player.transform);
 
         dashContinueTimer = player.dashContinue;
+
+        player.stats.SetInvincible(true);
         
     }
 
@@ -26,6 +28,8 @@ public class PlayerDashState : PlayerState
         base.Exit();
         SkillManager.instance.dashSkill.CloneOnDashArrival(player.transform);
         player.SetVe(0, 0);
+
+        player.stats.SetInvincible(false);
     }
 
     public override void Update()
