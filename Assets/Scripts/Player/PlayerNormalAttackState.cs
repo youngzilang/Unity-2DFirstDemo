@@ -14,6 +14,8 @@ public class PlayerNormalAttackState : PlayerState
 
     public override void Enter()
     {
+        AudioManager.instance.PlaySFX(0,null);
+
         base.Enter();
         if(attackCount>2||Time.time>= attackTiming + mixAttackWindow)
         {

@@ -5,7 +5,7 @@ using UnityEditor.Experimental.Rendering;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour
+public class UI : MonoBehaviour,ISaveManager
 {
     [SerializeField]private GameObject characterUI;
     [SerializeField] private GameObject craftUI;
@@ -23,6 +23,8 @@ public class UI : MonoBehaviour
     public SkillToolTipUI skillTipUI;
 
     private List<GameObject> businessUIs;
+
+    [SerializeField] private VolumeSliderUI[] volumeSetting;
 
     private void Awake()
     {
@@ -49,6 +51,7 @@ public class UI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V)) SwitchToWithKey(skillUI);
         if (Input.GetKeyDown(KeyCode.B)) SwitchToWithKey(craftUI);
         if (Input.GetKeyDown(KeyCode.N)) SwitchToWithKey(optionsUI);
+        if (Input.GetKeyDown(KeyCode.Escape)) SwitchToWithKey(inGameUI);
     }
 
     public void SwitchTo(GameObject menu)
@@ -62,8 +65,9 @@ public class UI : MonoBehaviour
             if(fade==false) transform.GetChild(i).gameObject.SetActive(false);
 
         }
-
-        if (menu) menu.SetActive(true);
+        
+        if (menu)
+            menu.SetActive(true);
     }
 
     public void SwitchToWithKey(GameObject _menu)
@@ -74,7 +78,7 @@ public class UI : MonoBehaviour
             CheckInGameUI();
             return;
         }
-
+        AudioManager.instance.PlaySFX(12, null);
         SwitchTo(_menu);
     }
 
@@ -113,4 +117,28 @@ public class UI : MonoBehaviour
     }
 
     public void RestartButton() => GameManager.instance.RestartScene();
+
+    public void LoadData(GameData _data)
+    {
+        foreach(KeyValuePair<string,float> keyValuePair in _data.volumeSetting)
+        {
+            foreach(VolumeSliderUI volumeSliderUI in volumeSetting)
+            {
+                if (volumeSliderUI.volumeName == keyValuePair.Key)
+                {
+                    volumeSliderUI.LoadSlider(keyValuePair.Value);
+                }
+            }
+        }
+    }
+
+    public void SaveData(ref GameData _data)
+    {
+        _data.volumeSetting.Clear();
+
+        foreach(VolumeSliderUI volumeSliderUI in volumeSetting)
+        {
+            _data.volumeSetting.Add(volumeSliderUI.volumeName, volumeSliderUI.slider.value);
+        }
+    }
 }

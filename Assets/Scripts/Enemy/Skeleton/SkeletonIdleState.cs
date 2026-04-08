@@ -20,6 +20,7 @@ public class SkeletonIdleState : SkeletonGroundState
     public override void Exit()
     {
         base.Exit();
+        AudioManager.instance.PlaySFX(1,enemy.transform);
     }
 
     public override void Update()

@@ -59,7 +59,7 @@ public class BlackHoleSkill : Skill
 
         if (controller.playerExit)
         {
-            controller = null;
+            //controller = null;
             return true;
         }
         return false;

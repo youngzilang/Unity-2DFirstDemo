@@ -11,11 +11,13 @@ public class PlayerMoveState : PlayerGroundState
     public override void Enter()
     {
         base.Enter();
+        AudioManager.instance.PlaySFX(11, null);
     }
 
     public override void Exit()
     {
         base.Exit();
+        AudioManager.instance.StopSFX(11);
     }
 
     public override void Update()
