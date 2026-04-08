@@ -64,8 +64,14 @@ public class Inventory : MonoBehaviour,ISaveManager
         equipItemSlot = equipSlotParent.GetComponentsInChildren<EquipmentUI>();
         statSlot = statSlotParent.GetComponentsInChildren<StatSlotUI>();
 
-        JustEquipmentsAdd();
     }
+
+    public void InitializeAfterLoad()
+    {
+        JustEquipmentsAdd();
+        UpdateSlotUI();
+    }
+
 
     private void JustEquipmentsAdd()
     {
@@ -293,6 +299,7 @@ public class Inventory : MonoBehaviour,ISaveManager
 
         if (Time.time > flaskTime + lastFlaskTime)
         {
+            AudioManager.instance.PlaySFX(18);
             flaskTime = equipment.flaskCd;
             equipment.UseItemEffect(null);
             lastFlaskTime = Time.time;
@@ -380,12 +387,16 @@ public class Inventory : MonoBehaviour,ISaveManager
         List<ItemData> itemDataBase = new List<ItemData>();
         string[] assetName = AssetDatabase.FindAssets("", new[] { "Assets/Data/Items" });
 
-        foreach(string SOName in assetName)
+        foreach (string SOName in assetName)
         {
             var SOpath = AssetDatabase.GUIDToAssetPath(SOName);
             var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOpath);
             itemDataBase.Add(itemData);
         }
+
+        //ItemData[] allItems = Resources.LoadAll<ItemData>("Items");
+        //itemDataBase.AddRange(allItems);
+
         return itemDataBase;
     }
 

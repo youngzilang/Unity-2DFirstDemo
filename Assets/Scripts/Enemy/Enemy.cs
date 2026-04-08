@@ -18,6 +18,8 @@ public class Enemy : Entity
     public float stunTime;
 
     public float attackCd;
+    public float minattackCd;
+    public float maxattackCd;
     [HideInInspector]public float lastAttackTime;
 
     protected bool canBeStun;

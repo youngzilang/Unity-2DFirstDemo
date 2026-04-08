@@ -88,6 +88,12 @@ public class GameManager : MonoBehaviour,ISaveManager
 
         lostCurrencyAmount = 0;
     }
+
+    public void PauseGame(bool _isPause)
+    {
+        if (_isPause) Time.timeScale = 0;
+        else Time.timeScale = 1;
+    }
     private void LoadCheckPoints(GameData _data)
     {
         foreach (KeyValuePair<string, bool> keyValuePair in _data.checkPoints)

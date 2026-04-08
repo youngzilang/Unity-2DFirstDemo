@@ -70,6 +70,8 @@ public class SaveManager : MonoBehaviour
         }
 
         OnGameLoaded?.Invoke();
+
+        if (Inventory.instance != null) Inventory.instance.InitializeAfterLoad();
     }
 
     public void SaveGame()

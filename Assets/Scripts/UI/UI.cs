@@ -68,6 +68,12 @@ public class UI : MonoBehaviour,ISaveManager
         
         if (menu)
             menu.SetActive(true);
+
+        if (GameManager.instance)
+        {
+            if (menu == inGameUI) GameManager.instance.PauseGame(false);
+            else GameManager.instance.PauseGame(true);
+        }
     }
 
     public void SwitchToWithKey(GameObject _menu)
