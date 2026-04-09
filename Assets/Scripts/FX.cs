@@ -19,6 +19,11 @@ public class FX : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    [Header("ÔªËØ·´Ó¦")]
+    [SerializeField] private ParticleSystem fireFX;
+    [SerializeField] private ParticleSystem iceFX;
+    [SerializeField] private ParticleSystem lightFX;
+
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -45,18 +50,24 @@ public class FX : MonoBehaviour
 
     public void FireFor(float _seconds)
     {
+        fireFX.Play();
+
         InvokeRepeating("FireFlash", 0, .3f);
         Invoke("CancleFlash", _seconds);
     }
 
     public void IceFor(float _seconds)
     {
+        iceFX.Play();
+
         InvokeRepeating("IceFlash", 0, .3f);
         Invoke("CancleFlash", _seconds);
     }
 
     public void LightFor(float _seconds)
     {
+        lightFX.Play();
+
         InvokeRepeating("LightFlash", 0, .3f);
         Invoke("CancleFlash", _seconds);
     }
@@ -71,6 +82,10 @@ public class FX : MonoBehaviour
     {
         CancelInvoke();
         spriteRenderer.color = Color.white;
+
+        fireFX.Stop();
+        iceFX.Stop();
+        lightFX.Stop();
     }
 
     private void FireFlash()
