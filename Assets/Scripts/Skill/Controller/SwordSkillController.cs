@@ -259,6 +259,8 @@ public class SwordSkillController : MonoBehaviour
         rb.isKinematic = true;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
+        GetComponentInChildren<ParticleSystem>().Play();
+
         if (isBounce && transforms.Count > 0) return;
 
         animator.SetBool("isFlip", false);

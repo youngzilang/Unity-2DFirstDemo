@@ -14,6 +14,9 @@ public class PlayerHoldState : PlayerState
     {
         base.Enter();
 
+        //调用接剑的dustFX效果
+        player.fX.PlayDustFX();
+
         returnSword = player.skillManager.swordSkill.swordOnly.transform;
 
         if (returnSword.position.x > player.transform.position.x && player.faceDir == -1) player.Flip();

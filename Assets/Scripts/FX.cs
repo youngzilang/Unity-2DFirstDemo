@@ -28,6 +28,10 @@ public class FX : MonoBehaviour
     [SerializeField] private GameObject hitFX;
     [SerializeField] private GameObject criticalHitFX;
 
+    [Space]
+    [Header("½£µÄ»Ò³¾Ð§¹û")]
+    [SerializeField] private ParticleSystem dustFX;
+
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -136,5 +140,10 @@ public class FX : MonoBehaviour
         
 
         Destroy(newHit, .5f);
+    }
+
+    public void PlayDustFX()
+    {
+        if(dustFX!= null) dustFX.Play();
     }
 }
