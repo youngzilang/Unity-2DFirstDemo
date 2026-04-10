@@ -192,12 +192,15 @@ public class CharaterStats : MonoBehaviour
     //ÎïÀí¹¥»÷
     public virtual void DoingDamage(CharaterStats _stats)
     {
+        bool critical = CriticalOrNot();
 
         int total = damage.GetValue() + strength.GetValue();
 
         _stats.GetComponent<Entity>().SetUpKnockBackDir(transform);
 
-        if (CriticalOrNot()) total = CalculateCriticalDamage(total);
+        if (critical) total = CalculateCriticalDamage(total);
+
+        fX.CreatHitFX(_stats.transform, critical);
 
         total = CountDamageAfterDefence(total,_stats);
         _stats.BeDamaged(total);

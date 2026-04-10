@@ -8,7 +8,9 @@ public class AreaSound : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Player>() != null)
+        if (AudioManager.instance == null) return;
+
+        if (collision.TryGetComponent(out Player player))
         {
             AudioManager.instance.PlaySFX(index);
         }
@@ -16,7 +18,9 @@ public class AreaSound : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.GetComponent<Player>() != null)
+        if (AudioManager.instance == null) return;
+
+        if (collision.TryGetComponent(out Player player))
         {
             AudioManager.instance.StopSFXWithTime(index);
         }

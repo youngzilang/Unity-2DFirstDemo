@@ -24,6 +24,10 @@ public class FX : MonoBehaviour
     [SerializeField] private ParticleSystem iceFX;
     [SerializeField] private ParticleSystem lightFX;
 
+    [Header("´ò»÷Ð§¹û")]
+    [SerializeField] private GameObject hitFX;
+    [SerializeField] private GameObject criticalHitFX;
+
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -104,5 +108,33 @@ public class FX : MonoBehaviour
     {
         if (spriteRenderer.color != lightColor[0]) spriteRenderer.color = lightColor[0];
         else spriteRenderer.color = lightColor[1];
+    }
+
+    public void CreatHitFX(Transform _target,bool _critical)
+    {
+        float zRotation = Random.Range(-90, 90);
+        float yRotation = 0;
+        float xPosition = Random.Range(-.5f, .5f);
+        float yPosition = Random.Range(-.5f, .5f);
+
+        Vector3 hitRotation = new Vector3(0, 0, zRotation);
+
+        if (_critical)
+        {
+            zRotation = Random.Range(-45, 45);
+
+            if (GetComponent<Entity>().faceDir == 1) yRotation = 180;
+
+            hitRotation = new Vector3(0, yRotation, zRotation);
+
+            hitFX = criticalHitFX;
+        }
+
+        GameObject newHit = Instantiate(hitFX, _target.position+new Vector3(xPosition,yPosition,0), Quaternion.identity);
+
+         newHit.transform.Rotate(hitRotation);
+        
+
+        Destroy(newHit, .5f);
     }
 }
