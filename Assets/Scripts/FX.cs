@@ -27,15 +27,28 @@ public class FX : MonoBehaviour
     [Header("打击效果")]
     [SerializeField] private GameObject hitFX;
     [SerializeField] private GameObject criticalHitFX;
+    private GameObject currentHitFX;
 
     [Space]
     [Header("剑的灰尘效果")]
     [SerializeField] private ParticleSystem dustFX;
 
+    [Space]
+    [Header("角色残影视觉")]
+    [SerializeField]private GameObject afterImagePrefab;
+    [SerializeField]private float colorLoseRate;
+    [SerializeField]private float afterImageCd;
+    private float afterImageTimer;
+
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originMaterial = spriteRenderer.material;
+    }
+
+    private void Update()
+    {
+        afterImageTimer-= Time.deltaTime;
     }
 
     public void Transprent(bool _transprent)
@@ -123,6 +136,8 @@ public class FX : MonoBehaviour
 
         Vector3 hitRotation = new Vector3(0, 0, zRotation);
 
+        currentHitFX = hitFX;
+
         if (_critical)
         {
             zRotation = Random.Range(-45, 45);
@@ -131,15 +146,27 @@ public class FX : MonoBehaviour
 
             hitRotation = new Vector3(0, yRotation, zRotation);
 
-            hitFX = criticalHitFX;
+            currentHitFX = criticalHitFX;
         }
 
-        GameObject newHit = Instantiate(hitFX, _target.position+new Vector3(xPosition,yPosition,0), Quaternion.identity);
+        GameObject newHit = Instantiate(currentHitFX, _target.position+new Vector3(xPosition,yPosition,0), Quaternion.identity);
 
          newHit.transform.Rotate(hitRotation);
         
 
         Destroy(newHit, .5f);
+    }
+
+    public void CreatAfterImage()
+    {
+        if (afterImageTimer < 0)
+        {
+            afterImageTimer = afterImageCd;
+            GameObject afterImage = Instantiate(afterImagePrefab, transform.position,transform.rotation);
+            afterImage.GetComponent<AfterImageFX>().SetUpAfterImage(spriteRenderer.sprite, colorLoseRate);
+        }
+
+       
     }
 
     public void PlayDustFX()

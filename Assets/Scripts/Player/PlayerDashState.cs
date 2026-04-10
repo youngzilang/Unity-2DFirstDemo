@@ -20,6 +20,8 @@ public class PlayerDashState : PlayerState
         dashContinueTimer = player.dashContinue;
 
         player.stats.SetInvincible(true);
+
+
         
     }
 
@@ -48,5 +50,7 @@ public class PlayerDashState : PlayerState
         {
             stateMachine.ChangeState(player.idleState);
         }
+
+        player.fX.CreatAfterImage();
     }
 }
