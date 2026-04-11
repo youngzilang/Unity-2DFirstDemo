@@ -1,12 +1,11 @@
+using Cinemachine;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class FX : MonoBehaviour
 {
     [Header("受击材质")]
-    [SerializeField]private Material hitMaterial;
+    [SerializeField] private Material hitMaterial;
     private Material originMaterial;
 
     [Header("受击时长")]
@@ -35,20 +34,29 @@ public class FX : MonoBehaviour
 
     [Space]
     [Header("角色残影视觉")]
-    [SerializeField]private GameObject afterImagePrefab;
-    [SerializeField]private float colorLoseRate;
-    [SerializeField]private float afterImageCd;
+    [SerializeField] private GameObject afterImagePrefab;
+    [SerializeField] private float colorLoseRate;
+    [SerializeField] private float afterImageCd;
     private float afterImageTimer;
+
+    [Space]
+    [Header("屏幕震动效果")]
+    [SerializeField] private float shakeMultiplier;
+    public Vector3 swordShake;
+    public Vector3 criticalShake;
+    private CinemachineImpulseSource impulseSource;
 
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originMaterial = spriteRenderer.material;
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     private void Update()
     {
-        afterImageTimer-= Time.deltaTime;
+        afterImageTimer -= Time.deltaTime;
     }
 
     public void Transprent(bool _transprent)
@@ -57,7 +65,7 @@ public class FX : MonoBehaviour
         else spriteRenderer.color = Color.white;
     }
 
-    private  IEnumerator Fx()
+    private IEnumerator Fx()
     {
         spriteRenderer.material = hitMaterial;
         Color originalColor = spriteRenderer.color;
@@ -127,7 +135,13 @@ public class FX : MonoBehaviour
         else spriteRenderer.color = lightColor[1];
     }
 
-    public void CreatHitFX(Transform _target,bool _critical)
+    public void ScreenShake(Vector3 _shakePower)
+    {
+        impulseSource.m_DefaultVelocity = new Vector3(_shakePower.x*PlayerManager.instance.player.faceDir,_shakePower.y) * shakeMultiplier;
+        impulseSource.GenerateImpulse();
+    }
+
+    public void CreatHitFX(Transform _target, bool _critical)
     {
         float zRotation = Random.Range(-90, 90);
         float yRotation = 0;
@@ -149,10 +163,10 @@ public class FX : MonoBehaviour
             currentHitFX = criticalHitFX;
         }
 
-        GameObject newHit = Instantiate(currentHitFX, _target.position+new Vector3(xPosition,yPosition,0), Quaternion.identity);
+        GameObject newHit = Instantiate(currentHitFX, _target.position + new Vector3(xPosition, yPosition, 0), Quaternion.identity);
 
-         newHit.transform.Rotate(hitRotation);
-        
+        newHit.transform.Rotate(hitRotation);
+
 
         Destroy(newHit, .5f);
     }
@@ -162,15 +176,15 @@ public class FX : MonoBehaviour
         if (afterImageTimer < 0)
         {
             afterImageTimer = afterImageCd;
-            GameObject afterImage = Instantiate(afterImagePrefab, transform.position,transform.rotation);
+            GameObject afterImage = Instantiate(afterImagePrefab, transform.position, transform.rotation);
             afterImage.GetComponent<AfterImageFX>().SetUpAfterImage(spriteRenderer.sprite, colorLoseRate);
         }
 
-       
+
     }
 
     public void PlayDustFX()
     {
-        if(dustFX!= null) dustFX.Play();
+        if (dustFX != null) dustFX.Play();
     }
 }

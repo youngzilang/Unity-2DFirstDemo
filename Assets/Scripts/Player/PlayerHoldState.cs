@@ -16,6 +16,8 @@ public class PlayerHoldState : PlayerState
 
         //调用接剑的dustFX效果
         player.fX.PlayDustFX();
+        //调用接剑的screenShake效果
+        player.fX.ScreenShake(player.fX.swordShake);
 
         returnSword = player.skillManager.swordSkill.swordOnly.transform;
 

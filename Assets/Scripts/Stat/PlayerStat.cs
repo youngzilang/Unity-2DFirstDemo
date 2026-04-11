@@ -43,6 +43,7 @@ public class PlayerStat : CharaterStats
         {
             PlayerManager.instance.player.SetUpKnokBackPower(10, 15);
             AudioManager.instance.PlaySFX(17);
+            PlayerManager.instance.player.fX.ScreenShake(PlayerManager.instance.player.fX.criticalShake);
         }
 
         ItemDataEquipment armor = Inventory.instance.GetEquipmentByType(EquipmentType.Armor);
