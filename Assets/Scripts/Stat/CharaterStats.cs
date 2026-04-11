@@ -84,6 +84,12 @@ public class CharaterStats : MonoBehaviour
         currentHP = GetMaxHp();
         fX = GetComponent<FX>();
         entity = GetComponent<Entity>();
+
+        // 订阅 maxHP 变化，用 delta 同步 currentHP
+        if (maxHP != null)
+        {
+            maxHP.OnValueChanged += OnMaxHpChanged;
+        }
     }
 
     protected virtual void Update()
@@ -387,5 +393,28 @@ public class CharaterStats : MonoBehaviour
             case buffType.lightDamage: return lightDamage;
         }
         return null;
+    }
+
+
+    private void OnMaxHpChanged(int delta)
+    {
+        // delta 为 maxHP 的增量（可正可负）
+        currentHP += delta;
+
+        // 保证上下界
+        int max = GetMaxHp();
+        if (currentHP > max) currentHP = max;
+        if (currentHP < 0) currentHP = 0;
+
+        onHPChange?.Invoke();
+    }
+
+
+    private void OnDestroy()
+    {
+        if (maxHP != null)
+        {
+            maxHP.OnValueChanged -= OnMaxHpChanged;
+        }
     }
 }
