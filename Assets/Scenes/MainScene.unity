@@ -140869,6 +140869,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -140984,6 +140985,28 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c11265b855408d42af33d62691f5194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseLocalSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &521878644
 GameObject:
   m_ObjectHideFlags: 0
@@ -153179,7 +153202,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1097443358}
   - component: {fileID: 1097443357}
-  - component: {fileID: 1097443359}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -153242,28 +153264,6 @@ Transform:
   - {fileID: 1524985544}
   m_Father: {fileID: 2045163246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1097443359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097443356}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c11265b855408d42af33d62691f5194, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ChannelMask: 1
-  m_Gain: 1
-  m_Use2DDistance: 0
-  m_UseLocalSpace: 1
-  m_ReactionSettings:
-    m_SecondaryNoise: {fileID: 0}
-    m_AmplitudeGain: 1
-    m_FrequencyGain: 1
-    m_Duration: 1
-    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1102939748
 GameObject:
   m_ObjectHideFlags: 0
@@ -161927,7 +161927,9 @@ MonoBehaviour:
   colorLoseRate: 0
   afterImageCd: 0
   shakeMultiplier: 0
-  shakePower: {x: 0, y: 0, z: 0}
+  swordShake: {x: 0, y: 0, z: 0}
+  criticalShake: {x: 0, y: 0, z: 0}
+  popUpTextPrefab: {fileID: 0}
 --- !u!50 &1334574400
 Rigidbody2D:
   serializedVersion: 4
@@ -174189,10 +174191,10 @@ GameObject:
   - component: {fileID: 1844310485}
   - component: {fileID: 1844310484}
   - component: {fileID: 1844310487}
-  - component: {fileID: 1844310488}
   - component: {fileID: 1844310489}
   - component: {fileID: 1844310490}
   - component: {fileID: 1844310491}
+  - component: {fileID: 1844310488}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -174355,8 +174357,10 @@ MonoBehaviour:
   afterImagePrefab: {fileID: 5122763444371403390, guid: 756c6b9ff40687f41aea6559ab59aeb7, type: 3}
   colorLoseRate: 2.5
   afterImageCd: 0.05
-  shakeMultiplier: 0.2
-  shakePower: {x: 1, y: 1, z: 0}
+  shakeMultiplier: 0.1
+  swordShake: {x: 1, y: 0, z: 0}
+  criticalShake: {x: 2, y: 2, z: 0}
+  popUpTextPrefab: {fileID: 4043441930255666019, guid: 250fbb9deef1cfe4998f976296f68fbc, type: 3}
 --- !u!114 &1844310489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174484,7 +174488,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: -1, z: 0}
+  m_DefaultVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &1847409708
 GameObject:
   m_ObjectHideFlags: 0
@@ -184755,7 +184759,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &6568700000219730092
 GameObject:
   m_ObjectHideFlags: 0

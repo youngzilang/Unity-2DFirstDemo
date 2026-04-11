@@ -35,6 +35,7 @@ public class Skill : MonoBehaviour
             cdTimer = cd;
             return true;
         }
+        player.fX.CreatePopUpText("¼¼ÄÜÀäÈ´ÖĞ");
         return false;
     }
 

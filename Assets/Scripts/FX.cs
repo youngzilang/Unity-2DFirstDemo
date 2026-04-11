@@ -1,5 +1,6 @@
 using Cinemachine;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class FX : MonoBehaviour
@@ -45,6 +46,10 @@ public class FX : MonoBehaviour
     public Vector3 swordShake;
     public Vector3 criticalShake;
     private CinemachineImpulseSource impulseSource;
+
+    [Space]
+    [Header("Æ®×Ö")]
+    [SerializeField] private GameObject popUpTextPrefab;
 
     void Start()
     {
@@ -182,9 +187,27 @@ public class FX : MonoBehaviour
 
 
     }
-
     public void PlayDustFX()
     {
         if (dustFX != null) dustFX.Play();
+    }
+
+    public void CreatePopUpText(string _text)
+    {
+        CreatePopUpText(_text, Color.white);
+    }
+
+    public void CreatePopUpText(string _text, Color _color)
+    {
+        if (string.IsNullOrEmpty(_text)) return;
+
+        Vector3 randomOffset = new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(1f, 2f), 0);
+        GameObject popUpText = Instantiate(popUpTextPrefab, transform.position + randomOffset, Quaternion.identity);
+        var tmp = popUpText.GetComponent<TextMeshPro>();
+        if (tmp != null)
+        {
+            tmp.text = _text;
+            tmp.color = _color;
+        }
     }
 }

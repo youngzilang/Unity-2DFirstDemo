@@ -154,9 +154,13 @@ public class CharaterStats : MonoBehaviour
     {
         int total = fireDamage.GetValue() + iceDamage.GetValue() + lightDamage.GetValue()+intelligence.GetValue();
         total =total- magicResistance.GetValue()<0?0:total- magicResistance.GetValue();
-        _stats.BeDamaged(total);
+        
 
-        if(Mathf.Max(fireDamage.GetValue(),iceDamage.GetValue(),lightDamage.GetValue())<=0)return;
+        if (Mathf.Max(fireDamage.GetValue(), iceDamage.GetValue(), lightDamage.GetValue()) <= 0)
+        {
+            _stats.BeDamaged(total, Color.white);
+            return;
+        }
 
         bool fireOrNot = fireDamage.GetValue() > iceDamage.GetValue() && fireDamage.GetValue() > lightDamage.GetValue();
         bool iceOrNot= iceDamage.GetValue() > fireDamage.GetValue() && iceDamage.GetValue() > lightDamage.GetValue();
@@ -168,27 +172,26 @@ public class CharaterStats : MonoBehaviour
             if (ran < 33&&fireDamage.GetValue()>0)
             {
                 fireOrNot = true;
-                Debug.Log("Fire!");
-                _stats.ApplyElement(fireOrNot, iceOrNot, lightOrNot);
-                return;
+                break;
             }
             else if (ran < 66&& iceDamage.GetValue()>0)
             {
                 iceOrNot = true;
-                Debug.Log("Ice!");
-                _stats.ApplyElement(fireOrNot, iceOrNot, lightOrNot);
-                return;
+                break;
             }
             else if(ran<100 && lightDamage.GetValue()>0)
             {
                 lightOrNot = true;
-                Debug.Log("Light!");
-                _stats.ApplyElement(fireOrNot, iceOrNot, lightOrNot);
-                return;
+                break;
             }
         }
-        
-        if(fireOrNot)
+
+        Color popColor = Color.white;
+        if (fireOrNot) popColor = Color.red;
+        else if (iceOrNot) popColor = new Color(0.4f, 0.8f, 1f);
+        else if (lightOrNot) popColor = new Color(0.7f, 0.3f, 1f);
+
+        if (fireOrNot)
         _stats.BeBurn(Mathf.RoundToInt(fireDamage.GetValue() * .2f));
 
 
@@ -206,16 +209,27 @@ public class CharaterStats : MonoBehaviour
 
         if (critical) total = CalculateCriticalDamage(total);
 
+        // 根据是否暴击选择飘字颜色（暴击黄，普通白）
+        Color popColor = critical ? Color.yellow : Color.white;
+
         fX.CreatHitFX(_stats.transform, critical);
 
         total = CountDamageAfterDefence(total,_stats);
-        _stats.BeDamaged(total);
+
+        // 直接把带颜色的伤害传递给目标
+        _stats.BeDamaged(total, popColor);
 
         DoingMagicDamage(_stats);
     }
 
     //受击伤害判定
     public virtual void BeDamaged(int _damage)
+    {
+        BeDamaged(_damage, Color.white);
+    }
+
+    // 新增：带颜色的受击处理（负责显示飘字、受击动画、死亡判定）
+    public virtual void BeDamaged(int _damage, Color popColor)
     {
         if (invincible) return;
 
@@ -226,8 +240,13 @@ public class CharaterStats : MonoBehaviour
         GetComponent<Entity>()?.Damage();
         fX.StartCoroutine("Fx");
 
-        if (currentHP <= 0&&!isDead) Die();
+        if (_damage > 0)
+            fX.CreatePopUpText(_damage.ToString(), popColor);
+
+        if (currentHP <= 0 && !isDead) Die();
     }
+
+
     //负面效果判定
     public void ApplyElement(bool _fire, bool _ice, bool _light)
     {
@@ -353,6 +372,7 @@ public class CharaterStats : MonoBehaviour
         if (vulnerable) _damage = Mathf.RoundToInt(_damage * 1.1f);
 
         currentHP -= _damage;
+
         if (onHPChange != null)
         {
             onHPChange();

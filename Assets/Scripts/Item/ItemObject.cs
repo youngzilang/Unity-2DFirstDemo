@@ -24,6 +24,8 @@ public class ItemObject : MonoBehaviour
         if (!Inventory.instance.BagFullOrNot() && item.itemType == ItemType.Equipment)
         {
             rb.velocity = new Vector2(0, 7);
+            //调用飘字
+            PlayerManager.instance.player.fX.CreatePopUpText("背包已满");
             return;
         }
         AudioManager.instance.PlaySFX(12,transform);
