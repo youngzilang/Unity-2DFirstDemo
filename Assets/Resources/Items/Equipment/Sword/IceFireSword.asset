@@ -15,7 +15,8 @@ MonoBehaviour:
   itemType: 1
   itemName: "\u51B0\u706B\u5251"
   icon: {fileID: 884613782, guid: 6c4a16bb52e56904484f4a19431d0af3, type: 3}
-  dropChance: 10
+  dropChance: 5
+  itemId: 6b86ef8ad49172945af74f3807079823
   equipmentType: 0
   armorCd: 0
   flaskCd: 0

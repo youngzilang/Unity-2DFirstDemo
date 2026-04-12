@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy_BOSS : Enemy
 {
+    [Header("´«ËÍÏà¹Ø")]
+    [SerializeField] private BoxCollider2D transformArea;
+    [SerializeField] private Vector2 surroundingCheck;
 
     #region State
 
@@ -40,5 +43,30 @@ public class Enemy_BOSS : Enemy
     {
         base.Die();
         stateMachine.ChangeState(deadState);
+    }
+
+    public void FindPosition()
+    {
+        Vector2 randomPos = new Vector2(Random.Range(transformArea.bounds.min.x+3, transformArea.bounds.max.x-3), Random.Range(transformArea.bounds.min.y, transformArea.bounds.max.y-3));
+        transform.position = randomPos;
+
+        transform.position = new Vector2(transform.position.x, transform.position.y - GroundBelow().distance);
+
+        if(SomethingAround()|| !GroundBelow() )
+        {
+            FindPosition();
+        }
+    }
+
+    private RaycastHit2D GroundBelow()=> Physics2D.Raycast(transform.position,  Vector2.down, 100,layer);
+
+    private bool SomethingAround() => Physics2D.BoxCast(transform.position, surroundingCheck, 0, Vector2.zero, 0, player);
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        Gizmos.DrawLine(transform.position, new(transform.position.x, transform.position.y - GroundBelow().distance));
+        Gizmos.DrawWireCube(transform.position, surroundingCheck);
     }
 }
