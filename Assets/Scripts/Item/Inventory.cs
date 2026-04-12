@@ -1,12 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Progress;
 
-public class Inventory : MonoBehaviour,ISaveManager
+public class Inventory : MonoBehaviour, ISaveManager
 {
     public static Inventory instance;
 
@@ -21,8 +17,8 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     public List<ItemData> justEquipments;
 
-   [Header("Inventory UI")]
-    [SerializeField]private Transform inventorySlotParent;
+    [Header("Inventory UI")]
+    [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform stashSlotParent;
     [SerializeField] private Transform equipSlotParent;
     [SerializeField] private Transform statSlotParent;
@@ -41,6 +37,7 @@ public class Inventory : MonoBehaviour,ISaveManager
     [Header("存档数据")]
     public List<InventoryItem> loadItems;
     public List<ItemDataEquipment> loadEquipments;
+    public List<ItemData> itemDataBase;
 
     private void Awake()
     {
@@ -64,6 +61,15 @@ public class Inventory : MonoBehaviour,ISaveManager
         equipItemSlot = equipSlotParent.GetComponentsInChildren<EquipmentUI>();
         statSlot = statSlotParent.GetComponentsInChildren<StatSlotUI>();
 
+        if (itemDataBase == null || itemDataBase.Count == 0)
+        {
+            ItemData[] runtimeItems = Resources.LoadAll<ItemData>("Items");
+            if (runtimeItems != null && runtimeItems.Length > 0)
+            {
+                itemDataBase = new List<ItemData>(runtimeItems);
+            }
+        }
+
     }
 
     public void InitializeAfterLoad()
@@ -75,16 +81,16 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     private void JustEquipmentsAdd()
     {
-        foreach(var equipment in loadEquipments)
+        foreach (var equipment in loadEquipments)
         {
             Equip(equipment);
         }
 
         if (loadItems.Count > 0)
         {
-            foreach(InventoryItem inventoryItem in loadItems)
+            foreach (InventoryItem inventoryItem in loadItems)
             {
-                for(int i=0;i< inventoryItem.stackSize; i++)
+                for (int i = 0; i < inventoryItem.stackSize; i++)
                 {
                     AddItem(inventoryItem.data);
                 }
@@ -136,10 +142,10 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     public void AddItem(ItemData _item)
     {
-        if (_item.itemType == ItemType.Equipment&&BagFullOrNot()) AddToInventory(_item);
+        if (_item.itemType == ItemType.Equipment && BagFullOrNot()) AddToInventory(_item);
         else if (_item.itemType == ItemType.Material) AddToStash(_item);
 
-            UpdateSlotUI();
+        UpdateSlotUI();
     }
 
     private void AddToInventory(ItemData _item)
@@ -194,7 +200,7 @@ public class Inventory : MonoBehaviour,ISaveManager
         UpdateSlotUI();
     }
 
-    public void  UpdateSlotUI()
+    public void UpdateSlotUI()
     {
         for (int i = 0; i < equipItemSlot.Length; i++)
         {
@@ -236,14 +242,14 @@ public class Inventory : MonoBehaviour,ISaveManager
         }
     }
 
-    public bool CraftOrNot(ItemDataEquipment equipmentToCraft,List<InventoryItem> requiredMateril)
+    public bool CraftOrNot(ItemDataEquipment equipmentToCraft, List<InventoryItem> requiredMateril)
     {
-        List<InventoryItem> toUsedMaterial =new List<InventoryItem>();
+        List<InventoryItem> toUsedMaterial = new List<InventoryItem>();
 
-        for(int i = 0; i < requiredMateril.Count; i++)
+        for (int i = 0; i < requiredMateril.Count; i++)
         {
 
-            if (stashDictionary.TryGetValue(requiredMateril[i].data,out InventoryItem value))
+            if (stashDictionary.TryGetValue(requiredMateril[i].data, out InventoryItem value))
             {
                 if (value.stackSize < requiredMateril[i].stackSize)
                 {
@@ -262,7 +268,7 @@ public class Inventory : MonoBehaviour,ISaveManager
             }
         }
 
-        for(int i = 0; i < requiredMateril.Count; i++)
+        for (int i = 0; i < requiredMateril.Count; i++)
         {
             for (int j = 0; j < requiredMateril[i].stackSize; j++) RemoveItem(requiredMateril[i].data);
         }
@@ -335,11 +341,11 @@ public class Inventory : MonoBehaviour,ISaveManager
 
     public void LoadData(GameData _data)
     {
-       foreach(KeyValuePair<string,int> keyValuePair in _data.inventory)
+        foreach (KeyValuePair<string, int> keyValuePair in _data.inventory)
         {
-            foreach(var item in GetItemDataBase())
+            foreach (var item in itemDataBase)
             {
-                if(item!= null && item.itemId == keyValuePair.Key)
+                if (item != null && item.itemId == keyValuePair.Key)
                 {
                     InventoryItem itemToLoad = new InventoryItem(item);
                     itemToLoad.stackSize = keyValuePair.Value;
@@ -349,9 +355,9 @@ public class Inventory : MonoBehaviour,ISaveManager
             }
         }
 
-       foreach(string id in _data.equipmentIds)
+        foreach (string id in _data.equipmentIds)
         {
-            foreach(var equip in GetItemDataBase())
+            foreach (var equip in itemDataBase)
             {
                 if (equip != null && equip.itemId == id)
                 {
@@ -366,21 +372,25 @@ public class Inventory : MonoBehaviour,ISaveManager
         _data.inventory.Clear();
         _data.equipmentIds.Clear();
 
-        foreach(KeyValuePair<ItemData,InventoryItem> keyValuePair in inventoryDictionary)
+        foreach (KeyValuePair<ItemData, InventoryItem> keyValuePair in inventoryDictionary)
         {
             _data.inventory.Add(keyValuePair.Key.itemId, keyValuePair.Value.stackSize);
         }
 
-        foreach(KeyValuePair<ItemData, InventoryItem> keyValuePair in stashDictionary)
+        foreach (KeyValuePair<ItemData, InventoryItem> keyValuePair in stashDictionary)
         {
             _data.inventory.Add(keyValuePair.Key.itemId, keyValuePair.Value.stackSize);
         }
 
-        foreach(KeyValuePair<ItemDataEquipment, InventoryItem> keyValuePair in equipmentDictionary)
+        foreach (KeyValuePair<ItemDataEquipment, InventoryItem> keyValuePair in equipmentDictionary)
         {
             _data.equipmentIds.Add(keyValuePair.Key.itemId);
         }
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("更新数据库")]
+    private void FillItemDataBase()=> itemDataBase = new List<ItemData>(GetItemDataBase());
 
     public List<ItemData> GetItemDataBase()
     {
@@ -399,5 +409,5 @@ public class Inventory : MonoBehaviour,ISaveManager
 
         return itemDataBase;
     }
-
+#endif
 }

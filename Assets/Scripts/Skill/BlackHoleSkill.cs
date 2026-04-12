@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +6,7 @@ public class BlackHoleSkill : Skill
     [Header("ºÚ¶´ÐÅÏ¢")]
     [SerializeField] private float maxSize;
     [SerializeField] private float growSpeed;
-    [SerializeField]private float smallerSpeed;
+    [SerializeField] private float smallerSpeed;
     [SerializeField] private GameObject blackHolePrefab;
     [SerializeField] private int cloneAttackAmount;
     [SerializeField] private float cloneAttackCd;
@@ -31,9 +28,9 @@ public class BlackHoleSkill : Skill
     {
         base.UseSkill();
 
-        GameObject infectBlackHole = Instantiate(blackHolePrefab,player.transform.position+new Vector3(0,5),Quaternion.identity);
-        controller= infectBlackHole.GetComponent<BlackHoleSkillController>();
-        controller.SetUpBlackHole(maxSize, growSpeed, smallerSpeed, cloneAttackCd, cloneAttackAmount,balckHoleCd);
+        GameObject infectBlackHole = Instantiate(blackHolePrefab, player.transform.position + new Vector3(0, 5), Quaternion.identity);
+        controller = infectBlackHole.GetComponent<BlackHoleSkillController>();
+        controller.SetUpBlackHole(maxSize, growSpeed, smallerSpeed, cloneAttackCd, cloneAttackAmount, balckHoleCd);
     }
 
     protected override void Start()

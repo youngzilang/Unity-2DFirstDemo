@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public enum ItemType
 {
@@ -11,13 +12,13 @@ public enum ItemType
 }
 
 
-[CreateAssetMenu(fileName ="Item Data",menuName ="Data/Item")]
+[CreateAssetMenu(fileName = "Item Data", menuName = "Data/Item")]
 public class ItemData : ScriptableObject
 {
     public ItemType itemType;
     public string itemName;
     public Sprite icon;
-    [Range(0,100)]
+    [Range(0, 100)]
     public int dropChance;
 
     public string itemId;

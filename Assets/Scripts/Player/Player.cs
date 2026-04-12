@@ -52,6 +52,7 @@ public class Player : Entity
     public SkillManager skillManager { get; private set; }
     #endregion
 
+    public PlayerFX fX { get; private set; }
     protected override void Awake()
     {
         base.Awake();
@@ -81,6 +82,7 @@ public class Player : Entity
         origianlSlideJumpSpeed = slideJumpSpeed;
         originalJumpForce = jumpForce;
         originalMoveSpeed = moveSpeed;
+        fX = GetComponent<PlayerFX>(); 
     }
 
     protected override  void Update()

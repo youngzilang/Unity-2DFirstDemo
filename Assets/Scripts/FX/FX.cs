@@ -7,7 +7,7 @@ public class FX : MonoBehaviour
 {
     [Header("受击材质")]
     [SerializeField] private Material hitMaterial;
-    private Material originMaterial;
+    protected Material originMaterial;
 
     [Header("受击时长")]
     [SerializeField] private float hitTime;
@@ -17,7 +17,7 @@ public class FX : MonoBehaviour
     [SerializeField] private Color[] iceColor;
     [SerializeField] private Color[] lightColor;
 
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
 
     [Header("元素反应")]
     [SerializeField] private ParticleSystem fireFX;
@@ -30,39 +30,15 @@ public class FX : MonoBehaviour
     private GameObject currentHitFX;
 
     [Space]
-    [Header("剑的灰尘效果")]
-    [SerializeField] private ParticleSystem dustFX;
-
-    [Space]
-    [Header("角色残影视觉")]
-    [SerializeField] private GameObject afterImagePrefab;
-    [SerializeField] private float colorLoseRate;
-    [SerializeField] private float afterImageCd;
-    private float afterImageTimer;
-
-    [Space]
-    [Header("屏幕震动效果")]
-    [SerializeField] private float shakeMultiplier;
-    public Vector3 swordShake;
-    public Vector3 criticalShake;
-    private CinemachineImpulseSource impulseSource;
-
-    [Space]
     [Header("飘字")]
     [SerializeField] private GameObject popUpTextPrefab;
 
-    void Start()
+    protected virtual void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originMaterial = spriteRenderer.material;
-
-        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
-    private void Update()
-    {
-        afterImageTimer -= Time.deltaTime;
-    }
 
     public void Transprent(bool _transprent)
     {
@@ -140,12 +116,6 @@ public class FX : MonoBehaviour
         else spriteRenderer.color = lightColor[1];
     }
 
-    public void ScreenShake(Vector3 _shakePower)
-    {
-        impulseSource.m_DefaultVelocity = new Vector3(_shakePower.x*PlayerManager.instance.player.faceDir,_shakePower.y) * shakeMultiplier;
-        impulseSource.GenerateImpulse();
-    }
-
     public void CreatHitFX(Transform _target, bool _critical)
     {
         float zRotation = Random.Range(-90, 90);
@@ -174,22 +144,6 @@ public class FX : MonoBehaviour
 
 
         Destroy(newHit, .5f);
-    }
-
-    public void CreatAfterImage()
-    {
-        if (afterImageTimer < 0)
-        {
-            afterImageTimer = afterImageCd;
-            GameObject afterImage = Instantiate(afterImagePrefab, transform.position, transform.rotation);
-            afterImage.GetComponent<AfterImageFX>().SetUpAfterImage(spriteRenderer.sprite, colorLoseRate);
-        }
-
-
-    }
-    public void PlayDustFX()
-    {
-        if (dustFX != null) dustFX.Play();
     }
 
     public void CreatePopUpText(string _text)

@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerState
@@ -17,17 +13,17 @@ public class PlayerState
     protected PlayerStateMachine stateMachine;
     protected string animationName;
 
-    protected bool trigger ;
-   
+    protected bool trigger;
 
-    public PlayerState(Player player,PlayerStateMachine stateMachine,string animationName)
+
+    public PlayerState(Player player, PlayerStateMachine stateMachine, string animationName)
     {
         this.player = player;
         this.stateMachine = stateMachine
-;        this.animationName = animationName;
+; this.animationName = animationName;
     }
 
-    
+
 
     public virtual void Enter()
     {

@@ -1,13 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEditor.Experimental.Rendering;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class UI : MonoBehaviour,ISaveManager
+public class UI : MonoBehaviour, ISaveManager
 {
-    [SerializeField]private GameObject characterUI;
+    [SerializeField] private GameObject characterUI;
     [SerializeField] private GameObject craftUI;
     [SerializeField] private GameObject skillUI;
     [SerializeField] private GameObject optionsUI;
@@ -57,15 +54,15 @@ public class UI : MonoBehaviour,ISaveManager
     public void SwitchTo(GameObject menu)
     {
 
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
 
             bool fade = transform.GetChild(i).GetComponent<FadeScreenUI>() != null;
 
-            if(fade==false) transform.GetChild(i).gameObject.SetActive(false);
+            if (fade == false) transform.GetChild(i).gameObject.SetActive(false);
 
         }
-        
+
         if (menu)
             menu.SetActive(true);
 
@@ -126,9 +123,9 @@ public class UI : MonoBehaviour,ISaveManager
 
     public void LoadData(GameData _data)
     {
-        foreach(KeyValuePair<string,float> keyValuePair in _data.volumeSetting)
+        foreach (KeyValuePair<string, float> keyValuePair in _data.volumeSetting)
         {
-            foreach(VolumeSliderUI volumeSliderUI in volumeSetting)
+            foreach (VolumeSliderUI volumeSliderUI in volumeSetting)
             {
                 if (volumeSliderUI.volumeName == keyValuePair.Key)
                 {
@@ -142,7 +139,7 @@ public class UI : MonoBehaviour,ISaveManager
     {
         _data.volumeSetting.Clear();
 
-        foreach(VolumeSliderUI volumeSliderUI in volumeSetting)
+        foreach (VolumeSliderUI volumeSliderUI in volumeSetting)
         {
             _data.volumeSetting.Add(volumeSliderUI.volumeName, volumeSliderUI.slider.value);
         }

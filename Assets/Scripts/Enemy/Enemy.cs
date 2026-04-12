@@ -25,6 +25,8 @@ public class Enemy : Entity
     protected bool canBeStun;
     [SerializeField] protected GameObject stunSign;
 
+    public FX fX { get; private set; }
+
     protected EnemyStateMachine stateMachine { get; private set; }
 
     public string lastAniBoolName;
@@ -34,6 +36,12 @@ public class Enemy : Entity
         base.Awake();
         stateMachine = new EnemyStateMachine();
         originalSpeed = moveSpeed;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        fX = GetComponent<FX>();
     }
 
     protected override void Update()

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -43,6 +40,6 @@ public class DodgeSkill : Skill
 
     public void CloneOnDodge()
     {
-        if (dodgeCloneUnlock) SkillManager.instance.cloneSkill.ClonePrefab(player.transform, 2*player.faceDir);
+        if (dodgeCloneUnlock) SkillManager.instance.cloneSkill.ClonePrefab(player.transform, 2 * player.faceDir);
     }
 }
