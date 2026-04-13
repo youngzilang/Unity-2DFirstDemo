@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FX : MonoBehaviour
@@ -33,17 +34,32 @@ public class FX : MonoBehaviour
     [Header("飘字")]
     [SerializeField] private GameObject popUpTextPrefab;
 
+    private GameObject healthBar;
+
     protected virtual void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         originMaterial = spriteRenderer.material;
+            healthBar = GetComponentInChildren<HealthUI>()?.gameObject;
     }
 
 
     public void Transprent(bool _transprent)
     {
+        // 保持血条物体处于激活状态，但通过 CanvasGroup 调整透明度与交互性
+        if (healthBar != null)
+        {
+            CanvasGroup cg = healthBar.GetComponent<CanvasGroup>();
+            if (cg == null) cg = healthBar.AddComponent<CanvasGroup>();
+
+            cg.alpha = _transprent ? 0f : 1f;
+            cg.interactable = !_transprent;
+            cg.blocksRaycasts = !_transprent;
+        }
+
         if (_transprent) spriteRenderer.color = Color.clear;
         else spriteRenderer.color = Color.white;
+       
     }
 
     private IEnumerator Fx()

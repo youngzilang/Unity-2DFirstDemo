@@ -10,7 +10,7 @@ public class Enemy : Entity
      public float attackDistance;
     public float battleTime;
     private float originalSpeed;
-    [SerializeField] protected LayerMask player;
+    [SerializeField] protected LayerMask playerMask;
 
     [Header("¹ÖÎïÑ£ÔÎ")]
     public float stunMove;
@@ -114,9 +114,10 @@ public class Enemy : Entity
     }
 
     #endregion
-    public RaycastHit2D PlayerCheck() => Physics2D.Raycast(transform.position, Vector2.right*faceDir,attackDistance,player);
+    public RaycastHit2D PlayerCheck() => Physics2D.Raycast(transform.position, Vector2.right*faceDir,attackDistance,playerMask);
 
     public virtual void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+        
 
     protected override void OnDrawGizmos()
     {

@@ -25,11 +25,17 @@ public class BOSSIdleState : EnemyState
     public override void Update()
     {
         base.Update();
-       
 
-        if(Input.GetKeyDown(KeyCode.K))
+       if(Vector2.Distance(PlayerManager.instance.player.transform.position, boss.rb.position) < 7)boss.bossBegin = true;
+
+        if (Input.GetKeyDown(KeyCode.I))
         {
             stateMachine.ChangeState(boss.transformState);
+        }
+
+        if (stateTimer < 0 && boss.bossBegin)
+        {
+            stateMachine.ChangeState(boss.battleState);
         }
     }
 }

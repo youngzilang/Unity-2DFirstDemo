@@ -13,9 +13,7 @@ public class BOSSTransformState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        boss.FindPosition();
 
-        stateTimer = 1;
     }
 
     public override void Exit()
@@ -27,9 +25,14 @@ public class BOSSTransformState : EnemyState
     {
         base.Update();
 
-            if (stateTimer <= 0)
-            {
-                stateMachine.ChangeState(boss.idleState);
+        if (trigger)
+        {
+            if(boss.CanSkill()) stateMachine.ChangeState(boss.skillStartState);
+            else
+                stateMachine.ChangeState(boss.battleState);
         }
+
     }
+
+    
 }

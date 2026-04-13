@@ -18,7 +18,7 @@ public class BOSSBattleState : EnemyState
         base.Enter();
         player = PlayerManager.instance.player.transform;
 
-      //  if (player.GetComponent<PlayerStat>().isDead) stateMachine.ChangeState(boss.moveState);
+        //  if (player.GetComponent<PlayerStat>().isDead) stateMachine.ChangeState(boss.moveState);
     }
 
     public override void Exit()
@@ -33,21 +33,22 @@ public class BOSSBattleState : EnemyState
         if (boss.PlayerCheck())
         {
             stateTimer = boss.battleTime;
-            if (boss.PlayerCheck().distance < boss.attackDistance && CanAttack())
+            if (boss.PlayerCheck().distance < boss.attackDistance )
             {
-                stateMachine.ChangeState(boss.attackState);
-            }
+                if(CanAttack()) stateMachine.ChangeState(boss.attackState);
+                else stateMachine.ChangeState(boss.idleState);
+            } 
         }
-        else
-        {
-            if (stateTimer < 0 || Vector2.Distance(player.position, boss.transform.position) > 7) stateMachine.ChangeState(boss.idleState);
-        }
+       
 
         if (Vector2.Distance(player.transform.position, boss.rb.position) > 1.5)
         {
             if (player.position.x > boss.rb.position.x) dir = 1;
             else dir = -1;
         }
+
+        if (boss.PlayerCheck() && boss.PlayerCheck().distance < boss.attackDistance-.1f) return;
+        
 
         boss.SetVe(boss.moveSpeed * dir, boss.rb.velocity.y);
     }

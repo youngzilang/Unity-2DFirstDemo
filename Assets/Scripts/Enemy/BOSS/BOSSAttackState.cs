@@ -12,6 +12,7 @@ public class BOSSAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        boss.transformChance += 5;
     }
 
     public override void Exit()
@@ -27,6 +28,10 @@ public class BOSSAttackState : EnemyState
         if (!boss.isHit)
             boss.SetVe(0, 0);
 
-        if (trigger) stateMachine.ChangeState(boss.battleState);
+        if (trigger)
+        {
+            if(boss.TransformCheck()) stateMachine.ChangeState(boss.transformState);
+            else stateMachine.ChangeState(boss.battleState);
+        }
     }
 }

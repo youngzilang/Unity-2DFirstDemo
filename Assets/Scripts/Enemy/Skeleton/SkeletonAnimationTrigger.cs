@@ -5,30 +5,30 @@ using UnityEngine;
 
 public class SkeletonAnimationTrigger : MonoBehaviour
 {
-    private Enemy_Skeleton skeleton => GetComponentInParent<Enemy_Skeleton>();
+    private Enemy enemy => GetComponentInParent<Enemy>();
 
-    private void AnimationTrigger()
-    {
-        skeleton.AnimationFinishTrigger();
+    protected void AnimationTrigger()
+    { 
+        enemy.AnimationFinishTrigger();
     }
 
-    private void AttackTrigger()
+    protected void AttackTrigger()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(skeleton.transform.position, skeleton.attackR);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(enemy.transform.position, enemy.attackR);
 
         foreach(var collider in colliders)
         {
             if (collider.GetComponent<Player>() != null)
             {
                 PlayerStat target= collider.GetComponentInChildren<PlayerStat>();
-                skeleton.stats.DoingDamage(target);
+                enemy.stats.DoingDamage(target);
                 //skeleton.stats.DoingDamage(target);
                 //collider.GetComponent<Player>().Damage();
             }
         }
     }
 
-    private void OpenStunWindow() => skeleton.OpenStunWindow();
+    private void OpenStunWindow() => enemy.OpenStunWindow();
 
-    private void CloseStunWindow() => skeleton.CloseStunWindow();
+    private void CloseStunWindow() => enemy.CloseStunWindow();
 }

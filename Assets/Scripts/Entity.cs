@@ -73,8 +73,13 @@ public class Entity : MonoBehaviour
 
     public void Damage() => StartCoroutine("Hitted");
 
-    
-    
+    public void SetDefaultDir(int _dir)
+    {
+        faceDir= _dir;
+        if(_dir==1) faceRight = true;
+        else faceRight = false;
+    }
+
 
     public IEnumerator Hitted()
     {
